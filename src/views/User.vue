@@ -3,98 +3,46 @@
   <div class="car">
       <header class="header">
           <div class="header-icon">
-              <span class="icon2-user"></span>
+            
           </div>
-          <span>登录/注册</span>
+          <span>登陆/注册</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: ''}">
-              <span class="my-indent-left">我的订单</span>
+              <span class="my-indent-left">查看/修改个人信息</span>
               <div class="my-indent-right">
-                  <span>全部订单</span>
+                  <span>个人信息</span>
                   <i class="icon-go"></i>
               </div>
           </router-link>
 
           <section class="my-pay">
               <router-link :to="{ name: ''}">
-                  <span class="icon2-money"></span>
-                  <p>代付款</p>
+                <img :src="icon_money"/>
+                  <p>收藏夹</p>
               </router-link>
               <router-link :to="{ name: ''}">
-                  <span class="icon2-thecar"></span>
-                  <p>待收货</p>
+                <img :src="icon_shop"/>
+                  <p>订阅店铺</p>
               </router-link>
-              <router-link :to="{ name: ''}">
-                  <span class="icon2-fixed"></span>
-                  <p>退换修</p>
-              </router-link>
-
           </section>
 
           <section class="my-vip">
-            <router-link class="my-vip-top ho" :to="{ name: ''}" >
-              <div class="my-vip-top-div">
-                <span class="icon2-vip">
-                    <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span>
-                </span>
-              </div>
-              <p>
-                <span>会员福利</span><i class="icon-go"></i>
-              </p>
-            </router-link>
             <router-link class="my-vip-bottom ho" :to="{ name: ''}">
-              <div>
-                <span class="icon2-money"></span>
-              </div>
+              <img :src="icon_order"/>
               <p>
-                <span>我的优惠</span><i class="icon-go"></i>
+                <span>我的订单</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: ''}" >
+              <img :src="icon_vip"/>
+              <p>
+                <span>权限说明</span>
+                <i class="icon-go"></i>
               </p>
             </router-link>
           </section>
-
-          <section class="my-service">
-              <router-link class="my-service-top" :to="{ name: ''}">
-                  <div>
-                    <span class="icon2-service">
-                        <span class="path1"></span><span class="path2"></span><span class="path3"></span>
-                    </span>
-                  </div>
-                  <p>
-                    <span>服务中心</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-              <router-link class="my-service-bottom" :to="{ name: ''}">
-                  <div>
-                    <span class="icon2-milogo"></span>
-                  </div>
-                  <p>
-                    <span>电商之家</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-          </section>
-
-          <section class="my-settle">
-              <router-link :to="{ name: ''}" class="my-settle-top">
-                  <div>
-                    <span class="icon2-f"></span>
-
-                  </div>
-
-                  <p>
-                    <span>F码通道</span><i class="icon-go"></i>
-                  </p>
-              </router-link>
-              <router-link :to="{ name: ''}" class="my-settle-bottom">
-                <div>
-                  <span class="icon2-settle"></span>
-                </div>
-                <p>
-                  <span>设置</span><i class="icon-go"></i>
-                </p>
-              </router-link>
-          </section>
-
       </div>
       <v-baseline></v-baseline>
       <v-footer></v-footer>
@@ -103,31 +51,39 @@
 
 <script>
   // import * as mockData from '@/http/mock.js' //模拟数据
-
+  import pay from'@/assets/user/pay.png'
+  import shop from'@/assets/user/shop.png'
+  import my_order from'@/assets/user/order.png'
+  import my_vip from'@/assets/user/vip.png'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
     components: {
       'v-baseline': Baseline,
       'v-footer': Footer
-    }
+    },
+    data () {
+				return {
+				 	icon_money:pay,
+          icon_shop:shop,
+          icon_order:my_order,
+          icon_vip:my_vip
+				  }
+		 }
   }
 </script>
 
 <style lang="less" scoped>
   @import '../assets/fz.less';
-  @import '../assets/index/style.css';
-  @import '../assets/user/icon/carstyle.css';
-
 
   .car {
     width: 100%;
-    padding-bottom: 14vw;
+    padding-bottom: 60vw;
     background-color: #F8FCFF;
     .header {
       width: 100%;
-      height: 16vw;
-      background: url(../../static/carbg.png) center 0 #f37d0f;
+      height: 25vw;
+      background: url(../../static/user_page.png) center 0 rgb(119, 244, 253);
       background-size: auto 100%;
       padding: 3.2vw 0;
       display: -webkit-box;
@@ -209,7 +165,7 @@
 
         >a {
           display: block;
-          width: 33.33%;
+          width: 50%;
           color: #999;
           text-align: center;
 
@@ -219,7 +175,9 @@
             display: block;
             text-align: center;
           }
-
+          >img{
+            width: 10%;
+          }
           p {
             padding: 2.3vw 0;
             text-align: center;
@@ -259,10 +217,10 @@
                     flex: 2;
                     padding-top: 1.3vw;
           }
-
-          .my-vip-top-div {
-            padding-top: 0;
+          >img{
+            width: 7%;
           }
+
           >p {
             -ms-flex: 10;
             -webkit-box-flex: 10;
@@ -284,22 +242,10 @@
       }
     }
   }
-  /*图标大小不一，重新定义*/
-
   .icon-go {
     .fz(font-size, 36);
     &::before {
       color: #aba8a8;
     }
   }
-
-  [class^="icon2-"],
-  [class*=" icon2-"] {
-    .fz(font-size, 50);
-  }
-
-  .icon2-service {
-    .fz(font-size, 34);
-  }
-
 </style>
