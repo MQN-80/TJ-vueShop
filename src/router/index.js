@@ -12,6 +12,7 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
+const User_data = resolve => require(['@/views/User_data.vue'], resolve)
 
 
 export default new Router({
@@ -56,6 +57,10 @@ export default new Router({
       path: '/login',
       name: '登录页',
       component: Login
-    }
+    },{
+      path: '/User/User_data',
+      name: '信息修改页',
+      component: User_data
+    },
   ]
 })
