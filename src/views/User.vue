@@ -3,12 +3,11 @@
   <div class="car">
       <header class="header">
           <div class="header-icon">
-            
           </div>
           <span>登陆/注册</span>
       </header>
       <div class="main">
-          <router-link class="my-indent" :to="{ name: ''}">
+          <router-link class="my-indent" :to="{ name: '信息修改页'}">
               <span class="my-indent-left">查看/修改个人信息</span>
               <div class="my-indent-right">
                   <span>个人信息</span>
@@ -28,7 +27,7 @@
           </section>
 
           <section class="my-vip">
-            <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+            <router-link  class="my-vip-bottom ho":to="{ name: ''}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
@@ -185,7 +184,7 @@
         }
       }
 
-      .my-vip,.my-service,.my-settle {
+      .my-vip{
         width: 100%;
         .mt();
         .bd();
