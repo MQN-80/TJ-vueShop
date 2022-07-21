@@ -27,7 +27,7 @@
           </section>
 
           <section class="my-vip">
-            <router-link class="my-vip-bottom ho" :to="{ name: ''}">
+            <router-link  class="my-vip-bottom ho":to="{ name: ''}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
@@ -184,7 +184,7 @@
         }
       }
 
-      .my-vip,.my-service,.my-settle {
+      .my-vip{
         width: 100%;
         .mt();
         .bd();
