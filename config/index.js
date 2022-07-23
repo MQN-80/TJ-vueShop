@@ -22,7 +22,7 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report
   },
   dev: {
-    host: "192.168.0.104",
+    host: "192.168.0.103",
     env: require('./dev.env'),
     port: 1322,
     autoOpenBrowser: true,
