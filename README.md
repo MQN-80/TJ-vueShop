@@ -40,14 +40,12 @@ npm install
 npm run dev
 
 # build for production with minification
-<<<<<<< HEAD
+
 npm run build
 ```
-=======
-npm 运行构建
-```
+
 
 ## 须知
 目前发现vant组件库与本项目不兼容，项目为vue2.4而npm下载的vant为3版本（如果有成功引入的话麻烦告知一下），导致vant组件库引入失败。
 因此推荐使用elementUI组件库，链接为https://element.eleme.cn/#/zh-CN
->>>>>>> 0e97e881fecce2ce8d672d2c17446841243ada9d
+
