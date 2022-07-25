@@ -16,25 +16,25 @@
           </router-link>
 
           <section class="my-pay">
-              <router-link :to="{ name: ''}">
+              <router-link :to="{ name: '收藏夹页'}">
                 <img :src="icon_money"/>
                   <p>收藏夹</p>
               </router-link>
-              <router-link :to="{ name: ''}">
+              <router-link :to="{ name: '订阅店铺页'}">
                 <img :src="icon_shop"/>
                   <p>订阅店铺</p>
               </router-link>
           </section>
 
           <section class="my-vip">
-            <router-link  class="my-vip-bottom ho":to="{ name: ''}">
+            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页'}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
-            <router-link class="my-vip-top ho" :to="{ name: ''}" >
+            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
               <img :src="icon_vip"/>
               <p>
                 <span>权限说明</span>
@@ -73,7 +73,7 @@
 </script>
 
 <style lang="less" scoped>
-  @import '../assets/fz.less';
+  @import '../../assets/fz.less';
 
   .car {
     width: 100%;
@@ -82,7 +82,7 @@
     .header {
       width: 100%;
       height: 25vw;
-      background: url(../../static/user_page.png) center 0 rgb(119, 244, 253);
+      background: url(../../../static/user_page.png) center 0 rgb(119, 244, 253);
       background-size: auto 100%;
       padding: 3.2vw 0;
       display: -webkit-box;

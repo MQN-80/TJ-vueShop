@@ -1,6 +1,11 @@
 
 <template lang="html">
 <div>
+  <div class="my-info">
+      <router-link :to="{ name: '用户页'}">
+        <p><返回上一页|</p>
+      </router-link>
+    </div>
 <div class="header">
   <div class="header-icon">
   </div>
@@ -46,19 +51,21 @@ export default {
     methods: {
       onSubmit() {
         console.log('submit!');
-      }
+      },
+      goback(){
+          this.$router.go(-1);//返回上一页
+      } 
     }
   }
 </script>
 <style lang="less" scoped>
-  @import '../assets/fz.less';
+  @import '../../assets/fz.less';
     .header {
       width: 100%;
       height: 25vw;
       background: rgb(185, 244, 255);
       background-size: auto 100%;
       padding: 3.2vw 0;
-      border-radius: 5%;
       .header-icon {
         border: .4vw solid #ffffff;
         background-color: @cl;
@@ -87,11 +94,12 @@ export default {
           background-color: #fff;
           display: block;
           width: 100%;
+          border-bottom:1px solid;
           display: -ms-flex;
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
-          height: 15vw;
+          height: 10vw;
           -webkit-box-align: center;
               -ms-flex-align: center;
                   align-items: center;
