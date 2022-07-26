@@ -7,9 +7,10 @@ import api from '@/http/api.js'       //http请求
 import less from 'less'
 import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
-import ElementUI from 'element-ui'
-import 'element-ui/lib/theme-chalk/index.css'
-Vue.use(ElementUI)//引入element UI
+import Vant from 'vant';
+import 'vant/lib/index.css';//引入Vant组件库
+
+Vue.use(Vant);
 Vue.use(Mint);
 Vue.config.productionTip = false
 Vue.prototype.$api = api;

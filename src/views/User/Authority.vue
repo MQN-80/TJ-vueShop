@@ -23,10 +23,12 @@
         <i >lv3</i>
         </p>
     </router-link>
+    <van-button type="primary">主要按钮</van-button>
   </section>
 </div>
 </template>
-
+<script>
+</script>
 <style lang="less" scoped>
   @import '../../assets/fz.less';
 
