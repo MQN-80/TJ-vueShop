@@ -1,5 +1,13 @@
 <template>
 <div>
+  <van-nav-bar
+  title="权限说明"
+  left-text="返回"
+  right-text="按钮"
+  left-arrow
+  @click-left="goback"
+  @click-right="onClickRight"
+/>
       <header class="header">
           <div class="header-info">您当前的权限等级为：</div>
           <div class="header-info">Lv.？</div>
@@ -23,11 +31,17 @@
         <i >lv3</i>
         </p>
     </router-link>
-    <van-button type="primary">主要按钮</van-button>
   </section>
 </div>
 </template>
 <script>
+export default {
+    methods: {
+      goback(){
+          this.$router.go(-1);//返回上一页
+      } 
+    }
+}
 </script>
 <style lang="less" scoped>
   @import '../../assets/fz.less';
