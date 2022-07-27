@@ -46,6 +46,6 @@ npm run build
 
 
 ## 须知
-目前发现vant组件库与本项目不兼容，项目为vue2.4而npm下载的vant为3版本（如果有成功引入的话麻烦告知一下），导致vant组件库引入失败。
-因此推荐使用elementUI组件库，链接为https://element.eleme.cn/#/zh-CN
+Vant组件库可以正常安装了，那就不用element ui了。
+Vant的链接在https://vant-contrib.gitee.io/vant/v2/#/zh-CN/quickstart ，安装Vant 2就能用了
 
