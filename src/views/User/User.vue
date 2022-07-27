@@ -41,6 +41,13 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
+              <img :src="icon_vip"/>
+              <p>
+                <span>发布商品</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
           </section>
       </div>
       <v-baseline></v-baseline>

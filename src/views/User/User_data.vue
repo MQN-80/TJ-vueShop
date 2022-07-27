@@ -2,38 +2,49 @@
 <template lang="html">
 <div>
   <div class="my-info">
-      <router-link :to="{ name: '用户页'}">
-        <p><返回上一页|</p>
-      </router-link>
+  <van-nav-bar
+  title="此页面进行数据修改"
+  left-text="返回"
+  right-text="按钮"
+  left-arrow
+  @click-left="goback"
+  @click-right="onClickRight"
+  />
     </div>
 <div class="header">
   <div class="header-icon">
   </div>
   <div class="header-info">点击更换头像</div>
 </div>
-<div class="my-info">
-  <el-form ref="form" :model="form" label-width="80px">
-  <el-form-item label="用户昵称">
-     <el-col :span="18">
-    <el-input v-model="form.name"></el-input>
-    </el-col>
-  </el-form-item>
-  <el-form-item label="用户性别">
-    <el-select style="width:75%" v-model="form.gender" placeholder="请选择性别">
-    <el-option label="男" value="male"></el-option>
-    <el-option label="女" value="female"></el-option>
-    </el-select>
-  </el-form-item>
-   <el-form-item label="用户介绍">
-    <el-col :span="18">
-    <el-input type="textarea" v-model="form.desc"></el-input>
-    </el-col>
-  </el-form-item>
-  <el-form-item>
-    <el-button type="primary" @click="onSubmit">立即保存</el-button>
-    <el-button>取消</el-button>
-  </el-form-item>
-  </el-form>
+<div>
+  <van-cell-group>
+  <van-cell />
+  <van-field
+  size="large"
+  label="用户姓名"
+  v-model="name"
+  input-align="right"
+  input="onChange_weight"
+  />
+  <van-field
+  size="large"
+  label="用户性别"
+  v-model="gender"
+  input-align="right"
+  input="onChange_chest_length"
+  />
+  <van-field
+  size="large"
+  label="个人介绍"
+  v-model="desc"
+  input-align="right"
+  rows="5"
+  maxlength="150"
+  show-word-limit
+  input="onChange_waistline"
+  />
+  <van-cell bindtap="saveData" title=" " value="点此保存数据" is-link />
+</van-cell-group>
 </div>
 </div>
 </template>
@@ -41,11 +52,9 @@
 export default {
     data() {
       return {
-        form: {
-          name: '',
-          gender: '',
-          desc: ''
-        }
+          name: '陈柯羲',
+          gender: '男',
+          desc: '该用户没有介绍'
       }
     },
     methods: {

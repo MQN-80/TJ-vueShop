@@ -1,40 +1,28 @@
 <template>
 <div>
-<el-page-header style="height:7vw" @back="goback" content="订阅店铺">
-</el-page-header>
-  <el-table
-    :data="tableData"
-    stripe
-    border
-    style="width: 100%">
-    <el-table-column
-      label="店铺名称"
-      width="180">
-      <template slot-scope="scope">
-        <img :src="icon_money"/>
-        <el-tag size="medium">{{ scope.row.name }}</el-tag>
-      </template>
-    </el-table-column>
-     <el-table-column
-      label="添加日期"
-      width="100">
-      <template slot-scope="scope">
-        <span>{{ scope.row.date }}</span>
-      </template>
-    </el-table-column>
-    <el-table-column label="操作">
-      <template slot-scope="scope">
-        <el-button
-          size="mini"
-          @click="handleEdit(scope.$index, scope.row)">查看</el-button>
-        <el-button
-          size="mini"
-          type="danger"
-          @click="handleDelete(scope.$index, scope.row)">删除</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
-  </div>
+<van-nav-bar
+  title="订阅店铺"
+  left-text="返回"
+  right-text="按钮"
+  left-arrow
+  @click-left="goback"
+  @click-right="onClickRight"
+/>
+<van-cell-group>
+  <div v-for="shop in tableData" :key="shop.name">
+ <van-cell title="URL 跳转" size="large" is-link url="">
+  <template #title>
+    <span>{{shop.name}}</span>
+    <van-tag type="danger">标签</van-tag>
+  </template>
+ <template #label>
+   <span>添加时间：{{shop.date}}</span>
+ </template>
+</van-cell>
+ <van-divider />
+</div>
+</van-cell-group>
+</div>
 </template>
 
 <script>
@@ -42,19 +30,19 @@
     data() {
       return {
         tableData: [{
-          name: '王小虎',
+          name: '万代',
           date: '2016-05-02',
           address: ''
         }, {
-          name: '王小虎',
+          name: '寿屋',
           date: '2016-05-04',
           address: ''
         }, {
-          name: '王小虎',
+          name: '御模道',
           date: '2016-05-01',
           address: ''
         }, {
-          name: '王小虎',
+          name: 'GSC',
           date: '2016-05-03',
           address: ''
         }]
@@ -67,6 +55,9 @@
       handleDelete(index, row) {
         console.log(index, row);
       },
+      onEdit() {
+      Toast('编辑');
+    },
       goback(){
           this.$router.go(-1);//返回上一页
       } 
