@@ -15,7 +15,7 @@
 
     <div class="pay-product">
       <ul v-if="!confirm">
-        <li v-for="k in carList">
+        <li v-for="k in midList">
           <a>
             <img :src="k.imgPath" alt="">
             <div>
@@ -61,14 +61,14 @@ export default {
   computed: {
 
     //所有商品列表
-    carList () {
+    midList () {
 
-      return this.$store.state.detail.selectedList
+      return this.$store.state.detail.midList
     },
 
     // 商品价格总和
     allpay () {
-      let allpay = 0, selectedList = this.carList
+      let allpay = 0, selectedList = this.midList
       for (let i = 0; i < selectedList.length; i++) {
         allpay += selectedList[i].price
       }
@@ -77,26 +77,27 @@ export default {
   },
   mounted () {
     // 防止页面刷新后数据丢失
-    if (this.$store.state.detail.selectedList == '') {
-      this.$store.commit('SET_SELECTEDLIST')
+    if (this.$store.state.detail.midList == '') {
+      //this.$store.commit('SET_MIDLIST')
     }
   },
 
   methods: {
     payConfirm () {
-      if (this.carList) { //还未提交了订单,数据还未清空
+      if (this.midList) { //还未提交了订单,数据还未清空
         MessageBox
           .confirm(
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
+          this.$router.push({ name: '完成页' });
             this.confirm = false;
             this.$store.commit('SET_LOADING', true);
-            this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-            this.$store.dispatch('resetCount'); //重置购物车数量
+            //this.$store.dispatch('cutMidList', this.midList);
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
               this.confirm = true; //支付完成后切换视图
+              this.$router.push({ name: '完成页' });
             }, 300)
           }, function (err) {
             //点击取消执行这里的函数

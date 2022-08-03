@@ -12,12 +12,8 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
-const User_data = resolve => require(['@/views/User/User_data.vue'], resolve)
-const Subscribe = resolve => require(['@/views/User/Subscribe_shop.vue'], resolve)
-const Favorites = resolve => require(['@/views/User/Favorites.vue'], resolve)
-const Historical_orders = resolve => require(['@/views/User/Orders.vue'], resolve)
-const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
-
+const NPay = resolve => require(['@/components/pay/pay/pay.vue'], resolve)
+const Complete = resolve => require(['@/components/pay/complete.vue'], resolve)
 export default new Router({
   routes: [{
       path: '/',
@@ -42,6 +38,16 @@ export default new Router({
       component: Pay
     },
     {
+      path: '/pay/pay',
+      name: '现付页',
+      component: NPay
+    },
+    {
+      path: '/pay/complete',
+      name: '完成页',
+      component: Complete
+    },
+    {
       path: '/user',
       name: '用户页',
       component: User,
@@ -60,26 +66,6 @@ export default new Router({
       path: '/login',
       name: '登录页',
       component: Login
-    },{
-      path: '/User/User_data',
-      name: '信息修改页',
-      component: User_data
-    },{
-      path: '/User/Historical_orders',
-      name: '历史订单页',
-      component: Historical_orders
-    },{
-      path: '/User/Favorites',
-      name: '收藏夹页',
-      component: Favorites
-    },{
-      path: '/User/Subscribe',
-      name: '订阅店铺页',
-      component: Subscribe
-    },{
-      path: '/User/Authority',
-      name: '权限说明页',
-      component: Authority
-    },
+    }
   ]
 })

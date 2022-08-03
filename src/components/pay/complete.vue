@@ -2,7 +2,7 @@
 
   <div class="pay">
     <v-header>
-      <h1 slot="title">支付订单</h1>
+      <h1 slot="title">订单详情</h1>
     </v-header>
 
     <div class="pay-address">
@@ -14,8 +14,7 @@
     </div>
 
     <div class="pay-product">
-      <ul v-if="!confirm">
-        <li v-for="k in carList">
+        <li v-for="k in midList">
           <a>
             <img :src="k.imgPath" alt="">
             <div>
@@ -24,18 +23,17 @@
             </div>
           </a>
         </li>
-      </ul>
 
       <!-- 支付成功后的提示 -->
-      <div class="pay-confirm" v-else>
+      <!-- <div class="pay-confirm" v-else>
         支付成功!!!</br>
         当页面数据清空</br>
         购物车列表重新设置
-      </div>
+      </div> -->
     </div>
-    <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
+    <h3 class="pay-allpay">共计 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
-      <span>立即支付</span>
+      <span>完成订单</span>
     </footer>
 
 
@@ -43,7 +41,7 @@
 </template>
 
 <script>
-import Util from '../../../util/common'
+import Util from '@/util/common'
 import Header from '@/common/_header.vue'
 import {
   MessageBox
@@ -59,16 +57,15 @@ export default {
   },
 
   computed: {
+ //所有商品列表
+    midList () {
 
-    //所有商品列表
-    carList () {
-
-      return this.$store.state.detail.selectedList
+      return this.$store.state.detail.midList
     },
 
     // 商品价格总和
     allpay () {
-      let allpay = 0, selectedList = this.carList
+      let allpay = 0, selectedList = this.midList
       for (let i = 0; i < selectedList.length; i++) {
         allpay += selectedList[i].price
       }
@@ -77,42 +74,21 @@ export default {
   },
   mounted () {
     // 防止页面刷新后数据丢失
-    if (this.$store.state.detail.selectedList == '') {
-      this.$store.commit('SET_SELECTEDLIST')
+    if (this.$store.state.detail.midList == '') {
+      //this.$store.commit('SET_MIDLIST')
     }
   },
-
   methods: {
     payConfirm () {
-      if (this.carList) { //还未提交了订单,数据还未清空
-        MessageBox
-          .confirm(
-            `确定支付${this.allpay}元`
-          )
-          .then(action => { //点击成功执行这里的函数
-            this.confirm = false;
-            this.$store.commit('SET_LOADING', true);
-            this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-            this.$store.dispatch('resetCount'); //重置购物车数量
-            setTimeout(() => {
-              this.$store.commit('SET_LOADING', false); //关闭loading
-              this.confirm = true; //支付完成后切换视图
-            }, 300)
-          }, function (err) {
-            //点击取消执行这里的函数
-          });
-      } else { //提交了订单,数据清空
-        alert('请勿重复提交订单')
-      }
-
+      this.$store.dispatch('resetMidList');
+      this.$router.push({ name: '首页' });
     }
   }
 
 }
 </script>
-
 <style lang="less" scoped>
-@import "../../../assets/fz.less";
+@import "../../assets/fz.less";
 .pay {
   width: 100%;
   background-color: #f7f7f7;
@@ -208,9 +184,9 @@ export default {
     span {
       display: block;
       width: 85%;
-      background-color: #fd729c;
+      background-color: #fd7272;
       border-radius: 1.3vw;
-      color: #fff;
+      color: rgb(0, 0, 0);
       font-size: 17px;
       padding: 4vw;
       margin: 0 auto;

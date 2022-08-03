@@ -12,6 +12,7 @@ const state = {
   fetchLoading:false,     //全局加载状态的Loading
   selectedList:'',         //已选择的购物车商品列表
   unSelectedList:'',      //未选择的购物车商品列表,提交订单后用它替换carList
+  midList:'',
 }
 
 //更改 store 中的状态的唯一方法:提交 mutation
@@ -46,17 +47,20 @@ const mutations = {
   [types.ADD_PRODUCT] (state) {
     state.carList = Util.getLocal('carList');
   },
-
+  [types.ADD_MIDPRODUCT] (state) {
+    state.midList = Util.getLocal('midList');
+  },
   //获取当前购物车商品数量
   [types.CHANGE_COUNT] (state) {
     state.count = Util.getLocal('count')
   },
-
+  [types.RESET_MIDLIST] (state) {
+    state.midList = Util.getLocal('midList')
+  },
 // 重置购物车
   [types.RESET_CARLIST] (state) {
     state.carList = Util.getLocal('carList')
   },
-
 // 重置购物车数量
   [types.RESET_COUNT] (state) {
     state.count = Util.getLocal('carList').length
@@ -111,8 +115,15 @@ const actions = {
     commit(types.ADD_PRODUCT)
   },
 
+  addMidList({commit},res) {
+    Util.setLocal(res,'midList',true);
+    commit(types.ADD_MIDPRODUCT)
+  },
   //重新设置购物车商品列表,把打钩并提交的商品去掉,即保留unSelectedList
-
+  cutMidList({commit},res) {
+    Util.setLocal(res,'midList');
+    commit(types.RESET_MIDLIST);
+  },
   resetCarList({commit,getters}) {
     const unSelectedList = Util.getLocal('unSelectedList');
     Util.setLocal(unSelectedList,'carList');
@@ -124,7 +135,11 @@ const actions = {
     Util.setLocal(count,'count');
     commit(types.RESET_COUNT);
   },
-
+  resetMidList({commit,getters}) {
+    const emptyList = null;
+    Util.setLocal(emptyList,'midList');
+    commit(types.RESET_MIDLIST)
+  },
 // 删除购物车列表的某一项 （用新的数组直接替换）
   cutCarList({commit},res) {
     Util.setLocal(res,'carList');
