@@ -42,12 +42,12 @@ export default new Router({
       component: Pay
     },
     {
-      path: '/user',
+      path: '/User',
       name: '用户页',
       component: User,
       meta: {
-           requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-       },
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+    },
     }, {
       path: '/detail',
       name: '详情页',

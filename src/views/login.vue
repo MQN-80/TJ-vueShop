@@ -62,11 +62,11 @@ export default {
       }
 
       setTimeout(()=>{
-        this.$router.replace({
-          path: 'user'
+        this.$router.push({
+          name:"用户页",
+          params:{id:123}
         })
       },1000);
-      // 登录成
     },
 
     //退出登录按钮

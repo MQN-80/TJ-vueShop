@@ -70,13 +70,21 @@
     },
     data () {
 				return {
+          user_id:this.$route.params.id,
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,
           icon_vip:my_vip
 				  }
-		 }
+		 }, 
+    created(){
+      console.log(this.user_id);
+      this.$ls.set(user_id+"subscribe",[]);
+      this.$ls.set(user_id+"orders",[]);
+      this.$ls.set(user_id+"favorites",[])
   }
+  }
+
 </script>
 
 <style lang="less" scoped>
