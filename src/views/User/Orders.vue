@@ -44,6 +44,7 @@ export default {
             order_number:'1919810',
             }
         ],
+        user_orders:this.$ls.get(this.$route.params.id+"orders")
         }
     },
     methods: {

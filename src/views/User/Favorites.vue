@@ -49,7 +49,8 @@
           name: '鞋',
           price: '300',
           address: ''
-        }]
+        }],
+        user_favorites:this.$ls.get(this.$route.params.id+"favorites")
       }
     },
     methods: {
