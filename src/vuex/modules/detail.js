@@ -80,6 +80,10 @@ const mutations = {
   ['SET_UNSELECTEDLIST'] (state) {
     state.unSelectedList = Util.getLocal('unSelectedList')
   }
+  ,
+  ['SET_MIDLIST'] (state,res) {
+    state.midList = Util.getLocal('midList')
+  },
 
 }
 

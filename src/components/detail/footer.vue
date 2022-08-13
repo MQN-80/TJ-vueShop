@@ -97,15 +97,24 @@ export default {
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数
-          //this.$store.dispatch('setLocalCount', false);
-          //this.$store.commit('addMidList', product);
+
           this.$store.dispatch('resetMidList');
           this.$store.dispatch('addMidList', product);
-          this.$router.push({ name: '现付页' });
-          // Toast({
-          //   message: '添加成功',
-          //   duration: 1000
-          // });
+          // 提交订单信息
+          // this.$net({
+          //   method:'post',
+          //   url:'',
+          //   header:{
+          //     token:true
+          //   },
+          //   data:{
+          //     arr:this.$store.state.detail.midList
+          //   }
+          // }).then(res=>{
+          //   console.log(res);
+          //   this.$router.push({ name: '现付页' });
+          // })
+this.$router.push({ name: '现付页' });
         }, function (err) {
         });
     }
