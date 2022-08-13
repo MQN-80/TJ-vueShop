@@ -99,7 +99,7 @@ export default {
         .then(action => {      //点击成功执行这里的函数
           //this.$store.dispatch('setLocalCount', false);
           //this.$store.commit('addMidList', product);
-          
+          this.$store.dispatch('resetMidList');
           this.$store.dispatch('addMidList', product);
           this.$router.push({ name: '现付页' });
           // Toast({
