@@ -45,7 +45,8 @@
           name: 'GSC',
           date: '2016-05-03',
           address: ''
-        }]
+        }],
+        shop_table:this.$ls.get(this.$route.params.id+"subscribe")
       }
     },
     methods: {

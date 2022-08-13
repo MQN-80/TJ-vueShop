@@ -10,6 +10,17 @@ import Mint from 'mint-ui';    //移动端UI
 import 'mint-ui/lib/style.css'
 import Vant from 'vant';
 import 'vant/lib/index.css';//引入Vant组件库
+import Storage from 'vue-ls'
+
+// vue-ls 的配置
+const storageOptions = {
+    namespace: 'vue_',   // key 键的前缀（随便起）
+  	name: 'ls',          // 变量名称（随便起） 使用方式：Vue.变量名称 或 this.$变量名称
+  	storage: 'local'     // 作用范围：local、session、memory
+}
+
+Vue.use(Storage, storageOptions)
+
 
 Vue.use(Vant);
 Vue.use(Mint);

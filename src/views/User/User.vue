@@ -7,7 +7,7 @@
           <span>登陆/注册</span>
       </header>
       <div class="main">
-          <router-link class="my-indent" :to="{ name: '信息修改页'}">
+          <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
               <span class="my-indent-left">查看/修改个人信息</span>
               <div class="my-indent-right">
                   <span>个人信息</span>
@@ -16,25 +16,25 @@
           </router-link>
 
           <section class="my-pay">
-              <router-link :to="{ name: '收藏夹页'}">
+              <router-link :to="{ name: '收藏夹页',query:{id:user_id}}">
                 <img :src="icon_money"/>
                   <p>收藏夹</p>
               </router-link>
-              <router-link :to="{ name: '订阅店铺页'}">
+              <router-link :to="{ name: '订阅店铺页',query:{id:user_id}}">
                 <img :src="icon_shop"/>
                   <p>订阅店铺</p>
               </router-link>
           </section>
 
           <section class="my-vip">
-            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页'}">
+            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页',query:{id:user_id}}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
-            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
+            <router-link class="my-vip-top ho" :to="{ name: '权限说明页',query:{id:user_id}}" >
               <img :src="icon_vip"/>
               <p>
                 <span>权限说明</span>
@@ -70,13 +70,21 @@
     },
     data () {
 				return {
+          user_id:this.$route.params.id,
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,
           icon_vip:my_vip
 				  }
-		 }
+		 }, 
+    created(){
+      console.log(this.user_id);
+      this.$ls.set(user_id+"subscribe",[]);
+      this.$ls.set(user_id+"orders",[]);
+      this.$ls.set(user_id+"favorites",[])
   }
+  }
+
 </script>
 
 <style lang="less" scoped>
