@@ -67,7 +67,9 @@ export default {
       {
         Toast('登录成功,存储token,跳转网页');
         this.toggle = false;
-        this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
+        //this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
+        localStorage.setItem('token',response.data)
+        console.log(localStorage.getItem('token'))
       }
       else
       {
@@ -76,7 +78,6 @@ export default {
      }).catch(function(error) {
       alert(error)
      })
-
       setTimeout(()=>{
         this.$router.push({
           name:"用户页",

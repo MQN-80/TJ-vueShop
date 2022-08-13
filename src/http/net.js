@@ -5,6 +5,22 @@ import router from '../router'
 const net = axios.create();
 net.defaults.baseURL = 'http://124.222.1.19:5000';
 net.defaults.timeout = 5000;
+  
+net.interceptors.request.use(function (config) {
+  // 在发送请求之前做些什么
+  // 如果有token,添加到请求报文 后台会根据该报文返回status
+  let token=localStorage.getItem('token')
+  console.log(token)
+  if(token) {
+    config.headers.Authorization = "Bearer"+" "+token;     
+  }
+
+  return config;
+
+}, function (error) {
+  // 对请求错误做些什么
+  alert('网络错误,请稍后再试');
+});
 /** 
 net.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 net.defaults.headers.post['X-Requested-With'] = 'XMLHttpRequest'
