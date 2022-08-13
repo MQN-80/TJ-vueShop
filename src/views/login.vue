@@ -38,6 +38,7 @@
 
 <script>
 import Header from '@/common/_header.vue'
+import net from '@/http/net.js'       //http请求
 import { Toast } from 'mint-ui'
 export default {
   components:{
@@ -53,6 +54,19 @@ export default {
   methods:{
     // 登录按钮
     login(){
+      this.$net({
+      method: 'get',
+      url: '/user/is_user',
+      params:{
+        userid:this.account,
+        password:this.password
+      }
+     }).then((response) => {
+      console.log(response);
+      this.datas = response.data;
+     }).catch(function(error) {
+      alert(error)
+     })
       if(this.account!=="" && this.password!=="") {
         Toast('登录成功,存储token,跳转网页');
         this.toggle = false;
