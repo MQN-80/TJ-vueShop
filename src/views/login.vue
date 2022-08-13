@@ -63,17 +63,19 @@ export default {
       }
      }).then((response) => {
       console.log(response);
-      this.datas = response.data;
+      if(response.data!="no")
+      {
+        Toast('登录成功,存储token,跳转网页');
+        this.toggle = false;
+        this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
+      }
+      else
+      {
+        Toast('账号密码错误');
+      }
      }).catch(function(error) {
       alert(error)
      })
-      if(this.account!=="" && this.password!=="") {
-        Toast('登录成功,存储token,跳转网页');
-        this.toggle = false;
-        this.$store.commit('CHANGE_TOKEN',1);
-      }else {
-        Toast('账号密码不能为空');
-      }
 
       setTimeout(()=>{
         this.$router.push({
