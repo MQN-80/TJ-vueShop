@@ -41,8 +41,15 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '积分页',query:{id:user_id}}" >
+              <img :src="icon_points"/>
+              <p>
+                <span>我的积分</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
             <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
-              <img :src="icon_vip"/>
+              <img :src="icon_add"/>
               <p>
                 <span>发布商品</span>
                 <i class="icon-go"></i>
@@ -61,6 +68,8 @@
   import shop from'@/assets/user/shop.png'
   import my_order from'@/assets/user/order.png'
   import my_vip from'@/assets/user/vip.png'
+  import my_add from'@/assets/user/add_product.png'
+  import my_points from'@/assets/user/my_points.png'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
   export default {
@@ -74,7 +83,9 @@
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,
-          icon_vip:my_vip
+          icon_vip:my_vip,
+          icon_add:my_add,
+          icon_points:my_points
 				  }
 		 }, 
     created(){
@@ -82,6 +93,7 @@
       this.$ls.set(user_id+"subscribe",[]);
       this.$ls.set(user_id+"orders",[]);
       this.$ls.set(user_id+"favorites",[])
+      this.$ls.set(user_id+"consumption",[])
   }
   }
 

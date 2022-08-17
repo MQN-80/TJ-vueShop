@@ -50,7 +50,7 @@ export default {
     methods: {
       goback(){
           this.$router.go(-1);//返回上一页
-      } 
+      }
     }
 }
 </script>
