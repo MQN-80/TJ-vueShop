@@ -17,6 +17,7 @@ const Subscribe = resolve => require(['@/views/User/Subscribe_shop.vue'], resolv
 const Favorites = resolve => require(['@/views/User/Favorites.vue'], resolve)
 const Historical_orders = resolve => require(['@/views/User/Orders.vue'], resolve)
 const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
+const Points = resolve => require(['@/views/User/Points.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -80,6 +81,10 @@ export default new Router({
       path: '/User/Authority',
       name: '权限说明页',
       component: Authority
+    },{
+      path: '/User/Points',
+      name: '积分页',
+      component: Points
     },
   ]
 })
