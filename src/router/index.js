@@ -18,6 +18,7 @@ const Favorites = resolve => require(['@/views/User/Favorites.vue'], resolve)
 const Historical_orders = resolve => require(['@/views/User/Orders.vue'], resolve)
 const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
 const Points = resolve => require(['@/views/User/Points.vue'], resolve)
+const Register = resolve => require(['@/views/Register.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -85,6 +86,10 @@ export default new Router({
       path: '/User/Points',
       name: '积分页',
       component: Points
+    },{
+      path: '/login/Register',
+      name: '注册页',
+      component: Register
     },
   ]
 })
