@@ -48,7 +48,7 @@ export default {
   },
   data(){
     return {
-      account:'',
+      account:this.$ls.get('user_info').user_id,
       password:'',
       toggle:!this.$store.state.login.token
     }

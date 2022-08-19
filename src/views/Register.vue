@@ -30,6 +30,7 @@
 <script>
 import Header from '@/common/_header.vue'
 import { Toast } from 'mint-ui'
+import net from '@/http/net.js'
 export default {
   components:{
     'v-header':Header
@@ -38,31 +39,35 @@ export default {
     return {
       password:'',
       nickname:'',
-      datas:{
-        token:'',
-        user_id:'',
-        id:''
-      }
+      datas:''
     }
   },
   methods:{
     Register(){
         this.$net({
-            method:'get',
-            url:'/user',
+            method:'post',
+            url:'/user/login',
             params:{
                 username:this.nickname,
                 password:this.password
             }
         }).then((response) => {
+            if(response.data=='no')
+            {
+                Toast('您注册的用户名已经被使用过！');
+                this.nickname='';
+                this.password='';
+            }
+            else{
             Toast('注册成功,存储token,即将返回登录页');
             console.log(response);
-            this.datas.token=response.token;
-            this.datas.user_id=response.user_id;
-            this.id.token=response.id;
+            this.datas=response.data;
+            console.log(this.datas);
+            this.$ls.set("user_info",this.datas)
             this.$router.go(-1);
+            }
         }).catch(function(error){
-            Toast('注册失败！可能为重复用户名或错误输入');
+            Toast('注册失败！可能为错误输入');
             alert(error)
         })
     }
