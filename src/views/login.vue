@@ -70,8 +70,14 @@ export default {
         Toast('登录成功,存储token,跳转网页');
         this.toggle = false;
         //this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
-        localStorage.setItem('token',response.data)
+        localStorage.setItem('token',response.data.token)
         console.log(localStorage.getItem('token'))
+         setTimeout(()=>{
+        this.$router.push({
+          name:"用户页",
+          params:{id:123}
+        })
+      },1000);
       }
       else
       {
@@ -80,12 +86,6 @@ export default {
      }).catch(function(error) {
       alert(error)
      })
-      setTimeout(()=>{
-        this.$router.push({
-          name:"用户页",
-          params:{id:123}
-        })
-      },1000);
     },
 
     //退出登录按钮

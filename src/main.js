@@ -32,7 +32,7 @@ Vue.prototype.$net = net;
 
 router.beforeEach((to, from, next) => {
     if (to.meta.requireAuth) {  // 需要权限,进一步进行判断
-      if (store.state.login.token) {  // 通过vuex state获取当前的token是否存在
+      if (localStorage.getItem('token')) {  // 通过vuex state获取当前的token是否存在
         next();
       }
       else {    //如果没有权限,重定向到登录页,进行登录
