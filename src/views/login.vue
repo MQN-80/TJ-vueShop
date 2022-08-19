@@ -20,7 +20,9 @@
        :readonly='!toggle'
        :disableClear = '!toggle'
         ></mt-field>
-      <p class="tip">Tip : 账号密码随便输</p>
+      <router-link :to="{ name: '注册页'}" >
+          <p class="tip">没有账号？点击此处进行注册</p>
+        </router-link>
     </section>
     <mt-button
      plain
@@ -46,7 +48,7 @@ export default {
   },
   data(){
     return {
-      account:'',
+      account:this.$ls.get('user_info').user_id,
       password:'',
       toggle:!this.$store.state.login.token
     }
