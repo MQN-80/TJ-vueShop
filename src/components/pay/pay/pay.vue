@@ -98,7 +98,6 @@ export default {
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
               this.confirm = true; //支付完成后切换视图
-              goPayment();
               this.$router.push({ name: '完成页' });
             }, 300)
           }, function (err) {
@@ -108,50 +107,6 @@ export default {
         alert('请勿重复提交订单')
       }
 
-    }
-    ,
-    goPayment() {
-      //判断是否选择了收货地址
-      //if( !this.path ) return Toast('请填写收货地址');
-
-      //发送请求==》1.修改订单状态2.删除购物车的数据
-      res => {
-
-        let newArr = [];
-        this.midList.forEach(v => {
-          newArr.push(v.title);
-        })
-        let totalprice = 0;
-        this.midList.forEach(v => {
-          totalprice+=v.price;
-        })
-        //支付传递的参数
-        let dataOrder = {
-          orderId: 2022081222001101021423558469,
-          name: newArr.join(''),
-          price: totalprice
-        }
-
-    
-          //去支付
-          http.$axios({
-            url: '/api/payment',
-            method: "post",
-            headers: {
-              token: true,
-              'Content-Type': 'application/x-www-form-urlencoded'
-            },
-            //qs是增加安全性的序列化
-            data: qs.stringify(dataOrder)
-          }).then(res => {
-            if (res.success) {
-              //打开支付宝支付的页面
-              console.log( res );
-            }
-          })
-
-        
-      }
     }
   }
 
