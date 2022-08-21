@@ -5,10 +5,8 @@
   <van-nav-bar
   title="此页面进行数据修改"
   left-text="返回"
-  right-text="按钮"
   left-arrow
   @click-left="goback"
-  @click-right="onClickRight"
   />
     </div>
 <div class="header">
@@ -21,22 +19,22 @@
   <van-cell />
   <van-field
   size="large"
-  label="用户姓名"
-  v-model="name"
+  label="用户昵称"
+  v-model="user_name"
   input-align="right"
   input="onChange_weight"
   />
   <van-field
   size="large"
   label="用户性别"
-  v-model="gender"
+  v-model="user_gender"
   input-align="right"
   input="onChange_chest_length"
   />
   <van-field
   size="large"
   label="个人介绍"
-  v-model="desc"
+  v-model="user_desc"
   input-align="right"
   rows="5"
   maxlength="150"
@@ -52,9 +50,9 @@
 export default {
     data() {
       return {
-          name: '陈柯羲',
-          gender: '男',
-          desc: '该用户没有介绍'
+          user_name: '陈柯羲',
+          user_gender: '男',
+          user_desc: '该用户没有介绍'
       }
     },
     methods: {
