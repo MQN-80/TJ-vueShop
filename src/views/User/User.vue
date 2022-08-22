@@ -5,6 +5,7 @@
           <div class="header-icon">
           </div>
           <span>登陆/注册</span>
+          
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
