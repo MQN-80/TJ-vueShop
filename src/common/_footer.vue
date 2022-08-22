@@ -4,7 +4,7 @@
     <mt-tabbar v-model="selected" fixed>
     <mt-tab-item id="首页">
       <i slot="icon" class="icon-index"></i>
-        首页
+      首页
     </mt-tab-item>
     <mt-tab-item id="分类页">
       <i slot="icon" class="icon-category"></i>
@@ -47,11 +47,9 @@
           break;
         case '分类页':
           this.selected = '分类页';
-
           break;
         case '购物车页':
           this.selected = '购物车页';
-
           break;
         case '用户页':
           this.selected = '用户页';
