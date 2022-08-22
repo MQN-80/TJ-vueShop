@@ -55,10 +55,16 @@ export default {
       url: '/index'
     }).then((response) => {
       this.datas = response.data;
+      this.datas.swiper[0].imgPath="http://106.12.131.109:8083/main/1.jpeg";
+      this.datas.swiper[1].imgPath="http://106.12.131.109:8083/main/2.jpeg";
+      this.datas.swiper[2].imgPath="http://106.12.131.109:8083/main/3.jpeg";
+      this.datas.swiper[3].imgPath="http://106.12.131.109:8083/main/4.jpeg";
     }).catch(function(error) {
       alert(error)
     })
+    //this.swiper1[0].id=0;
   }
+  
 }
 </script>
 

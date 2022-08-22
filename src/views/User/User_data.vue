@@ -76,7 +76,7 @@ export default {
       data:formData,
       params:{
         option:1,
-        userid:this.$ls.get("user_info").id
+        id:this.$ls.get("user_info").id
       }
      }).then((response) => {
       console.log(response);
