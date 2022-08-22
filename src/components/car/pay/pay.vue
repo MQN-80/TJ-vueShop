@@ -92,11 +92,13 @@ export default {
           .then(action => { //点击成功执行这里的函数
             this.confirm = false;
             this.$store.commit('SET_LOADING', true);
-            this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-            this.$store.dispatch('resetCount'); //重置购物车数量
+            // this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
+            // this.$store.dispatch('resetCount'); //重置购物车数量
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
               this.confirm = true; //支付完成后切换视图
+
+              this.$router.push({ name: '车结页' });
             }, 300)
           }, function (err) {
             //点击取消执行这里的函数

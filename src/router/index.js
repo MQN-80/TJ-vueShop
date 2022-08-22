@@ -14,6 +14,7 @@ const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
 const NPay = resolve => require(['@/components/pay/pay/pay.vue'], resolve)
 const Complete = resolve => require(['@/components/pay/complete.vue'], resolve)
+const Carcomplete = resolve => require(['@/components/car/pay/complete.vue'], resolve)
 export default new Router({
   routes: [{
       path: '/',
@@ -46,6 +47,11 @@ export default new Router({
       path: '/pay/complete',
       name: '完成页',
       component: Complete
+    },
+    {
+      path: '/car/complete',
+      name: '车结页',
+      component: Carcomplete
     },
     {
       path: '/user',

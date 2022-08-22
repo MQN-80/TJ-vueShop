@@ -114,7 +114,7 @@ export default {
           //   console.log(res);
           //   this.$router.push({ name: '现付页' });
           // })
-this.$router.push({ name: '现付页' });
+          this.$router.push({ name: '现付页' });
         }, function (err) {
         });
     }
