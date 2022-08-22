@@ -4,8 +4,8 @@
       <header class="header">
           <div class="header-icon">
           </div>
-          <span>登陆/注册</span>
-          
+          <span>登陆/注册</span>    
+        <span>欢迎你！{{user_name}}</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
@@ -60,6 +60,7 @@
       </div>
       <v-baseline></v-baseline>
       <v-footer></v-footer>
+      <van-button size="large" to="/login" v-on:click="delete_info" plain type="info">退出登录</van-button>
     </div>
 </template>
 
@@ -73,6 +74,7 @@
   import my_points from'@/assets/user/my_points.png'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import { Toast } from 'mint-ui'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -80,7 +82,8 @@
     },
     data () {
 				return {
-          user_id:this.$route.params.id,
+          user_id:this.$ls.get("user_info").user_id,
+          user_name:this.$ls.get("user_info").user_name,
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,
@@ -91,10 +94,17 @@
 		 }, 
     created(){
       console.log(this.user_id);
-      this.$ls.set(user_id+"subscribe",[]);
-      this.$ls.set(user_id+"orders",[]);
-      this.$ls.set(user_id+"favorites",[])
-      this.$ls.set(user_id+"consumption",[])
+      this.$ls.set(this.user_id+"subscribe",[]);
+      this.$ls.set(this.user_id+"orders",[]);
+      this.$ls.set(this.user_id+"favorites",[])
+      this.$ls.set(this.user_id+"consumption",[])
+  },
+  methods:{
+  delete_info(){
+    Toast('已经退出登录！返回登录页');
+    localStorage.removeItem('token');
+    console.log("删除成功");
+  }
   }
   }
 
@@ -115,7 +125,7 @@
       padding: 3.2vw 0;
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex;
+      display:flex;
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;

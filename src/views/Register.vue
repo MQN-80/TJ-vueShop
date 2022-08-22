@@ -63,14 +63,16 @@ export default {
             console.log(response);
             this.datas=response.data;
             console.log(this.datas);
-            this.$ls.set("user_info",this.datas)
+            this.$ls.set("user_account",this.datas.user_id);
+            setTimeout(()=>{
             this.$router.go(-1);
+            },1000);
             }
         }).catch(function(error){
             Toast('注册失败！可能为错误输入');
             alert(error)
         })
-    }
+    },
   }
 }
 

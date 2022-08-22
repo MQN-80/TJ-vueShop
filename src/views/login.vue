@@ -48,7 +48,7 @@ export default {
   },
   data(){
     return {
-      account:this.$ls.get('user_info').user_id,
+      account:this.$ls.get('user_account'),
       password:'',
       toggle:!this.$store.state.login.token
     }
@@ -72,10 +72,11 @@ export default {
         //this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
         localStorage.setItem('token',response.data.token)
         console.log(localStorage.getItem('token'))
+        this.$ls.set("user_account",this.account);
+        this.$ls.set("user_info",response.data);
          setTimeout(()=>{
         this.$router.push({
           name:"用户页",
-          params:{id:123}
         })
       },1000);
       }
