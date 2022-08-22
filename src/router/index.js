@@ -55,9 +55,9 @@ export default new Router({
       name: '详情页',
       component: Detail
     }, {
-      path: '/search',
+      path: '/Search',
       name: '搜索页',
-      component: Search
+      component: Search,
     },{
       path: '/login',
       name: '登录页',
