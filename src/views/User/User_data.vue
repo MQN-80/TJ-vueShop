@@ -11,7 +11,7 @@
     </div>
 <div class="header">
   <div class="header-info">
-    点击更换头像
+    点击更换头像<br/>
     <van-uploader :after-read="afterRead" />
   </div>
 </div>
