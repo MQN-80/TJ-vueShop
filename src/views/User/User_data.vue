@@ -80,7 +80,7 @@ export default {
       }
      }).then((response) => {
       console.log(response);
-      console(this.$ls.get("user_info"));
+      console(this.$ls.get("user_info").id);
      }).catch(function(error) {
      })
      console.log(formData);
