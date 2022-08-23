@@ -19,6 +19,8 @@ const Historical_orders = resolve => require(['@/views/User/Orders.vue'], resolv
 const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
 const Points = resolve => require(['@/views/User/Points.vue'], resolve)
 const Register = resolve => require(['@/views/Register.vue'], resolve)
+const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
+const My_product = resolve => require(['@/views/My_product.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -90,6 +92,14 @@ export default new Router({
       path: '/login/Register',
       name: '注册页',
       component: Register
+    },{
+      path: '/User/Add_product',
+      name: '商品发布页',
+      component: Add_product
+    },{
+      path: '/User/My_product',
+      name: '我的商品页',
+      component: My_product
     },
   ]
 })

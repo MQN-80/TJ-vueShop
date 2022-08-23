@@ -2,12 +2,8 @@
 
   <div class="car">
       <header class="header">
-        <van-image
-       round
-       width="4rem"
-       height="4rem"
-       :src="avator_img"
-        />
+          <div class="header-icon">
+          </div>
           <span>登陆/注册</span>    
         <span>欢迎你！{{user_name}}</span>
       </header>
@@ -53,10 +49,17 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
-            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
+            <router-link class="my-vip-top ho" :to="{ name: '商品发布页'}" >
               <img :src="icon_add"/>
               <p>
                 <span>发布商品</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '我的商品页'}" >
+              <img :src="icon_my_p"/>
+              <p>
+                <span>我的商品</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
@@ -72,6 +75,7 @@
   // import * as mockData from '@/http/mock.js' //模拟数据
   import pay from'@/assets/user/pay.png'
   import shop from'@/assets/user/shop.png'
+  import my_p from'@/assets/user/my_product.png'
   import my_order from'@/assets/user/order.png'
   import my_vip from'@/assets/user/vip.png'
   import my_add from'@/assets/user/add_product.png'
@@ -93,8 +97,7 @@
           icon_order:my_order,
           icon_vip:my_vip,
           icon_add:my_add,
-          icon_points:my_points,
-          avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
+          icon_points:my_points
 				  }
 		 }, 
     created(){
@@ -149,14 +152,14 @@
         span {
           .fz(font-size, 54);
           &::before {
-            color: #ffffff;
+            color: #2c2c2c;
           }
         }
       }
       >span {
         margin-left: 3.2vw;
         .fz(font-size, 30);
-        color: #ffffff;
+        color: #3b3b3b;
         letter-spacing: .2vw;
       }
     }
