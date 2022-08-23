@@ -2,10 +2,13 @@
 
   <div class="car">
       <header class="header">
-          <div class="header-icon">
-          </div>
-          <span>登陆/注册</span>    
-        <span>欢迎你！{{user_name}}</span>
+        <van-image
+       round
+       width="4rem"
+       height="4rem"
+       :src="avator_img"
+        />  
+          <span>欢迎你！{{user_name}}</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
@@ -97,7 +100,12 @@
           icon_order:my_order,
           icon_vip:my_vip,
           icon_add:my_add,
-          icon_points:my_points
+          icon_points:my_points,
+<<<<<<< HEAD
+          avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
+=======
+          icon_my_p:my_p
+>>>>>>> 840482d733a5646efd8a3b9d3657e431066e2423
 				  }
 		 }, 
     created(){
