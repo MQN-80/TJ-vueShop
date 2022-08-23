@@ -10,9 +10,10 @@
   />
     </div>
 <div class="header">
-  <div class="header-icon">
+  <div class="header-info">
+    点击更换头像
+    <van-uploader :after-read="afterRead" />
   </div>
-  <div class="header-info">点击更换头像</div>
 </div>
 <div>
   <van-cell-group>
@@ -61,7 +62,29 @@ export default {
       },
       goback(){
           this.$router.go(-1);//返回上一页
-      } 
+      },
+      afterRead(file) {
+      // 此时可以自行将文件上传至服务器
+      var formData=new FormData();
+      formData.append('file',file.file);
+      this.$pic({
+      method: 'post',
+      url: '/api/reg',
+      headers: {
+       "content-type": "multipart/form-data"
+      },
+      data:formData,
+      params:{
+        option:1,
+        id:this.$ls.get("user_info").id
+      }
+     }).then((response) => {
+      console.log(response);
+      console(this.$ls.get("user_info"));
+     }).catch(function(error) {
+     })
+     console.log(formData);
+    },
     }
   }
 </script>
