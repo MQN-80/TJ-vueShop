@@ -3,10 +3,8 @@
   <van-nav-bar
   title="我的积分"
   left-text="返回"
-  right-text="按钮"
   left-arrow
   @click-left="goback"
-  @click-right="onClickRight"
   />
   <header class="header">
     <div class="header-info">您目前还有</div>

@@ -3,7 +3,7 @@
 <div>
   <div class="my-info">
   <van-nav-bar
-  title="此页面进行数据修改"
+  title="个人信息修改"
   left-text="返回"
   left-arrow
   @click-left="goback"

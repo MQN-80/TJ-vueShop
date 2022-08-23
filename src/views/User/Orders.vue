@@ -3,10 +3,8 @@
   <van-nav-bar
   title="历史订单"
   left-text="返回"
-  right-text="按钮"
   left-arrow
   @click-left="goback"
-  @click-right="onClickRight"
 />
 <van-cell-group>
   <div v-for="order in orders" :key="order.productname">
