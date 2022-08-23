@@ -2,12 +2,16 @@
 
   <div class="car">
       <header class="header">
-          <div class="header-icon">
-          </div>
-          <span>登陆/注册</span>
+        <van-image
+       round
+       width="4rem"
+       height="4rem"
+       :src="avator_img"
+        />  
+          <span>欢迎你！{{user_name}}</span>
       </header>
       <div class="main">
-          <router-link class="my-indent" :to="{ name: '信息修改页'}">
+          <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
               <span class="my-indent-left">查看/修改个人信息</span>
               <div class="my-indent-right">
                   <span>个人信息</span>
@@ -16,35 +20,49 @@
           </router-link>
 
           <section class="my-pay">
-              <router-link :to="{ name: '收藏夹页'}">
+              <router-link :to="{ name: '收藏夹页',query:{id:user_id}}">
                 <img :src="icon_money"/>
                   <p>收藏夹</p>
               </router-link>
-              <router-link :to="{ name: '订阅店铺页'}">
+              <router-link :to="{ name: '订阅店铺页',query:{id:user_id}}">
                 <img :src="icon_shop"/>
                   <p>订阅店铺</p>
               </router-link>
           </section>
 
           <section class="my-vip">
-            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页'}">
+            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页',query:{id:user_id}}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
-            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
+            <router-link class="my-vip-top ho" :to="{ name: '权限说明页',query:{id:user_id}}" >
               <img :src="icon_vip"/>
               <p>
                 <span>权限说明</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
-            <router-link class="my-vip-top ho" :to="{ name: '权限说明页'}" >
-              <img :src="icon_vip"/>
+            <router-link class="my-vip-top ho" :to="{ name: '积分页',query:{id:user_id}}" >
+              <img :src="icon_points"/>
+              <p>
+                <span>我的积分</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '商品发布页'}" >
+              <img :src="icon_add"/>
               <p>
                 <span>发布商品</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '我的商品页'}" >
+              <img :src="icon_my_p"/>
+              <p>
+                <span>我的商品</span>
                 <i class="icon-go"></i>
               </p>
             </router-link>
@@ -52,6 +70,7 @@
       </div>
       <v-baseline></v-baseline>
       <v-footer></v-footer>
+      <van-button size="large" to="/login" v-on:click="delete_info" plain type="info">退出登录</van-button>
     </div>
 </template>
 
@@ -59,10 +78,14 @@
   // import * as mockData from '@/http/mock.js' //模拟数据
   import pay from'@/assets/user/pay.png'
   import shop from'@/assets/user/shop.png'
+  import my_p from'@/assets/user/my_product.png'
   import my_order from'@/assets/user/order.png'
   import my_vip from'@/assets/user/vip.png'
+  import my_add from'@/assets/user/add_product.png'
+  import my_points from'@/assets/user/my_points.png'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import { Toast } from 'mint-ui'
   export default {
     components: {
       'v-baseline': Baseline,
@@ -70,13 +93,34 @@
     },
     data () {
 				return {
+          user_id:this.$ls.get("user_info").user_id,
+          user_name:this.$ls.get("user_info").user_name,
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,
-          icon_vip:my_vip
+          icon_vip:my_vip,
+          icon_add:my_add,
+          icon_points:my_points,
+          avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
 				  }
-		 }
+		 }, 
+    created(){
+      this.avator_img="http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg";
+      console.log(this.user_id);
+      this.$ls.set(this.user_id+"subscribe",[]);
+      this.$ls.set(this.user_id+"orders",[]);
+      this.$ls.set(this.user_id+"favorites",[])
+      this.$ls.set(this.user_id+"consumption",[])
+  },
+  methods:{
+  delete_info(){
+    Toast('已经退出登录！返回登录页');
+    localStorage.removeItem('token');
+    console.log("删除成功");
   }
+  }
+  }
+
 </script>
 
 <style lang="less" scoped>
@@ -94,7 +138,7 @@
       padding: 3.2vw 0;
       display: -webkit-box;
       display: -ms-flexbox;
-      display: flex;
+      display:flex;
       -webkit-box-align: center;
       -ms-flex-align: center;
       align-items: center;
@@ -112,14 +156,14 @@
         span {
           .fz(font-size, 54);
           &::before {
-            color: #ffffff;
+            color: #2c2c2c;
           }
         }
       }
       >span {
         margin-left: 3.2vw;
         .fz(font-size, 30);
-        color: #ffffff;
+        color: #3b3b3b;
         letter-spacing: .2vw;
       }
     }

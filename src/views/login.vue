@@ -20,7 +20,9 @@
        :readonly='!toggle'
        :disableClear = '!toggle'
         ></mt-field>
-      <p class="tip">Tip : 账号密码随便输</p>
+      <router-link :to="{ name: '注册页'}" >
+          <p class="tip">没有账号？点击此处进行注册</p>
+        </router-link>
     </section>
     <mt-button
      plain
@@ -38,6 +40,7 @@
 
 <script>
 import Header from '@/common/_header.vue'
+import net from '@/http/net.js'       //http请求
 import { Toast } from 'mint-ui'
 export default {
   components:{
@@ -45,7 +48,7 @@ export default {
   },
   data(){
     return {
-      account:'',
+      account:this.$ls.get('user_account'),
       password:'',
       toggle:!this.$store.state.login.token
     }
@@ -53,20 +56,37 @@ export default {
   methods:{
     // 登录按钮
     login(){
-      if(this.account!=="" && this.password!=="") {
+      this.$net({
+      method: 'get',
+      url: '/user/is_user',
+      params:{
+        userid:this.account,
+        password:this.password
+      }
+     }).then((response) => {
+      console.log(response);
+      if(response.data!="no")
+      {
         Toast('登录成功,存储token,跳转网页');
         this.toggle = false;
-        this.$store.commit('CHANGE_TOKEN',1);
-      }else {
-        Toast('账号密码不能为空');
-      }
-
-      setTimeout(()=>{
-        this.$router.replace({
-          path: 'user'
+        //this.$store.commit('CHANGE_TOKEN',response.data);   //存储token
+        localStorage.setItem('token',response.data.token)
+        console.log(localStorage.getItem('token'))
+        this.$ls.set("user_account",this.account);
+        this.$ls.set("user_info",response.data);
+         setTimeout(()=>{
+        this.$router.push({
+          name:"用户页",
         })
       },1000);
-      // 登录成
+      }
+      else
+      {
+        Toast('账号密码错误');
+      }
+     }).catch(function(error) {
+      alert(error)
+     })
     },
 
     //退出登录按钮

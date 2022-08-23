@@ -20,6 +20,7 @@
     "vant": "^2.12.48",
     "vue": "^2.4.2",
     "vue-awesome-swiper": "^2.6.4",
+    "vue-ls": "^4.2.0",
     "vue-router": "^2.7.0",
     "vuex": "^2.4.0"
   },

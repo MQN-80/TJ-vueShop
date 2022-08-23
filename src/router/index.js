@@ -12,9 +12,16 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
-const NPay = resolve => require(['@/components/pay/pay/pay.vue'], resolve)
-const Complete = resolve => require(['@/components/pay/complete.vue'], resolve)
-const Carcomplete = resolve => require(['@/components/car/pay/complete.vue'], resolve)
+const User_data = resolve => require(['@/views/User/User_data.vue'], resolve)
+const Subscribe = resolve => require(['@/views/User/Subscribe_shop.vue'], resolve)
+const Favorites = resolve => require(['@/views/User/Favorites.vue'], resolve)
+const Historical_orders = resolve => require(['@/views/User/Orders.vue'], resolve)
+const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
+const Points = resolve => require(['@/views/User/Points.vue'], resolve)
+const Register = resolve => require(['@/views/Register.vue'], resolve)
+const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
+const My_product = resolve => require(['@/views/My_product.vue'], resolve)
+
 export default new Router({
   routes: [{
       path: '/',
@@ -39,39 +46,60 @@ export default new Router({
       component: Pay
     },
     {
-      path: '/pay/pay',
-      name: '现付页',
-      component: NPay
-    },
-    {
-      path: '/pay/complete',
-      name: '完成页',
-      component: Complete
-    },
-    {
-      path: '/car/complete',
-      name: '车结页',
-      component: Carcomplete
-    },
-    {
-      path: '/user',
+      path: '/User',
       name: '用户页',
       component: User,
       meta: {
-           requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
-       },
+        requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+    },
     }, {
       path: '/detail',
       name: '详情页',
       component: Detail
     }, {
-      path: '/search',
+      path: '/Search',
       name: '搜索页',
-      component: Search
+      component: Search,
     },{
       path: '/login',
       name: '登录页',
       component: Login
-    }
+    },{
+      path: '/User/User_data',
+      name: '信息修改页',
+      component: User_data
+    },{
+      path: '/User/Historical_orders',
+      name: '历史订单页',
+      component: Historical_orders
+    },{
+      path: '/User/Favorites',
+      name: '收藏夹页',
+      component: Favorites
+    },{
+      path: '/User/Subscribe',
+      name: '订阅店铺页',
+      component: Subscribe
+    },{
+      path: '/User/Authority',
+      name: '权限说明页',
+      component: Authority
+    },{
+      path: '/User/Points',
+      name: '积分页',
+      component: Points
+    },{
+      path: '/login/Register',
+      name: '注册页',
+      component: Register
+    },{
+      path: '/User/Add_product',
+      name: '商品发布页',
+      component: Add_product
+    },{
+      path: '/User/My_product',
+      name: '我的商品页',
+      component: My_product
+    },
   ]
 })

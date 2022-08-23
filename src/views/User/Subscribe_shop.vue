@@ -3,10 +3,8 @@
 <van-nav-bar
   title="订阅店铺"
   left-text="返回"
-  right-text="按钮"
   left-arrow
   @click-left="goback"
-  @click-right="onClickRight"
 />
 <van-cell-group>
   <div v-for="shop in tableData" :key="shop.name">
@@ -45,7 +43,8 @@
           name: 'GSC',
           date: '2016-05-03',
           address: ''
-        }]
+        }],
+        shop_table:this.$ls.get(this.$route.params.id+"subscribe")
       }
     },
     methods: {

@@ -3,10 +3,8 @@
 <van-nav-bar
   title="收藏夹"
   left-text="返回"
-  right-text="按钮"
   left-arrow
   @click-left="goback"
-  @click-right="onClickRight"
 />
 <van-cell-group>
   <div v-for="product in productData" :key="product.name">
@@ -49,7 +47,8 @@
           name: '鞋',
           price: '300',
           address: ''
-        }]
+        }],
+        user_favorites:this.$ls.get(this.$route.params.id+"favorites")
       }
     },
     methods: {
