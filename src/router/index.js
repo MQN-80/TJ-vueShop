@@ -21,6 +21,8 @@ const Points = resolve => require(['@/views/User/Points.vue'], resolve)
 const Register = resolve => require(['@/views/Register.vue'], resolve)
 const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
 const My_product = resolve => require(['@/views/My_product.vue'], resolve)
+const Forum = resolve => require(['@/views/forum/Forum.vue'], resolve)
+const CArticle = resolve => require(['@/views/forum/Create_article.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -52,7 +54,16 @@ export default new Router({
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
     },
-    }, {
+    },
+    {
+      path: '/forum',
+      name: '论坛页',
+      component: Forum,
+    },{
+      path: '/Carticle',
+      name: '发贴页',
+      component: CArticle,
+    },{
       path: '/detail',
       name: '详情页',
       component: Detail

@@ -50,7 +50,7 @@
 }
 .icon-user:before {
   content: "\e90a";
-  color: #515151;
+  color: #4d4d4d;
 }
 .icon-go:before {
   content: "\e900";
@@ -80,4 +80,8 @@
 }
 .icon-set:before {
   content: "\e901";
+}
+.icon-forum:before{
+  content: "㊂";
+  color: #4d4d4d;
 }
