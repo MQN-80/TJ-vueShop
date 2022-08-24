@@ -103,9 +103,7 @@ export default {
           // 提交订单信息
           this.$net({
             method: 'post',
-            url: '/ShopTransaction/add_deal_record',
-
-          
+            url: '/ShopTransaction/add_deal_record',        
             params: {
               //arr: this.$store.state.detail.midList
               Product_id:'E6936BA8E6F37DCCE05011AC02002E4E',
@@ -116,7 +114,6 @@ export default {
             console.log(res);
             this.$router.push({ name: '现付页' });
           })
-          //this.$router.push({ name: '现付页' });
         }, function (err) {
         });
     }
