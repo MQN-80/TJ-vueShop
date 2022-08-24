@@ -8,7 +8,7 @@
 />
       <header class="header">
           <div class="header-info">您当前的权限等级为：</div>
-          <div class="header-info">Lv.？</div>
+          <div class="header-info">Lv.?</div>
       </header>
   <section class="my-rank">
     <router-link class="rank1" :to="{ name: '权限说明页'}" >
