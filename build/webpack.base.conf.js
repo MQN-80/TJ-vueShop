@@ -33,10 +33,6 @@ module.exports = {
         options: vueLoaderConfig
       },
       {
-        test: /\.sass$/,
-        loaders: ['style', 'css', 'sass']
-      },
-      {
         test: /\.js$/,
         loader: 'babel-loader',
         include: [resolve('src'), resolve('test')]
