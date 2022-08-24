@@ -23,7 +23,7 @@
   label="用户昵称"
   v-model="user_name"
   input-align="right"
-  input="onChange_weight"
+   input="onChange_weight"
   />
   <van-field
   size="large"
@@ -40,7 +40,7 @@
   rows="5"
   maxlength="150"
   show-word-limit
-  input="onChange_waistline"
+   input="onChange_waistline"
   />
   <van-cell bindtap="saveData" title=" " value="点此保存数据" is-link />
 </van-cell-group>
@@ -51,9 +51,9 @@
 export default {
     data() {
       return {
-          user_name: '陈柯羲',
+          user_name: this.$ls.get("data").user_name,
           user_gender: '男',
-          user_desc: '该用户没有介绍'
+          user_desc:this.$ls.get("data").user_intro
       }
     },
     methods: {
