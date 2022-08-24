@@ -9,6 +9,9 @@
        :src="avator_img"
         />  
           <span>欢迎你！{{user_name}}</span>
+          <div class="header-icon">
+          </div>
+          <span>{{user_name}}</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
