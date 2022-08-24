@@ -12,6 +12,9 @@ const Detail = resolve => require(['@/views/Detail.vue'], resolve)
 const Search = resolve => require(['@/views/Search.vue'], resolve)
 const Pay = resolve => require(['@/components/car/pay/pay.vue'], resolve)
 const Login = resolve => require(['@/views/login.vue'], resolve)
+const NPay = resolve => require(['@/components/pay/pay/pay.vue'], resolve)
+const Complete = resolve => require(['@/components/pay/complete.vue'], resolve)
+const Carcomplete = resolve => require(['@/components/car/pay/complete.vue'], resolve)
 const User_data = resolve => require(['@/views/User/User_data.vue'], resolve)
 const Subscribe = resolve => require(['@/views/User/Subscribe_shop.vue'], resolve)
 const Favorites = resolve => require(['@/views/User/Favorites.vue'], resolve)
@@ -68,7 +71,23 @@ export default new Router({
       path: '/User/User_data',
       name: '信息修改页',
       component: User_data
-    },{
+    },
+    {
+      path: '/pay/pay',
+      name: '现付页',
+      component: NPay
+    },
+    {
+      path: '/pay/complete',
+      name: '完成页',
+      component: Complete
+    },
+    {
+      path: '/car/complete',
+      name: '车结页',
+      component: Carcomplete
+    },
+    {
       path: '/User/Historical_orders',
       name: '历史订单页',
       component: Historical_orders
