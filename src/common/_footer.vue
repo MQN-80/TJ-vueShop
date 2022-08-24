@@ -51,6 +51,10 @@
         case '购物车页':
           this.selected = '购物车页';
           break;
+        case '现付页':
+          this.selected = '现付页';
+
+          break;
         case '用户页':
           this.selected = '用户页';
           break;

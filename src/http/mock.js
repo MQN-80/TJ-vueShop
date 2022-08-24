@@ -1,3 +1,4 @@
+import Mock from 'mockjs'
 var Random = Mock.Random
 var index = Mock.mock('http://api.com/index', {
   // "user|5-10": [{
