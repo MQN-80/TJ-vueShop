@@ -181,7 +181,7 @@ export default {
       position: absolute;
       top: 0.5vw;
       right: 5.5vw;
-      background-color: @cl;
+      background-color: #ff0000;
       border-radius: 50%;
       color: #fff;
       .fz(font-size,24);
@@ -202,8 +202,8 @@ export default {
     line-height: 14vw;
     height: 14vw;
 
-    color: rgb(255, 255, 255);
-    background-color:@cl;
+    color: rgb(248, 248, 248);
+    background-color: #ece00b;
     letter-spacing: 0.2vw;
     &:active {
       background-color: #ff0000;
