@@ -2,7 +2,6 @@
 
   <div class="car">
       <header class="header">
-<<<<<<< HEAD
         <van-image
        round
        width="4rem"
@@ -10,11 +9,6 @@
        :src="avator_img"
         />  
           <span>欢迎你！{{user_name}}</span>
-=======
-          <div class="header-icon">
-          </div>
-          <span>{{user_name}}</span>
->>>>>>> b18c5ee (update1)
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
@@ -37,7 +31,7 @@
           </section>
 
           <section class="my-vip">
-            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页',query:{id:user_id}}">
+            <router-link  class="my-vip-bottom ho" :to="{ name: '历史订单页',query:{id:user_id}}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
@@ -107,11 +101,7 @@
           icon_vip:my_vip,
           icon_add:my_add,
           icon_points:my_points,
-<<<<<<< HEAD
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
-=======
-          icon_my_p:my_p
->>>>>>> b18c5ee (update1)
 				  }
 		 }, 
     created(){
