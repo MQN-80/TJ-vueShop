@@ -27,7 +27,7 @@
           </section>
 
           <section class="my-vip">
-            <router-link  class="my-vip-bottom ho":to="{ name: '历史订单页',query:{id:user_id}}">
+            <router-link  class="my-vip-bottom ho" :to="{ name: '历史订单页',query:{id:user_id}}">
               <img :src="icon_order"/>
               <p>
                 <span>我的订单</span>
