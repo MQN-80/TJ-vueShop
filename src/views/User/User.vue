@@ -9,6 +9,9 @@
        :src="avator_img"
         />  
           <span>欢迎你！{{user_name}}</span>
+          <div class="header-icon">
+          </div>
+          <span>{{user_name}}</span>
       </header>
       <div class="main">
           <router-link class="my-indent" :to="{ name: '信息修改页',query:{id:user_id}}">
@@ -102,6 +105,7 @@
           icon_add:my_add,
           icon_points:my_points,
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
+          icon_my_p:my_p
 				  }
 		 }, 
     created(){
