@@ -99,7 +99,7 @@ export default {
     p:last-of-type {
       padding: 1vw 0 0 1vw;
       span {
-        color: @cl;
+        color: rgb(244, 54, 54);
         .fz(font-size,42);
       }
     }
@@ -111,7 +111,7 @@ export default {
   }
 
   .footer-pay {
-    background-color: @cl;
+    background-color: #fb4a4a;
     line-height: 16vw;
     color: #fff;
   }
