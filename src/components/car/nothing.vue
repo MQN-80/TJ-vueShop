@@ -8,8 +8,6 @@
     </div>
     <router-link class="nothing-toshop" :to="{name:'分类页'}">
       <p>购物车是空的</p>
-      <button bindtap="">dianwo</button>
-      
       <router-link :to="{ name: '分类页', params: {} }">去逛逛</router-link>
     </router-link>
   </div>
@@ -19,26 +17,10 @@
 
 <script>
 import Gologin from '@/components/car/gologin.vue'
-import axios from 'axios'
 export default {
   components: {
     'v-gologin': Gologin
-  },
-  data(){
-    return{
-    message:"",
-    }
-  },
-  mounted:function(){
-  axios.get('http://124.222.1.19:5000/user/get_user_health',{			
-			}).then(res=>{
-					console.log(res.data);
-				},err=>{
-					console.log(err);
-			})
-  },
-
-
+  }
 }
 </script>
 
