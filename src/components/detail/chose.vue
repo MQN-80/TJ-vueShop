@@ -90,7 +90,7 @@ export default {
         }
         > span {
             line-height: 10vw;
-            color: @cl;
+            color: rgb(238, 113, 80);
             .fz(font-size,34);
             font-weight: 600;
         }
@@ -115,8 +115,8 @@ export default {
                 color: rgb(111, 111, 111);
                 &.active,
                 &:active {
-                    color: @cl;
-                    border-color: @cl;
+                    color: rgb(238, 113, 80);
+                    border-color: rgb(238, 113, 80);
                     -webkit-transform: scale(1.1);
                     transform: scale(1.1);
                 }
@@ -178,7 +178,7 @@ export default {
                 position: absolute;
                 top: 0.5vw;
                 right: 5.5vw;
-                background-color: @cl;
+                background-color: rgb(238, 113, 80);
                 border-radius: 50%;
                 color: #fff;
                 .fz(font-size,24);
@@ -199,7 +199,7 @@ export default {
             height: 14vw;
 
             color: #fff;
-            background-color: @cl;
+            background-color: rgb(238, 113, 80);
             letter-spacing: 0.2vw;
             &:active {
                 background-color: #ff7d00;

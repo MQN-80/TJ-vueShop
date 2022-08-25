@@ -84,13 +84,8 @@
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       -webkit-box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       .is-selected {
-<<<<<<< HEAD
         color: rgb(247, 45, 45);
         background-color: #fff;
-=======
-        color: @cl;
-        background-color: rgb(72, 72, 72);
->>>>>>> upstream/master
         i {
           &::before {
             color: rgb(247, 45, 45);
