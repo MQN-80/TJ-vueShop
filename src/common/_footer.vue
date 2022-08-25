@@ -14,6 +14,10 @@
       <i slot="icon" class="icon-car"></i>
       购物车
     </mt-tab-item>
+    <mt-tab-item id="论坛页">
+      <i slot="icon" class="icon-forum"></i>
+      论坛
+    </mt-tab-item>
     <mt-tab-item id="用户页">
       <i slot="icon" class="icon-user"></i>
       我的
@@ -53,7 +57,8 @@
           break;
         case '现付页':
           this.selected = '现付页';
-
+        case '论坛页':
+          this.selected = '论坛页';
           break;
         case '用户页':
           this.selected = '用户页';
@@ -73,16 +78,19 @@
 
 }
   .footer {
-
-
     .mint-tabbar {
       background-color: #fff;
       background-image: none;
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       -webkit-box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       .is-selected {
+<<<<<<< HEAD
         color: rgb(247, 45, 45);
         background-color: #fff;
+=======
+        color: @cl;
+        background-color: rgb(72, 72, 72);
+>>>>>>> upstream/master
         i {
           &::before {
             color: rgb(247, 45, 45);
