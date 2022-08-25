@@ -3,11 +3,13 @@
 	    <div class="loading" v-if="loading">
 			<van-loading size="24px" vertical>加载中...</van-loading>
 	    </div>
-	    <div class="posts" v-else>
+	    <div class="posts" v-else >
 			<ul>
-				<section v-for="post in posts" :key="post" @click="gotoArticle">	
+				<section v-for="post in posts" :key="post">	
 					<h class="head">
+					<router-link :to="{name:'文章页' ,params:{Article:post}}">
 						<b>{{ post.article_title}}</b>
+					</router-link>
 					</h>
 					<div>
 						<span>
@@ -25,9 +27,7 @@
 </template>
 
 <script>
-import section1 from '../../components/index/section1.vue';
-	export default {
-  components: { section1 },
+export default {
 	  name: 'PostList',
 	  data () {
 	    return {
@@ -50,7 +50,7 @@ import section1 from '../../components/index/section1.vue';
                 }
               })
 			  .then( (response) => {
-			  	if( response){
+			  	if( response.data !=""){
 			  		this.posts = response.data;
 			  		this.loading = false;
 			  	}
@@ -72,17 +72,21 @@ import section1 from '../../components/index/section1.vue';
 	.PostList {
 		color: #000;
 		margin-top: 0.5rem;
+		margin-left: 0.5rem;
+		margin-right: 0.5rem;
+		height: 100%;
 	}
 	.PostList .posts {
-		background-color: rgb(255, 255, 255);
-		padding: 0.5rem;
-		margin: 0.3rem 2rem;
+		color: #000;
+   		padding: 10px;
+    	border-radius: 30px ;
+   		box-shadow: 0 0 0 2px #e1f0fd;
 	}
 	.PostList .posts section {
 		padding-top: 3vw;
 		list-style: none;
 		margin-bottom: 16px;
-		border-bottom: 1px solid #dba335;
+		border-bottom: 1px solid #e1f0fd;
 		line-height: 30px;
 	}
 	.PostList .posts .head{

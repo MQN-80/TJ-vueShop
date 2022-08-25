@@ -1,6 +1,6 @@
 <template>
   <div class="forum_heard">
-    <van-tabs v-model="active" background = "rgb(220, 220, 220)">
+    <van-tabs v-model="active" background = "#dbe9f5">
       <van-tab title="热门贴子">
         <recommend></recommend>
       </van-tab>

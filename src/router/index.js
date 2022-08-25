@@ -26,6 +26,7 @@ const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
 const My_product = resolve => require(['@/views/My_product.vue'], resolve)
 const Forum = resolve => require(['@/views/forum/Forum.vue'], resolve)
 const CArticle = resolve => require(['@/views/forum/Create_article.vue'], resolve)
+const Article =resolve => require(['@/views/forum/Article.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -130,6 +131,10 @@ export default new Router({
       path: '/User/My_product',
       name: '我的商品页',
       component: My_product
-    },
+    },{
+      path:'/forum/Article',
+      name: '文章页',
+      component:Article,
+    }
   ]
 })
