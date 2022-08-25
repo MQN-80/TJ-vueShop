@@ -1,7 +1,7 @@
 <template lang="html">
     <ul class="product-list">
       <li>
-        <router-link :to="{name:'详情页'}">
+        <router-link :to="{name:'详情页',params: {id: 1111}}">
           <img src="./1.jpg" alt=""/>
           <div>产品名称</div>
           <div> 99元</div>
@@ -35,7 +35,13 @@
 import { Lazyload } from 'mint-ui';
 
 export default {
-  
+data(){
+
+},
+props:["productInfo"],
+mounted() {
+    console.log(this.productInfo); //父组件传递过来的数据
+  },
 }
 
 </script>

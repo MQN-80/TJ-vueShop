@@ -4,7 +4,7 @@
         <van-dropdown-item v-model="value1" :options="option1" />
         <van-dropdown-item v-model="value2" :options="option2" />
     </van-dropdown-menu>
-    <Products/>
+    <Products :productInfo="product"/>
   </div> 
 </template>
 
@@ -27,11 +27,18 @@ export default {
       datas: {
         Products:{}
       },
+      product:[],
     }
   },
-
+  props:["message"],
   components:{
       Products
+  },
+  mounted() {
+    console.log(this.message); //父组件传递过来的数据
+    console.log("dada");
+    this.product=this.message;
+    console.log(this.product);
   },
 };
 </script>

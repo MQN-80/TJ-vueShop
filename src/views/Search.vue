@@ -24,7 +24,7 @@
         :SearchTipsData = "SearchTipsData"/>
 
         <!-- 调用商品内容组件 -->
-        <SearchProducts v-if="blockshow==3"/>
+        <SearchProducts :message="getProduct" v-if="blockshow==3"/>
       </div>
   </body>
 </template>
@@ -33,6 +33,7 @@
 import HistoryHot from "@/components/search/HistoryHot"
 import SearchTips from "@/components/search/SearchTips"
 import SearchProducts from "@/components/search/SearchProducts"
+import { Toast } from 'vant';
 // 未来调用数据接口
 // import (GetSearchHistoryHot,GetSearchTips) from "@/vuex/search"
 
@@ -51,7 +52,9 @@ export default {
       //热门搜索的列表数据
       HotData:[],
       //搜索实时提示的列表数据
-      SearchTipsData:[]
+      SearchTipsData:[],
+      //获取的后端商品列表
+      getProduct:[],
     };
   },
 
@@ -72,7 +75,8 @@ export default {
   methods: {
     onSearch(val) {
       // 发送搜索请求
-      this.blockshow=3;
+      this.get_serachProduct(val);
+      //this.blockshow=3;
       Toast(val);
     },
     onCancel() {
@@ -91,6 +95,22 @@ export default {
           SearchTipsData.SearchTipsData=res.data
         }
       })
+    },
+    //获取搜索的商品
+    get_serachProduct(val){
+    this.$net({
+    method:'get',
+    url:'/ShopTransaction/search_productInfo',
+    params:{
+       product_name:val
+      }
+    }).then((response)=>{
+    this.getProduct=response.data;
+    this.blockshow=3;
+    console.log("sada")
+    }).catch((err)=>{
+      console.log(err);
+    })
     }
   },
   components:{
