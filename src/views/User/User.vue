@@ -66,6 +66,13 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '店铺页'}" >
+              <img :src="icon_my_p"/>
+              <p>
+                <span>店铺按钮</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
           </section>
       </div>
       <v-baseline></v-baseline>
@@ -102,7 +109,6 @@
           icon_add:my_add,
           icon_points:my_points,
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
-          icon_my_p:my_p
 				  }
 		 }, 
     created(){

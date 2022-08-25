@@ -24,6 +24,7 @@ const Points = resolve => require(['@/views/User/Points.vue'], resolve)
 const Register = resolve => require(['@/views/Register.vue'], resolve)
 const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
 const My_product = resolve => require(['@/views/My_product.vue'], resolve)
+const Shop = resolve => require(['@/views/Shop.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -119,6 +120,10 @@ export default new Router({
       path: '/User/My_product',
       name: '我的商品页',
       component: My_product
+    },{
+      path: '/User/Shop',
+      name: '店铺页',
+      component: Shop
     },
   ]
 })
