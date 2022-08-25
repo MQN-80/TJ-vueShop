@@ -81,11 +81,11 @@
       box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       -webkit-box-shadow: 0 0 2.2vw 0 hsla(0, 6%, 50%, .13);
       .is-selected {
-        color: @cl;
+        color: rgb(247, 45, 45);
         background-color: #fff;
         i {
           &::before {
-            color: @cl;
+            color: rgb(247, 45, 45);
           }
         }
       }
