@@ -1,14 +1,18 @@
 <template>
     <div>
-        <div class="shouhang">
-            <div style="float: left;" >
-                <a href="#" >首页</a>
-            </div>
-            <div align="center" style="text-indent: -2em;">发布商品</div>
+        <div class="head">
+            <van-row>
+                <van-col span="6">
+                    <h1 >
+                        <a href="#" >首页</a>
+                    </h1>
+                </van-col>
+                <van-col span="8" offset="3">发布商品</van-col>
+            </van-row>
         </div>
         <br>
         <form action="">
-            <span class="tishi">标题：</span>
+            <span class="tishi" >标题：</span>
             <input type="text">
             <br>
             <br>
@@ -22,15 +26,15 @@
                 <option >分类6</option>
             </select>
             <br><br>
-            <span class="tishi">价格：</span>
+            <span class="tishi" >价格：</span>
             <input type="text" style="width: 100px;">
             <br><br>
-            <span class="tishi">联系方式：</span>
+            <span class="tishi" >联系方式：</span>
             <input type="text">
             <br><br>
             <span class="tishi"> 描述：</span>
             <br><br>
-            <textarea name="" id="" cols="55" rows="10" class="nonesize"></textarea>
+            <textarea name="" id="" cols="35" rows="9" class="nonesize" placeholder="请输入商品描述"></textarea>
             <br><br>
             <span class="tishi"> 上传图片：</span>
             <van-uploader :after-read="afterRead" />
@@ -67,7 +71,7 @@ export default {
     width: 100px;
     padding: 4px 30px 4px 4px;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
     border: 1.5px solid rgba(63, 79, 94, 0.525);
     height: 30px;
     -webkit-appearance: none;
@@ -88,7 +92,7 @@ export default {
     }
     /* 发布按钮 */
     .button{
-    width: 390px;
+    width: 340px;
     height: 81px;
     background:linear-gradient(315deg, #89d8d3 0%, #03c8a8 74%);
     border: none;
@@ -104,16 +108,6 @@ export default {
     position: relative;
     z-index: 0;
     }
-    /* 首行 */
-    .shouhang{
-    line-height: 1.6;
-    background: #89d8d3;
-    width: 495px;
-    height: 48px;
-    font-weight: 500;
-    font-size: 27px;
-    color: white;
-    }
     .biaoti{
         font-size: 27px;
         color: white;
@@ -122,5 +116,18 @@ export default {
     }
     .nonesize{
         resize:none;
+        font-size: large;
+    }
+    /* 首行 */
+    .head{
+        line-height: 2;
+        background: #89d8d3;
+        font-weight: 500;
+        font-size: 27px;
+        color: white;
+        height: 53px;
+    }
+    .head h1{
+        margin: 0 1rem;
     }
 </style>
