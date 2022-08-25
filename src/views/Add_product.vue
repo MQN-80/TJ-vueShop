@@ -8,8 +8,8 @@
         </div>
         <br>
         <form action="">
-            <span class="tishi">标题：</span>
-            <input type="text">
+            <span class="tishi">商品名称：</span>
+            <input type="text" v-model="productName">
             <br>
             <br>
             <span class="tishi">分类：</span>
@@ -42,7 +42,13 @@
 
 <script>
 export default {
-
+data(){
+    return{
+        productName:'', 
+        price:0,
+        
+    }
+}
 }
 </script>
 
