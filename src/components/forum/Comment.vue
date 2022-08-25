@@ -1,7 +1,6 @@
 <template>
     <div class="markup" >
       <h2 class="title">评论</h2>
-      {{this.post}}
       <van-form >
         <van-field
           v-model="markup"
@@ -18,7 +17,7 @@
           <van-button round block type="info" native-type="submit">提交</van-button>
         </div>
       </van-form>
-      {{User_id}}{{MA}} {{Article_id}}
+      {{User_id}}{{markup}} {{Article_id}}
     </div>
 </template>
 
@@ -45,7 +44,7 @@ export default {
                     article_id: Article_id
                 }
               })
-			  .then( (response) => {
+			  .then((response) => {
 			  	if(){
 			  	}
 			  })

@@ -1,5 +1,5 @@
 <template>
-<div class="Article" style="background:#ddd">
+<div class="Article" style="background:#F8FCFF">
     <van-nav-bar
     title="文章详情"
     left-text="返回"
@@ -21,7 +21,6 @@
 			</ul>
 			<div v-html="$route.params.Article.article_context" id="content"></div>
             <van-cell title="URL 跳转"  is-link url="../../components/forum/Comment.vue" />
-            {{posts}}
 		</div>
         <div id='reply'>
             <div v-for='(post,index) in posts' :key="post" class='replySec'>
@@ -38,7 +37,7 @@
             </div>
     	</div>
 	</div>
-    <comment  :Article_id = this.$route.params.Article.article_id :Aser_id = 1></comment>
+    <comment  :Article_id = this.$route.params.Article.article_id :User_id = 1></comment>
 </div>
 </template>
 
@@ -108,7 +107,6 @@ import Comment from '../../components/forum/Comment.vue';
 		box-sizing: border-box;
 		display: inline-block;
 		width: 95%;
-		border: 3px solid #ddd;	
 	    padding: 0.8rem 0.4rem;
 	    margin-left: 2.5%;
 	}
@@ -116,7 +114,7 @@ import Comment from '../../components/forum/Comment.vue';
 		padding: 2rem 1rem 2rem 1rem;
 		line-height: 1.6;
 		padding-bottom: 1rem;
-		border-top: 3px solid #ddd;
+		border-top: 3px solid #F8FCFF;
     }
 	.ArticleSection > h1 {
 		font-size: 0.1rem;
@@ -145,7 +143,7 @@ import Comment from '../../components/forum/Comment.vue';
         box-sizing: border-box;
         border-bottom: 1px solid #C0CCDA;
         width: 100%;
-        padding: 1rem;
+        padding: 5px;
         background: white;
     }
     #reply {
@@ -167,30 +165,11 @@ import Comment from '../../components/forum/Comment.vue';
     .thumbsClass {
     	float: right;
     }
-    .replyUp > a{
-    	color: black;
-	   	text-decoration: none;
-		font-weight: 600;
-    }
-    .replyUp a:nth-of-type(2) {
-    	margin-left: -14px;
-    	vertical-align: super;
-    }
     .thumbsClass  {
     	color: red;
     }
     .replySec > p {
     	padding-left: 50px;
     	clear: both;
-    }
-    .replySec img {
-    	width: 1.5rem;
-    	height: 1.5rem;
-    	margin-right: 1rem;
-    }	
-    .replySec p img {
-    	overflow: hidden;
-    	width: 100%;
-    	height: 100%;
     }
 </style>
