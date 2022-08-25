@@ -66,6 +66,13 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
+            <router-link class="my-vip-top ho" :to="{ name: '店铺页'}" >
+              <img :src="icon_my_p"/>
+              <p>
+                <span>店铺按钮</span>
+                <i class="icon-go"></i>
+              </p>
+            </router-link>
           </section>
       </div>
       <v-baseline></v-baseline>
@@ -107,10 +114,46 @@
     created(){
       this.avator_img="http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg";
       console.log(this.user_id);
-      this.$ls.set(this.user_id+"subscribe",[]);
-      this.$ls.set(this.user_id+"orders",[]);
-      this.$ls.set(this.user_id+"favorites",[])
-      this.$ls.set(this.user_id+"consumption",[])
+      //缓存用户数据
+      this.$net({
+      method: 'get',
+      url: '/userCenter/get_user_info',
+      params:{
+        userid:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      this.$ls.set("data",response.data);
+     }).catch(function(error) {
+      alert(error)
+     });
+     //缓存收藏夹
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collect',
+      params:{
+        userid:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      this.$ls.set("favorites",response.data);
+     }).catch(function(error) {
+      alert(error)
+     });
+     //缓存积分数据
+     this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_User_Credits',
+      params:{
+        userid:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      this.$ls.set("consumption",response.data);
+     }).catch(function(error) {
+      alert(error)
+     })
+     //缓存订阅店铺
+      this.$ls.set("subscribe",[]);
+      //缓存历史订单
+      this.$ls.set("orders",[]);
   },
   methods:{
   delete_info(){

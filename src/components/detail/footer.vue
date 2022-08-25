@@ -7,6 +7,9 @@
       <i class="icon-car"></i>
       <span v-if="count">{{count}}</span>
     </router-link>
+    <span class="footer-gocar" @click="addIntoCollect">
+      <img :src="icon_collect"/>
+    </span>
     <span class="footer-addcar" @click="addIntoCar">
       加入购物车
     </span>
@@ -19,6 +22,8 @@
 <script>
 import { MessageBox } from 'mint-ui';
 import { Toast } from 'mint-ui';
+import collect from'@/assets/user/collect.png'
+import collect_filled from'@/assets/user/collects.png'
 export default {
   computed: {
 
@@ -39,7 +44,11 @@ export default {
       return this.$store.state.detail.sizeSelected
     }
   },
-
+    data () {
+				return {
+          icon_collect:collect
+				  }
+		 }, 
   methods: {
     addIntoCar () {
       //  mint-ui的弹出式提示框
@@ -100,23 +109,33 @@ export default {
 
           this.$store.dispatch('resetMidList');
           this.$store.dispatch('addMidList', product);
-          // 提交订单信息
-          // this.$net({
-          //   method:'post',
-          //   url:'',
-          //   header:{
-          //     token:true
-          //   },
-          //   data:{
-          //     arr:this.$store.state.detail.midList
-          //   }
-          // }).then(res=>{
-          //   console.log(res);
-          //   this.$router.push({ name: '现付页' });
-          // })
-          this.$router.push({ name: '现付页' });
+          //提交订单信息
+          this.$net({
+            method: 'post',
+            url: '/ShopTransaction/add_deal_record',
+            params: {
+              //arr: this.$store.state.detail.midList
+              Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
+              Ord_price: JSON.stringify(product[0].price),
+              UserID: this.$ls.get("user_info").userid
+            }
+          }).then(res => {
+            console.log(res);
+            this.$router.push({ name: '现付页' });
+          })
         }, function (err) {
         });
+    },
+    addIntoCollect(){
+      const product = [{
+        title: this.productDatasView.title,
+        price: this.productDatasView.price,
+        size: this.productDatasView.chose[this.sizeSelected].size,
+        col: this.productDatasView.chose[this.colSelected].col,
+        id: this.productDatasView.id,
+        imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
+        choseBool: false
+      }];
     }
   }
 }
@@ -186,7 +205,12 @@ export default {
       color: #fff;
       .fz(font-size,24);
     }
-
+    img{
+      width: 30px;
+      height: 30px;
+      position:relative;
+      bottom:6px;
+    }
     &:active {
       background-color: #f1f1f1;
     }
@@ -203,10 +227,10 @@ export default {
     height: 14vw;
 
     color: rgb(255, 255, 255);
-    background-color:@cl;
+    background-color:  #fca67e;
     letter-spacing: 0.2vw;
     &:active {
-      background-color: #ff0000;
+      background-color: #fa4b4b;
     }
   }
     .footer-addstr {
@@ -217,7 +241,17 @@ export default {
     height: 14vw;
 
     color: #fff;
-    background-color:  #ff0000;
+    background-color:  #ff2e2e;
+    letter-spacing: 2vw;
+    &:active {
+      background-color: #ff8400;
+    }
+  }
+    .footer-addcollects {
+    line-height: 14vw;
+    height: 14vw;
+    color: rgb(0, 0, 0);
+    background-color:  #ffffff;
     letter-spacing: 2vw;
     &:active {
       background-color: #ff8400;
