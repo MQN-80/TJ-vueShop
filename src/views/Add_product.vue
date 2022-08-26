@@ -1,15 +1,11 @@
 <template>
     <div>
-        <div class="head">
-            <van-row>
-                <van-col span="6">
-                    <h1 >
-                        <a href="#" >首页</a>
-                    </h1>
-                </van-col>
-                <van-col span="8" offset="3">发布商品</van-col>
-            </van-row>
-        </div>
+  <van-nav-bar
+  title="发布商品"
+  left-text="返回"
+  left-arrow
+  @click-left="goback"
+  />
         <br>
         <form action="">
             <span class="tishi">商品名称：</span>
@@ -17,40 +13,93 @@
             <br>
             <br>
             <span class="tishi">分类：</span>
-            <select >
-                <option >分类1</option>
-                <option >分类2</option>
-                <option >分类3</option>
-                <option >分类4</option>
-                <option >分类5</option>
-                <option >分类6</option>
-            </select>
+            <input type="text" v-model="type">
             <br><br>
             <span class="tishi" >价格：</span>
-            <input type="text" style="width: 100px;">
-            <br><br>
-            <span class="tishi" >联系方式：</span>
-            <input type="text">
+            <input type="text" v-model="price" style="width: 100px; ">
             <br><br>
             <span class="tishi"> 描述：</span>
             <br><br>
-            <textarea name="" id="" cols="35" rows="9" class="nonesize" placeholder="请输入商品描述"></textarea>
+            <textarea name="" id="" cols="35" rows="9" class="nonesize" placeholder="请输入商品描述" v-model="desc"></textarea>
             <br><br>
             <span class="tishi"> 上传图片：</span>
-            <van-uploader :after-read="afterRead" />
+            <van-uploader :after-read="afterRead" v-model="fileList" :max-count="1"/>
             <br><br>
-            <center><button class="button" type="submit">发布</button></center>
+            <center>
+            <van-button plain type="primary" @click="pushProduct">上传商品</van-button></center>
         </form>
     </div>
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
 data(){
     return{
         productName:'', 
         price:0,
-        
+        type:'',  //商品类型
+        desc:'', //商品描述
+        fileList:[],
+    }
+},
+methods:{
+    goback(){
+      this.$router.go(-1);//返回上一页
+    },
+    afterRead(file){
+    console.log(file);
+    console.log(this.fileList[0]);
+    },
+    pushProduct(){
+    if(this.productName!=''&&this.price!=0&&this.type!=''&&this.desc!='')
+    {
+     this.commit()
+    }
+    else
+    {
+        Toast("请填写完整后再提交");
+    }
+    },
+    commit(){
+    this.$net({
+      method: 'post',
+      url: '/ShopCenter/post_product',
+      params:{
+        shopUserId:this.$ls.get("user_info").id,
+        productName:this.productName,
+        productType:this.type,
+        productDes:this.desc,
+        price:this.price
+      }
+     }).then((response)=>{
+        console.log(response);
+        this.uploadPic(response.data);  //上传图片
+        Toast("上传成功,等待后台管理员审核");
+     }).catch((err)=>{
+        console.log(err);
+        Toast("网络报错,请稍后");
+     })
+    },
+    uploadPic(id){
+     var formData=new FormData();
+      formData.append('file',this.fileList[0].file);
+      this.$pic({
+      method: 'post',
+      url: '/api/reg',
+      headers: {
+       "content-type": "multipart/form-data"
+      },
+      data:formData,
+      params:{
+        option:2,
+        id:this.$ls.get("user_info").id
+      }
+     }).then((response) => {
+      console.log(response);
+     }).catch(function(error) {
+     })
+     console.log(formData);    
     }
 }
 }

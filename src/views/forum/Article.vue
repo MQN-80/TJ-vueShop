@@ -7,6 +7,7 @@
     @click-left="onClickLeft"
     />
 	<div class="ArticleSection">
+		<img :src="icon_redo" v-on:click="getcommentData"/>
 	    <div class="loading" v-if="loading">
 			<van-loading size="24px" vertical>加载中...</van-loading>
 	    </div>
@@ -42,6 +43,7 @@
 </template>
 
 <script>
+import redo from'@/assets/forum/redo.png'
 import Comment from '../../components/forum/Comment.vue';
 	export default {
         components:{
@@ -58,6 +60,7 @@ import Comment from '../../components/forum/Comment.vue';
 	    return {
 	      posts:{},
 	      loading:false,
+		  icon_redo:redo
 	    }
         },
 		methods:{
@@ -110,6 +113,10 @@ import Comment from '../../components/forum/Comment.vue';
 	    padding: 0.8rem 0.4rem;
 	    margin-left: 2.5%;
 	}
+	.ArticleSection img {
+		width: 30px;
+        height: 30px;
+		}
 	.ArticleSection #content {
 		padding: 2rem 1rem 2rem 1rem;
 		line-height: 1.6;

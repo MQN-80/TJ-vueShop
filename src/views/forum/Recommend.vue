@@ -1,5 +1,6 @@
 <template>
 	<div class="PostList">
+		<img :src="icon_redo" v-on:click="getData" />
 	    <div class="loading" v-if="loading">
 			<van-loading size="24px" vertical>加载中...</van-loading>
 	    </div>
@@ -27,12 +28,15 @@
 </template>
 
 <script>
+import redo from'@/assets/forum/redo.png'
+
 export default {
 	  name: 'PostList',
 	  data () {
 	    return {
 	      posts:{},
-	      loading:false
+	      loading:false,
+		  icon_redo:redo
 	    }
 	},
       filters: {
@@ -77,6 +81,10 @@ export default {
 		margin-right: 0.5rem;
 		height: 100%;
 	}
+	.PostList img {
+		width: 30px;
+        height: 30px;
+		}
 	.PostList .posts {
 		color: #000;
    		padding: 10px;

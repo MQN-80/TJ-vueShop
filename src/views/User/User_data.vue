@@ -12,7 +12,7 @@
 <div class="header">
   <div class="header-info">
     点击更换头像<br/>
-    <van-uploader :after-read="afterRead" />
+    <van-uploader :after-read="afterRead" v-model="fileList" :max-count="1" />
   </div>
 </div>
 <div>
@@ -27,13 +27,6 @@
   />
   <van-field
   size="large"
-  label="用户性别"
-  v-model="user_gender"
-  input-align="right"
-  input="onChange_chest_length"
-  />
-  <van-field
-  size="large"
   label="个人介绍"
   v-model="user_desc"
   input-align="right"
@@ -42,7 +35,7 @@
   show-word-limit
    input="onChange_waistline"
   />
-  <van-cell bindtap="saveData" title=" " value="点此保存数据" is-link />
+  <van-cell v-on:click="saveData" title=" " value="点此保存数据" is-link />
 </van-cell-group>
 </div>
 </div>
@@ -51,9 +44,9 @@
 export default {
     data() {
       return {
-          user_name: this.$ls.get("data").user_name,
-          user_gender: '男',
-          user_desc:this.$ls.get("data").user_intro
+          user_name:this.$ls.get("data")[0].UserName,
+          user_desc:this.$ls.get("data")[0].UserDetail,
+          fileList:[],
       }
     },
     methods: {
@@ -62,6 +55,29 @@ export default {
       },
       goback(){
           this.$router.go(-1);//返回上一页
+      },
+      saveData(){
+      this.$net({
+      method: 'post',
+      url: '/userCenter/update_user_info',
+      params:{
+        user_id:this.$ls.get("user_info").user_id,
+        user_name:this.user_name,
+        user_detail:this.user_desc
+      }
+     }).then((response) => {
+      console.log(response);
+     }).catch(function(error) {
+      alert(error)
+     });
+      this.$ls.set("data",{
+      user_name:this.user_name,
+      user_detail:this.detail
+     });
+     this.$ls.set("user_info",{
+      user_id:this.$ls.get("user_info").user_id,
+      user_name:this.user_name
+     })
       },
       afterRead(file) {
       // 此时可以自行将文件上传至服务器
