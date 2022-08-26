@@ -107,11 +107,11 @@ export default {
     }).then((response)=>{
     this.getProduct=response.data;
     this.blockshow=3;
-    console.log("sada")
+    console.log(response)
     }).catch((err)=>{
       console.log(err);
     })
-    }
+    },
   },
   components:{
     HistoryHot,

@@ -36,11 +36,15 @@ import { Lazyload } from 'mint-ui';
 
 export default {
 data(){
-
+return{
+  product:[],
+}
 },
 props:["productInfo"],
 mounted() {
     console.log(this.productInfo); //父组件传递过来的数据
+    this.product=this.productInfo;
+    console.log(this.product);
   },
 }
 

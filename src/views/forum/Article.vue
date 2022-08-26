@@ -70,10 +70,10 @@ import Comment from '../../components/forum/Comment.vue';
                 }
               })
 			  .then( (response) => {
-			  	if( response.data !=""){
+			  	
 			  		this.posts = response.data;
 			  		this.loading = false;
-			  	}
+			  	
 			  })
 			  .catch(function (error) {
 			    console.log(error);
