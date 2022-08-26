@@ -200,7 +200,7 @@ export default {
       position: absolute;
       top: 0.5vw;
       right: 5.5vw;
-      background-color: @cl;
+      background-color: rgb(238, 113, 80);
       border-radius: 50%;
       color: #fff;
       .fz(font-size,24);
