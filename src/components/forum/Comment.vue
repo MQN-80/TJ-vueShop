@@ -14,7 +14,7 @@
           border
         />
         <div style="margin: 10px;">
-          <van-button round block type="info" native-type="submit">提交</van-button>
+          <van-button round block type="info" native-type="submit" @click="postComment">提交</van-button>
         </div>
       </van-form>
       {{User_id}}{{markup}} {{Article_id}}
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 
 export default {
    props:{
@@ -31,28 +32,32 @@ export default {
    data() {
     return {
       markup: '',
+      article_id:'',
     };
    },
+  created(){
+  this.article_id=this.Article_id.toString();
+  },
   methods:{
-        /*postComment(){
+        postComment(){
       	this.$net({
                 url: '/userForum/push_comment',
                 method: 'post',
                 params: {
-                    context: markup,
-                    user_id: User_id,
-                    article_id: Article_id
+                    context: this.markup,
+                    user_id: this.$ls.get("user_info").user_id,
+                    article_id: this.article_id
                 }
               })
 			  .then((response) => {
-			  	if(){
-			  	}
+			  	Toast("上传成功,等待评论审核")
 			  })
 			  .catch(function (error) {
 			    console.log(error);
+          Toast("系统貌似有故障")
 				alert(error)
 			  });
-    }*/
+    }
   }
 }
 </script>

@@ -52,6 +52,7 @@ export default {
 			  .then( (response) => {
 			  	if( response.data !=""){
 			  		this.posts = response.data;
+					console.log(this.posts);
 			  		this.loading = false;
 			  	}
 			  })
