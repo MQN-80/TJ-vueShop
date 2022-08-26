@@ -108,6 +108,7 @@
           icon_vip:my_vip,
           icon_add:my_add,
           icon_points:my_points,
+          icon_my_p:my_p,
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
 				  }
 		 }, 
@@ -119,21 +120,25 @@
       method: 'get',
       url: '/userCenter/get_user_info',
       params:{
-        userid:this.$ls.get("user_info").user_id,
+        user_id:this.$ls.get("user_info").user_id,
       }
      }).then((response) => {
+      console.log('用户数据为');
+      console.log(response);
       this.$ls.set("data",response.data);
      }).catch(function(error) {
       alert(error)
      });
-     //缓存收藏夹
+      //缓存收藏夹
       this.$net({
       method: 'get',
       url: '/ShopTransaction/search_user_collect',
       params:{
-        userid:this.$ls.get("user_info").user_id,
+        UserID:this.$ls.get("user_info").user_id,
       }
      }).then((response) => {
+      console.log('收藏夹为');
+      console.log(response);
       this.$ls.set("favorites",response.data);
      }).catch(function(error) {
       alert(error)
@@ -143,15 +148,29 @@
       method: 'get',
       url: '/ShopTransaction/get_User_Credits',
       params:{
-        userid:this.$ls.get("user_info").user_id,
+        UserID:this.$ls.get("user_info").user_id,
       }
      }).then((response) => {
+      console.log('积分为');
+      console.log(response);
       this.$ls.set("consumption",response.data);
      }).catch(function(error) {
       alert(error)
      })
      //缓存订阅店铺
-      this.$ls.set("subscribe",[]);
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collectShop',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('订阅店铺为');
+      console.log(response);
+      this.$ls.set("subscribe",response.data);
+     }).catch(function(error) {
+      alert(error)
+     })
       //缓存历史订单
       this.$ls.set("orders",[]);
   },
