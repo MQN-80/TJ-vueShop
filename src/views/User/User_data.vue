@@ -12,7 +12,7 @@
 <div class="header">
   <div class="header-info">
     点击更换头像<br/>
-    <van-uploader :after-read="afterRead" />
+    <van-uploader :after-read="afterRead" v-model="fileList" :max-count="1" />
   </div>
 </div>
 <div>
@@ -45,7 +45,8 @@ export default {
     data() {
       return {
           user_name:this.$ls.get("data")[0].UserName,
-          user_desc:this.$ls.get("data")[0].UserDetail
+          user_desc:this.$ls.get("data")[0].UserDetail,
+          fileList:[],
       }
     },
     methods: {
