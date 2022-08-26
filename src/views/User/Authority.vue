@@ -7,26 +7,20 @@
   @click-left="goback"
 />
       <header class="header">
-          <div class="header-info">您当前的权限等级为：</div>
-          <div class="header-info">Lv.?</div>
+          <div class="header-info">您当前的身份为：</div>
+          <div class="header-rank">{{role}}</div>
       </header>
   <section class="my-rank">
     <router-link class="rank1" :to="{ name: '权限说明页'}">
       <p>
-        <span>Lv1</span>
-        <i >lv1</i>
-        </p>
-    </router-link>
-    <router-link class="rank2" :to="{ name: '权限说明页'}" >
-      <p>
-        <span>Lv2</span>
-        <i >lv2</i>
+        <span>普通用户</span>
+        <i >啥也干不了</i>
         </p>
     </router-link>
     <router-link class="rank3" :to="{ name: '权限说明页'}" >
       <p>
-        <span>Lv3</span>
-        <i >lv3</i>
+        <span>管理员</span>
+        <i >啥都能干</i>
         </p>
     </router-link>
   </section>
@@ -34,11 +28,34 @@
 </template>
 <script>
 export default {
-    methods: {
+  data(){
+    return{
+      role:'1234',
+    }
+  },
+  methods: {
       goback(){
           this.$router.go(-1);//返回上一页
-      } 
-    }
+      },
+    },
+    created(){
+      this.$net({
+      method: 'get',
+      url: '/userCenter/get_user_role_rank',
+      params:{
+        user_id:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log(response);
+      if(response.data.RoleRank==1)
+      this.role="普通用户";
+      else
+      this.role="管理员";
+      console.log(this.role);
+     }).catch(function(error) {
+      alert(error)
+     });
+      }
 }
 </script>
 <style lang="less" scoped>
@@ -56,6 +73,14 @@ export default {
         color: #000000;
         letter-spacing: .5vw;
         text-align: center;
+      }
+  .header-rank{
+    font-size:30px;
+    margin-left:auto;
+    margin-right:auto;
+    color: #000000;
+    letter-spacing: .5vw;
+    text-align: center;
       }
     }
   .my-rank{
