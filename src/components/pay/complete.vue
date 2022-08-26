@@ -171,7 +171,7 @@ export default {
     background-color: #fff;
     i,
     span {
-      color: @cl;
+      color: rgb(246, 34, 34);
     }
   }
 
@@ -192,14 +192,14 @@ export default {
       margin: 0 auto;
       text-align: center;
       &:active {
-        background-color: @cl;
+        background-color: rgb(246, 34, 34);
       }
     }
   }
 
   .pay-confirm {
     padding: 20px 0;
-    background-color: @cl;
+    background-color: rgb(246, 34, 34);
     text-align: center;
     color: #fff;
     line-height: 30px;
