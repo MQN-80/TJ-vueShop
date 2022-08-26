@@ -19,7 +19,7 @@ var index = Mock.mock('http://api.com/index', {
       'imgPath':Random.image('400x400', '#b7ddf2', '#333', 'png', ''),
       'id':'@id'
     }],
-    'banner':Random.image('400x100', '#ffcc33', '#FFF', 'png', 's1-banner')
+    'banner':Random.image('400x100', '#ffcc33', '#FFF', 'png', '随机店铺')
   },
   'section2|10':{
     'list|10':[{

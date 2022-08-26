@@ -1,19 +1,22 @@
 <template lang="html">
   <section class="section1">
     <h1 class="section1-title">
-      section1
+      随机推荐
       <i class="icon-right"></i>
     </h1>
     <ul class="section1-list">
       <li v-for="k in list" :key="k.id">
-        <router-link :to="{name:'详情页'}">
-          <img v-lazy="k.imgPath" alt="">
+        <router-link :to="{name:'详情页',params:{id:k.id}}">
+          <img  v-lazy="k.imgPath" alt="">
         </router-link>
       </li>
     </ul>
   <router-link :to="{ name: '详情页'}"  class="section1-banner">
-    <img v-lazy="banner">
   </router-link>
+   <h1 class="section1-title">
+      随机店铺好物
+      <i class="icon-right"></i>
+    </h1>
   </section>
 </template>
 
@@ -32,7 +35,24 @@ export default {
         return []
       }
     }
-  }
+  },
+  data:{
+  list:[],
+  },
+  methods:{
+    getProduct(){
+
+    }
+  },
+  beforeCreate(){
+  this.$net({
+      method: 'get',
+      url: '/MallPage/get4randomProduct',
+  }).then(response=>{
+    console.log(response);
+    this.list=response.data;
+  })
+  },
 }
 
 </script>
