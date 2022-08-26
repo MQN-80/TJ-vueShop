@@ -1,15 +1,11 @@
 <template>
     <div>
-        <div class="head">
-            <van-row>
-                <van-col span="6">
-                    <h1 >
-                        <a href="#" >首页</a>
-                    </h1>
-                </van-col>
-                <van-col span="8" offset="3">发布商品</van-col>
-            </van-row>
-        </div>
+  <van-nav-bar
+  title="发布商品"
+  left-text="返回"
+  left-arrow
+  @click-left="goback"
+  />
         <br>
         <form action="">
             <span class="tishi">商品名称：</span>
@@ -50,8 +46,12 @@ data(){
     return{
         productName:'', 
         price:0,
-        
     }
+},
+methods:{
+    goback(){
+      this.$router.go(-1);//返回上一页
+    },
 }
 }
 </script>

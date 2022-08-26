@@ -30,7 +30,7 @@
 export default {
   data(){
     return{
-      role:'1234',
+      role:'系统未查到！',
     }
   },
   methods: {
@@ -64,7 +64,7 @@ export default {
   .header {
       width: 100%;
       height: 25vw;
-      background: rgb(119, 244, 253);
+      background: rgb(255, 255, 255);
       background-size: auto 100%;
       padding: 3.2vw 0;
   .header-info {
