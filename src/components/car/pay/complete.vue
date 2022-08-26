@@ -80,8 +80,7 @@ export default {
   },
   methods: {
       payConfirm() {
-          this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-          this.$store.dispatch('resetCount'); //重置购物车数量
+
           this.$router.push({ name: '首页' });
     }
   }

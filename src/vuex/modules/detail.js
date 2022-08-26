@@ -14,6 +14,7 @@ const state = {
   unSelectedList:'',      //未选择的购物车商品列表,提交订单后用它替换carList
   midList:'',
   orderid:'', 
+  orderidList:'', 
 }
 
 //更改 store 中的状态的唯一方法:提交 mutation
@@ -72,7 +73,12 @@ const mutations = {
   [types.RESET_COUNT] (state) {
     state.count = Util.getLocal('carList').length
   },
-
+  [types.ADD_ORDERID] (state) {
+    state.orderidList = Util.getLocal('orderidList')
+  },
+  [types.RESET_ORDERLIST] (state) {
+    state.orderidList = Util.getLocal('orderidList')
+  },
 // loading开关
   [types.SET_LOADING] (state,res) {
     state.fetchLoading = res
@@ -129,6 +135,15 @@ const actions = {
   addMidList({commit},res) {
     Util.setLocal(res,'midList',true);
     commit(types.ADD_MIDPRODUCT)
+  },
+  addOrderList({commit},res) {
+    Util.setLocal(res,'orderidList',true);
+    commit(types.ADD_ORDERID)
+  },
+  resetOrderList({commit},res) {
+    const emptyList = null;
+    Util.setLocal(emptyList,'orderidList');
+    commit(types.RESET_ORDERLIST)
   },
   transOrderID({commit},res) {
     Util.setLocal(res,'orderid',true);

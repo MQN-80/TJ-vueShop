@@ -95,8 +95,7 @@ export default {
             method: 'put',
             url: '/ShopTransaction/modify_deal_record',
             params: {
-              //arr: this.$store.state.detail.midList
-              Trade_id:  111
+              Trade_id:  this.orderid
             }
           }).then(res => {
             console.log(res);

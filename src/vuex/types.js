@@ -43,7 +43,10 @@ export const SET_SELECTEDLIST = 'SET_SELECTEDLIST'
 export const SET_UNSELECTEDLIST = 'SET_UNSELECTEDLIST'
 
 
+export const ADD_ORDERID = 'ADD_ORDERID'
 
+
+export const RESET_ORDERLIST = 'RESET_ORDERLIST'
 //全局loading状态
 
 export const SET_LOADING = 'SET_LOADING'
