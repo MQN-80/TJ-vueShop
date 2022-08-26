@@ -91,19 +91,16 @@ export default {
           )
           .then(action => { //点击成功执行这里的函数
           //修改订单信息
-          // this.$net({
-          //   method: 'post',
-          //   url: '/ShopTransaction/add_deal_record',
-          //   params: {
-          //     //arr: this.$store.state.detail.midList
-          //     Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
-          //     Ord_price: JSON.stringify(product[0].price),
-          //     UserID: this.$ls.get("user_info").userid
-          //   }
-          // }).then(res => {
-          //   console.log(res);
-          //   this.$router.push({ name: '现付页' });
-          // })
+          this.$net({
+            method: 'put',
+            url: '/ShopTransaction/modify_deal_record',
+            params: {
+              Trade_id:  this.orderid
+            }
+          }).then(res => {
+            console.log(res);
+            this.$router.push({ name: '现付页' });
+          })
 
 
           //进行积分交换

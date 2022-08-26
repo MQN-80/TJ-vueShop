@@ -19,6 +19,10 @@ export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const ADD_MIDPRODUCT = 'ADD_MIDPRODUCT'
 //footer组件中保存购物车数量的数据
 
+export const SET_ORDERID = 'SET_ORDERID'
+
+export const RESET_ORDERID = 'RESET_ORDERID'
+
 export const CHANGE_COUNT = 'CHANGE_COUNT'
 
 //提交订单后重新设置购物车商品列表,把打钩并提交的商品去掉,即保留unSelectedList
@@ -39,7 +43,10 @@ export const SET_SELECTEDLIST = 'SET_SELECTEDLIST'
 export const SET_UNSELECTEDLIST = 'SET_UNSELECTEDLIST'
 
 
+export const ADD_ORDERID = 'ADD_ORDERID'
 
+
+export const RESET_ORDERLIST = 'RESET_ORDERLIST'
 //全局loading状态
 
 export const SET_LOADING = 'SET_LOADING'

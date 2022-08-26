@@ -108,6 +108,7 @@ export default {
         .then(action => {      //点击成功执行这里的函数
 
           this.$store.dispatch('resetMidList');
+          this.$store.dispatch('resetOrderID');
           this.$store.dispatch('addMidList', product);
           //提交订单信息
           this.$net({
@@ -121,6 +122,7 @@ export default {
             }
           }).then(res => {
             console.log(res);
+            this.$store.dispatch('transOrderID', res);
             this.$router.push({ name: '现付页' });
           })
         }, function (err) {
