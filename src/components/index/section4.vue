@@ -1,12 +1,12 @@
 <template lang="html">
   <section class="section4">
     <h2 class="section4-title">
-      section4
+      最近上架
       <i class="icon-right"></i>
     </h2>
     <ul class="section4-list">
       <li v-for="k in list" :key='k.id'>
-        <router-link :to="{name:'详情页'}">
+       <router-link :to="{name:'详情页',params:{id:k.id}}">
           <img v-lazy="k.imgPath">
           <p>{{k.intro}}</p>
         </router-link>
@@ -16,7 +16,7 @@
 
     </ul>
     <router-link :to="{name:'分类页'}" class="section4-banner">
-      <img v-lazy="banner">
+     
     </router-link>
   </section>
 </template>
@@ -35,7 +35,19 @@ export default {
         return []
       }
     }
-  }
+  },
+  data:{
+    list:[],
+  },
+  beforeCreate(){
+  this.$net({
+      method: 'get',
+      url: '/MallPage/get4recentProduct',
+  }).then(response=>{
+    console.log(response);
+    this.list=response.data;
+  })
+  },
 }
 </script>
 

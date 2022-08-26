@@ -3,7 +3,7 @@
     <div class="section2-list">
       <ul>
         <li v-for="k in list" :key="k.id">
-          <router-link :to="{name:'详情页'}">
+         <router-link :to="{name:'详情页',params:{id:k.id}}">
             <img v-lazy="k.imgPath">
           </router-link>
           <h2 class="section2-list-title ac">
@@ -19,8 +19,11 @@
       </ul>
     </div>
     <router-link class="section2-banner" :to="{name:'详情页'}">
-      <img v-lazy="banner">
     </router-link>
+     <h1 class="section2-title">
+      活动商品推荐
+      <i class="icon-right"></i>
+    </h1>
   </section>
 </template>
 
@@ -39,7 +42,19 @@ export default {
         return []
       }
     }
-  }
+  },
+  data:{
+    list:[],
+  },
+  beforeCreate(){
+  this.$net({
+      method: 'get',
+      url: '/MallPage/get4shopProduct',
+  }).then(response=>{
+    console.log(response);
+    this.list=response.data;
+  })
+  },
 }
 </script>
 
@@ -94,13 +109,25 @@ export default {
   }
 }
 
-.section2-banner {
-  display: block;
-  width: 100vw;
-  img {
-    display: block;
-    height: 24vw;
-    width: 100%;
+.section2-title {
+    .bt();
+    background-color: #ffffff;
+    text-align: center;
+    padding: 4vw 0;
+    .fz(font-size, 40);
+    color: #333;
+    position: relative;
+
+    i {
+      position: absolute;
+      right: 6vw;
+      top: 50%;
+      .fz(font-size, 36);
+      .fz(margin-top,-16);
+
+      &::before {
+        color: rgb(159, 159, 159);
+      }
+    }
   }
-}
 </style>

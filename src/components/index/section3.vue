@@ -20,7 +20,6 @@
       </li>
     </ul>
     <router-link :to="{name:'分类页'}" class="section3-banner">
-      <img v-lazy="banner">
     </router-link>
   </section>
 </template>
@@ -52,6 +51,15 @@ import { Lazyload } from 'mint-ui';
         }]
       }
     },
+  beforeCreate(){
+  this.$net({
+      method: 'get',
+      url: '/MallPage/get4shopProduct',
+  }).then(response=>{
+    console.log(response);
+    this.list=response.data;
+  })
+  },
     mounted() {
       this.$api({
         url: '/index',
