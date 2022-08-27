@@ -33,7 +33,10 @@ export default new Router({
   routes: [{
       path: '/',
       name: '首页',
-      component: Index
+      component: Index,
+      meta: {
+        keepAlive: false
+    },
     }, {
       path: '/category',
       name: '分类页',
@@ -42,15 +45,24 @@ export default new Router({
       children: [{
         path: '/category/:tab',
         component:CategoryMain
-      }]
+      }],
+      meta: {
+        keepAlive: false
+    },
     }, {
       path: '/car',
       name: '购物车页',
-      component: Car
+      component: Car,
+      meta: {
+        keepAlive: false
+    },
     }, {
       path: '/car/pay',
       name: '支付页',
-      component: Pay
+      component: Pay,
+      meta: {
+        keepAlive: false
+    },
     },
     {
       path: '/User',
@@ -58,88 +70,146 @@ export default new Router({
       component: User,
       meta: {
         requireAuth: true,  // 添加该字段，表示进入这个路由是需要登录才能进入的
+        keepAlive: true
     },
     },
     {
       path: '/forum',
       name: '论坛页',
       component: Forum,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/Carticle',
       name: '发贴页',
-      component: CArticle,
+      component: CArticle,     
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/detail',
       name: '详情页',
-      component: Detail
+      component: Detail,
+      meta: {
+        keepAlive: false
+    },
     }, {
       path: '/Search',
       name: '搜索页',
       component: Search,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/login',
       name: '登录页',
-      component: Login
+      component: Login,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/User_data',
       name: '信息修改页',
-      component: User_data
+      component: User_data,
+      meta: {
+        keepAlive: false
+    },
     },
     {
       path: '/pay/pay',
       name: '现付页',
-      component: NPay
+      component: NPay,
+      meta: {
+        keepAlive: false
+    },
     },
     {
       path: '/pay/complete',
       name: '完成页',
-      component: Complete
+      component: Complete,
+      meta: {
+        keepAlive: false
+    },
     },
     {
       path: '/car/complete',
       name: '车结页',
-      component: Carcomplete
+      component: Carcomplete,
+      meta: {
+        keepAlive: false
+    },
     },
     {
       path: '/User/Historical_orders',
       name: '历史订单页',
-      component: Historical_orders
+      component: Historical_orders,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Favorites',
       name: '收藏夹页',
-      component: Favorites
+      component: Favorites,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Subscribe',
       name: '订阅店铺页',
-      component: Subscribe
+      component: Subscribe,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Authority',
       name: '权限说明页',
-      component: Authority
+      component: Authority,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Points',
       name: '积分页',
-      component: Points
+      component: Points,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/login/Register',
       name: '注册页',
-      component: Register
+      component: Register,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Add_product',
       name: '商品发布页',
-      component: Add_product
+      component: Add_product,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/My_product',
       name: '我的商品页',
-      component: My_product
+      component: My_product,
+      meta: {
+        keepAlive: false
+    },
     },{
       path:'/forum/Article',
       name: '文章页',
       component:Article,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/Shop',
       name: '店铺页',
-      component: Shop
+      component: Shop,
+      meta: {
+        keepAlive: false
+    },
     },
   ]
 })
