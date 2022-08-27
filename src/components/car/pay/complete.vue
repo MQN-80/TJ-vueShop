@@ -60,12 +60,12 @@ export default {
  //所有商品列表
     carList () {
 
-      return this.$store.state.detail.carList
+      return this.$store.state.detail.selectedList
     },
 
     // 商品价格总和
     allpay () {
-      let allpay = 0, selectedList = this.carList
+      let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
         allpay += selectedList[i].price
       }
@@ -79,9 +79,10 @@ export default {
     }
   },
   methods: {
-      payConfirm() {
+    payConfirm() {
 
-          this.$router.push({ name: '首页' });
+
+      this.$router.push({ name: '首页' });
     }
   }
 

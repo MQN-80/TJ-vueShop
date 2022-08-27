@@ -94,6 +94,7 @@ export default {
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
       }];
+      
 
 
       MessageBox
@@ -122,7 +123,7 @@ export default {
             }
           }).then(res => {
             console.log(res);
-            this.$store.dispatch('transOrderID', res);
+            this.$store.dispatch('transOrderID', res.data);
             this.$router.push({ name: '现付页' });
           })
         }, function (err) {
