@@ -1,7 +1,7 @@
 <template lang="html">
   <div class="detail">
     <v-swiper/>
-    <v-chose/>
+    <v-chose :message="id"/>
     <v-content/>
     <v-baseline/>
     <v-footer/>>
@@ -14,7 +14,6 @@ import Chose from '@/components/detail/chose.vue'
 import Content from '@/components/detail/content.vue'
 import Footer from '@/components/detail/footer.vue'
 import Baseline from '@/common/_baseline.vue'
-import detail from '@/http/mock.js' //模拟数据
 export default {
   components:{
     'v-swiper':Swiper,
@@ -23,10 +22,13 @@ export default {
     'v-footer':Footer,
     'v-baseline':Baseline
   },
-
+  data:{
+  id:'',
+  },
   beforeCreate(){
-    console.log(this.$route.params.id)
-    this.$store.dispatch('setDatas');
+    this.id=this.$route.params.id;
+    console.log(this.id)
+    //this.$store.dispatch('setDatas');
   }
 }
 </script>
