@@ -73,6 +73,7 @@
                 <i class="icon-go"></i>
               </p>
             </router-link>
+            <van-button size="large" v-on:click="update_data" plain type="info">更新数据</van-button>
           </section>
       </div>
       <v-baseline></v-baseline>
@@ -179,6 +180,68 @@
     Toast('已经退出登录！返回登录页');
     localStorage.removeItem('token');
     console.log("删除成功");
+  },
+  update_data(){
+    this.avator_img="http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg";
+      console.log(this.user_id);
+      //缓存用户数据
+      this.$net({
+      method: 'get',
+      url: '/userCenter/get_user_info',
+      params:{
+        user_id:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('用户数据为');
+      console.log(response);
+      this.$ls.set("data",response.data);
+     }).catch(function(error) {
+      alert(error)
+     });
+      //缓存收藏夹
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collect',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('收藏夹为');
+      console.log(response);
+      this.$ls.set("favorites",response.data);
+     }).catch(function(error) {
+      alert(error)
+     });
+     //缓存积分数据
+     this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_User_Credits',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分为');
+      console.log(response);
+      this.$ls.set("consumption",response.data);
+     }).catch(function(error) {
+      alert(error)
+     })
+     //缓存订阅店铺
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collectShop',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('订阅店铺为');
+      console.log(response);
+      this.$ls.set("subscribe",response.data);
+     }).catch(function(error) {
+      alert(error)
+     })
+      //缓存历史订单
+      this.$ls.set("orders",[]);
   }
   }
   }
