@@ -15,7 +15,7 @@
                         <span style="font-size:20px">{{add.address}}</span>
                     </template>
                     <template #footer>
-                        <van-button plain type="info">修改地址</van-button>
+                        <van-button plain type="info" @click="goedit(add)">修改地址</van-button>
                     </template>
                 </van-card>
                 <van-divider />
@@ -33,13 +33,15 @@ export default {
                   user_name: 'ckx',
                   phone: '19321501919',
                   address: '上海市嘉定区曹安公路4800号19号楼321',
-                  add_state: '默认'
+                  add_state: '默认',
+                  add_id:'00000'
               },
               {
                   user_name: 'ckx',
                   phone: '19321501919',
                   address: '上海市嘉定区曹安公路4800号19号楼321',
-                  add_state: ''
+                  add_state: '',
+                  add_id: ''
               }
           ],
         user_orders:this.$ls.get(this.$route.params.id+"orders")
@@ -54,6 +56,20 @@ export default {
       {
         this.$router.push({ name: '地址添加页' });
 
+      },
+      goedit(add){
+
+          console.info(add);
+          this.$router.push({
+              name: '地址修改页',
+              query: {
+                  user_name: add.user_name,
+                  phone: add.phone,
+                  address: add.address,
+                  add_state: add.add_state,
+                  addressid: add.add_id,
+              }
+          }) 
       }
     }
 }
