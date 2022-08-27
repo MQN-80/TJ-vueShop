@@ -1,5 +1,8 @@
 <template>
-    <div class="markup" >
+    <div v-if="!islogin">
+      <van-button block type="info" to='/login'>前往登录,才可以评论</van-button>
+    </div>
+    <div class="markup" v-else>
       <h2 class="title">评论</h2>
       <van-form >
         <van-field
@@ -26,7 +29,6 @@ import { Toast } from 'vant';
 
 export default {
    props:{
-    User_id:Number,
     Article_id:Number,
    },
    data() {
@@ -58,6 +60,16 @@ export default {
 				alert(error)
 			  });
     }
+  },
+  beforeMount() {
+      if(localStorage.getItem('token'))
+      {
+        this.islogin=true;
+      }
+      else
+	  	{
+        this.islogin=false;
+      }
   }
 }
 </script>

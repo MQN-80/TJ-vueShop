@@ -8,10 +8,7 @@
     />
 	<div class="ArticleSection">
 		<img :src="icon_redo" v-on:click="getcommentData"/>
-	    <div class="loading" v-if="loading">
-			<van-loading size="24px" vertical>加载中...</van-loading>
-	    </div>
-	    <div class="article" v-else>
+	    <div class="article">
 			<h1>{{$route.params.Article.article_title}}</h1>
 			<ul>
 				<li>
@@ -23,7 +20,10 @@
 			<div v-html="$route.params.Article.article_context" id="content"></div>
             <van-cell title="URL 跳转"  is-link url="../../components/forum/Comment.vue" />
 		</div>
-        <div id='reply'>
+		<div class="replySec" v-if="!loading">
+			<p class='p'>暂无评论</p>
+	    </div>
+        <div id='reply' v-else>
             <div v-for='(post,index) in posts' :key="post" class='replySec'>
                 <div class='replyUp'>
                 	{{post.user_name}}
@@ -38,7 +38,7 @@
             </div>
     	</div>
 	</div>
-    <comment  :Article_id = this.$route.params.Article.article_id :User_id = 1></comment>
+    <comment  :Article_id = this.$route.params.Article.article_id ></comment>
 </div>
 </template>
 
@@ -73,9 +73,11 @@ import Comment from '../../components/forum/Comment.vue';
                 }
               })
 			  .then( (response) => {
-			  	
-			  		this.posts = response.data;
-			  		this.loading = false;
+					if(response.data!="")
+					{
+						this.posts = response.data;
+						this.loading = true;
+					}
 			  	
 			  })
 			  .catch(function (error) {
@@ -85,12 +87,19 @@ import Comment from '../../components/forum/Comment.vue';
 	  	}
 	  },
 	    beforeMount() {
-	    	this.loading = true;
-	    	this.getcommentData();
-            if(!this.loading)
-            {
-                /*此处获取商品细节信息，方便跳转商品页面*/
-            }
+			if(this.$route.params.Article)
+	    	{
+				this.loading = false;
+				this.getcommentData();
+				if(!this.loading)
+				{
+					/*此处获取商品细节信息，方便跳转商品页面*/
+				}
+			}
+			else
+			{
+				this.$router.push({ name: '论坛页' });
+			}
 	    },
     }
 </script>
@@ -153,6 +162,10 @@ import Comment from '../../components/forum/Comment.vue';
         padding: 5px;
         background: white;
     }
+	.replySec .p{
+		text-align: center;	
+		padding-left: 0px;
+	}
     #reply {
         display: flex;
         flex-direction: column;
