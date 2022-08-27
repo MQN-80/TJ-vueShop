@@ -28,7 +28,8 @@ const Forum = resolve => require(['@/views/forum/Forum.vue'], resolve)
 const CArticle = resolve => require(['@/views/forum/Create_article.vue'], resolve)
 const Article =resolve => require(['@/views/forum/Article.vue'], resolve)
 const Shop = resolve => require(['@/views/Shop.vue'], resolve)
-
+const address = resolve => require(['@/views/address/address.vue'], resolve)
+const addaddress = resolve => require(['@/views/address/address_edit.vue'], resolve)
 export default new Router({
   routes: [{
       path: '/',
@@ -206,10 +207,15 @@ export default new Router({
     },{
       path: '/User/Shop',
       name: '店铺页',
-      component: Shop,
-      meta: {
-        keepAlive: false
-    },
+      component: Shop
+    },,{
+      path: '/User/address',
+      name: '地址页',
+      component: address
+    },{
+      path: '/User/address/addaddress',
+      name: '地址添加页',
+      component: addaddress
     },
   ]
 })
