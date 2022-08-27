@@ -7,14 +7,17 @@
   @click-left="goback"
 />
 <van-cell-group>
-  <div v-for="shop in tableData" :key="shop.name">
- <van-cell title="URL 跳转" size="large" is-link url="">
+  <div v-for="shop in shop_table" :key="shop.name">
+ <van-cell icon title="URL 跳转" size="large" is-link url="">
   <template #title>
     <span>{{shop.name}}</span>
     <van-tag type="danger">标签</van-tag>
   </template>
+    <template #icon>
+      <img class="icon_shop" :src="shop.img"/>
+  </template>
  <template #label>
-   <span>添加时间：{{shop.date}}</span>
+   <span>添加时间：{{shop.collect_time}}</span>
  </template>
 </van-cell>
  <van-divider />
@@ -44,7 +47,7 @@
           date: '2016-05-03',
           address: ''
         }],
-        shop_table:this.$ls.get(this.$route.params.id+"subscribe")
+        shop_table:this.$ls.get("subscribe")
       }
     },
     methods: {
@@ -65,4 +68,10 @@
 </script>
 
 <style>
+.icon_shop{
+    width: 70px;
+    height:70px;
+    border-radius: 50%;
+    margin-right: 4vw;
+}
 </style>
