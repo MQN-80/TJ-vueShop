@@ -1,6 +1,6 @@
 <template>
     <div>
-        <van-nav-bar title="修改地址" left-text="返回" left-arrow @click-left="goback" right-text="删除" right-arrow @click-right="godel"/>
+        <van-nav-bar title="添加地址" left-text="返回" left-arrow @click-left="goback" />
         <br>
         <form action="">
             <span class="tishi">收货人：</span>
@@ -26,9 +26,9 @@ import { Toast } from 'vant';
 export default {
     data() {
         return {
-            userName: this.$route.query.user_name,
-            phone: this.$route.query.phone,  
-            address: this.$route.query.address, 
+            userName: '',
+            phone: '',  
+            address: '', 
         }
     },
     methods: {
@@ -63,27 +63,6 @@ export default {
                 Toast("网络报错,请稍后");
             })
         },
-        godel()
-        {
-            this.$net({
-                method: 'post',
-                url: '/ShopTransaction/add_delivery_address',
-                params: {
-                    user_id: this.$ls.get("user_info").id,
-                    addr: this.address,
-                    phone_number: this.phone,
-                    name: this.userName,
-                    add_default: 0
-                }
-            }).then((response) => {
-                console.log(response);
-                Toast("上传成功");
-                this.$router.push({ name: '用户页' });
-            }).catch((err) => {
-                console.log(err);
-                Toast("网络报错,请稍后");
-            })
-        }
     }
 }
 </script>

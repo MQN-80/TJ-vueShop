@@ -29,7 +29,8 @@ const CArticle = resolve => require(['@/views/forum/Create_article.vue'], resolv
 const Article =resolve => require(['@/views/forum/Article.vue'], resolve)
 const Shop = resolve => require(['@/views/Shop.vue'], resolve)
 const address = resolve => require(['@/views/address/address.vue'], resolve)
-const addaddress = resolve => require(['@/views/address/address_edit.vue'], resolve)
+const addaddress = resolve => require(['@/views/address/address_add.vue'], resolve)
+const editaddress = resolve => require(['@/views/address/address_edit.vue'], resolve)
 export default new Router({
   routes: [{
       path: '/',
@@ -213,9 +214,13 @@ export default new Router({
       name: '地址页',
       component: address
     },{
-      path: '/User/address/addaddress',
+      path: '/User/address/address-add',
       name: '地址添加页',
       component: addaddress
+    },{
+      path: '/User/address/address-edit',
+      name: '地址修改页',
+      component: editaddress
     },
   ]
 })
