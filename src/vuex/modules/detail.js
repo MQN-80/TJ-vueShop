@@ -14,7 +14,8 @@ const state = {
   unSelectedList:'',      //未选择的购物车商品列表,提交订单后用它替换carList
   midList:'',
   orderid:'', 
-  orderidList:'', 
+  orderidList:'',
+  
 }
 
 //更改 store 中的状态的唯一方法:提交 mutation
