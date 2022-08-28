@@ -6,12 +6,12 @@
     </v-header>
 
     <div class="pay-address">
-      <div>
-        <p class="main-address-per">收货人:<span>王先生</span></p>
-        <p class="main-address-tel">15985698749</p>
+        <div>
+          <p class="main-address-per">收货人:<span>{{this.$route.query.user_name}}</span></p>
+          <p class="main-address-tel">{{this.$route.query.phone}}</p>
+        </div>
+        <p>收货地址:<span>{{this.$route.query.address}}</span></p>
       </div>
-      <p>收货地址:<span>上海市嘉定区曹安公路4800号</span></p>
-    </div>
 
     <div class="pay-product">
         <li v-for="k in midList">
@@ -24,12 +24,6 @@
           </a>
         </li>
 
-      <!-- 支付成功后的提示 -->
-      <!-- <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空</br>
-        购物车列表重新设置
-      </div> -->
     </div>
     <h3 class="pay-allpay">共计 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
@@ -51,8 +45,10 @@ export default {
     'v-header': Header
   },
   data () {
+    console.log(this.$route.query);
     return {
-      confirm: ''
+      confirm: '',
+      
     }
   },
 
