@@ -4,15 +4,13 @@
     <v-header>
       <h1 slot="title">支付订单</h1>
     </v-header>
-
-    <div class="pay-address">
-      <div>
-        <p class="main-address-per">收货人:<span>王先生</span></p>
-        <p class="main-address-tel">15985698749</p>
+      <div class="pay-address" @click='goAddress'>
+        <div>
+          <p class="main-address-per">收货人:<span>{{this.user_name}}</span></p>
+          <p class="main-address-tel">{{this.phone}}</p>
+        </div>
+        <p>收货地址:<span>{{this.address}}</span></p>
       </div>
-      <p>收货地址:<span>上海市嘉定区曹安公路4800号</span></p>
-    </div>
-
     <div class="pay-product">
       <ul v-if="!confirm">
         <li v-for="k in midList">
@@ -44,6 +42,7 @@
 <script>
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
+import eventBus from '@/views/address/eventBus.js'
 import qs from 'qs'
 import {
   MessageBox
@@ -54,7 +53,10 @@ export default {
   },
   data () {
     return {
-      confirm: ''
+      confirm: '',
+      user_name: '',
+      phone: '',
+      address: '',
     }
   },
 
@@ -75,11 +77,35 @@ export default {
       return allpay
     }
   },
+  activated()
+  {
+    eventBus.$on('selectAddress', (data) => {
+
+      this.user_name = data.user_name;
+      this.phone = data.phone;
+      this.address = data.address;
+    })
+window.console.log(this.phone);
+    this.$refs.table.refresh();
+
+  },
   mounted () {
     // 防止页面刷新后数据丢失
     if (this.$store.state.detail.midList == '') {
       this.$store.commit('SET_MIDLIST')
     }
+    eventBus.$on('selectAddress', (data) => {
+
+      this.user_name = data.user_name;
+      this.phone = data.phone;
+      this.address = data.address;
+      window.console.log(this.address);
+      this.$set(this,'user_name','男');
+
+
+      //this.$router.go(0);
+      this.$forceUpdate();
+    })
   },
 
   methods: {
@@ -131,6 +157,16 @@ export default {
       } else { //提交了订单,数据清空
         alert('请勿重复提交订单')
       }
+
+    },
+    goAddress()
+    {
+      this.$router.push({
+        name: '地址页',
+        query: {
+          type: 'select'
+        }
+      });
 
     }
   }
