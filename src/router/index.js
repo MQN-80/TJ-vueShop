@@ -63,7 +63,7 @@ export default new Router({
       name: '支付页',
       component: Pay,
       meta: {
-        keepAlive: false
+        keepAlive: true
     },
     },
     {
@@ -123,7 +123,7 @@ export default new Router({
       name: '现付页',
       component: NPay,
       meta: {
-        keepAlive: false
+        keepAlive: true
     },
     },
     {

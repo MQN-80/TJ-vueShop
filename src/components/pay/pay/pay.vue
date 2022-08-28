@@ -24,11 +24,6 @@
         </li>
       </ul>
 
-      <!-- 支付成功后的提示 -->
-      <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空
-      </div>
     </div>
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
@@ -77,35 +72,19 @@ export default {
       return allpay
     }
   },
-  activated()
-  {
+  activated() {
     eventBus.$on('selectAddress', (data) => {
 
       this.user_name = data.user_name;
       this.phone = data.phone;
       this.address = data.address;
     })
-window.console.log(this.phone);
-    this.$refs.table.refresh();
-
   },
   mounted () {
     // 防止页面刷新后数据丢失
     if (this.$store.state.detail.midList == '') {
       this.$store.commit('SET_MIDLIST')
     }
-    eventBus.$on('selectAddress', (data) => {
-
-      this.user_name = data.user_name;
-      this.phone = data.phone;
-      this.address = data.address;
-      window.console.log(this.address);
-      this.$set(this,'user_name','男');
-
-
-      //this.$router.go(0);
-      this.$forceUpdate();
-    })
   },
 
   methods: {
@@ -143,13 +122,18 @@ window.console.log(this.phone);
           //   this.$router.push({ name: '现付页' });
           // })
             this.$router.push({ name: '完成页' });
-            this.confirm = false;
             this.$store.commit('SET_LOADING', true);
             //this.$store.dispatch('cutMidList', this.midList);
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
-              this.confirm = true; //支付完成后切换视图
-              this.$router.push({ name: '完成页' });
+              this.$router.push({
+                name: '完成页',
+                query: {
+                  user_name: this.user_name,
+                  phone: this.phone,
+                  address: this.address,
+                }
+              }) 
             }, 300)
           }, function (err) {
             //点击取消执行这里的函数
