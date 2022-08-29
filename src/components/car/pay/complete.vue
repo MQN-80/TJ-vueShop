@@ -1,9 +1,7 @@
 <template lang="html">
 
   <div class="pay">
-    <v-header>
-      <h1 slot="title">订单详情</h1>
-    </v-header>
+    <van-nav-bar title="订单详情"/>
 
     <div class="pay-address">
         <div>
@@ -23,13 +21,6 @@
             </div>
           </a>
         </li>
-
-      <!-- 支付成功后的提示 -->
-      <!-- <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空</br>
-        购物车列表重新设置
-      </div> -->
     </div>
     <h3 class="pay-allpay">共计 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
