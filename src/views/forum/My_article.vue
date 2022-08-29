@@ -1,5 +1,8 @@
 <template>
-  <div class="MyArticle">
+  <div v-if="!islogin">
+      <van-empty description="先登录吧！" />
+  </div>
+  <div class="MyArticle" v-else>
     <div class="ShowArticle">
       <img :src="icon_redo" v-on:click="getMyArticle" />
       <div v-if="isEmpty">
@@ -68,8 +71,16 @@
       }
     },
     beforeMount(){
+      if(localStorage.getItem('token'))
+      {
         this.isEmpty=true;
         this.getMyArticle();
+        this.islogin=true;
+      }
+      else
+	  	{
+        this.islogin=false;
+      }
     },
     }
 </script>
