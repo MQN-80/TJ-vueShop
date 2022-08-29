@@ -20,7 +20,6 @@
           <van-button round block type="info" native-type="submit" @click="postComment">提交</van-button>
         </div>
       </van-form>
-      {{User_id}}{{markup}} {{Article_id}}
     </div>
 </template>
 

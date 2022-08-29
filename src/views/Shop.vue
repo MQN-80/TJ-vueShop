@@ -3,10 +3,8 @@
     <van-nav-bar
     title="用户店铺"
     left-text="返回"
-    right-text="首页"
     left-arrow
     @click-left="goback"
-    @click-right="onClickRight"
     />
     <div class="background">
         
@@ -163,6 +161,7 @@ export default {
                     this.bg_color="#fef0f0";
                     this.ft_color="#f56c6c";
                 }
+                this.$router.go(-1);//返回上一页
             }
         }
         // 关注按钮需要的methods
