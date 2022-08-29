@@ -84,9 +84,9 @@ export default {
         },
         handleIconY() {
             if (this.top < 0) {
-                this.top = 30;//不上帖上边所以设置为30 没设置0
+                this.top = 70;//不上帖上边所以设置为70 没设置0
             } else if(this.top + this.itemHeight > this.clientH) {
-                this.top = this.clientH - this.itemHeight - 30;//不让帖下边所以减30
+                this.top = this.clientH - this.itemHeight - 70;//不让帖下边所以减70
             }
         },
         bindScrollEvent() {
