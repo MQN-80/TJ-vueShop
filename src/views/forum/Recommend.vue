@@ -20,7 +20,6 @@
 							{{ post.create_time }}
 						</span>
 					</div>
-					<h class="last"></h>
 				</section>
 			</ul>
 	    </div>

@@ -64,12 +64,13 @@ export default {
               //arr: this.$store.state.detail.midList
               Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
               Ord_price: JSON.stringify(this.$store.getters.selectedList[i].price),
-              UserID: this.$ls.get("user_info").userid
+              UserID: this.$ls.get("user_info").user_id
             }
           }).then(res => {
             console.log(res);
             this.$store.dispatch('addOrderList', res.data);
           })
+          setTimeout(500);
         }
 
         this.$router.push({ name: '支付页' });

@@ -107,6 +107,7 @@ export default {
               }).then(res => {
                 console.log(res);
               })
+              setTimeout(500);
 
 
               //进行积分交换
