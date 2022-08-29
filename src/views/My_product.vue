@@ -2,10 +2,12 @@
     <div>
         <!-- 商品列表 -->
         <div class="goodlistdiv">
-            <h1>
-                <label >我的发布</label>
-                <a href="#" >首页</a>
-            </h1>
+            <van-nav-bar
+            title="我的商品"
+            left-text="返回"
+            left-arrow
+            @click-left="goback"
+            />
             <br>
             <div class="bianju">
             <van-grid :center="false" :border="false" :column-num="2" :gutter="5">
@@ -102,22 +104,6 @@ a{
 .goodlistdiv{
     clear: both;
     margin: 1rem 0;
-}
-.goodlistdiv h1{
-    display: block;
-    clear: both;
-    margin: 0 1.5rem;
-    height: 2.5rem;
-    line-height: 2.5rem;
-    text-align: center;
-}
-.goodlistdiv h1 label{
-    font-size: 1.8rem;
-    margin: 0 0 0 3.4rem;
-}
-.goodlistdiv h1 a{
-    float: right;
-    font-size: 1.8rem;
 }
 .goodsdiv{
     width: 100%;
