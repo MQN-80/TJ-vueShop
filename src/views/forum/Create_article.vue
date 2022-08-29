@@ -63,6 +63,8 @@ export default {
         {
            this.commit_article();
         }
+        else
+            Toast("请完成内容输入再发布吧！")
      },
      commit_article()
      {
