@@ -48,7 +48,7 @@ export default {
                 method: 'post',
                 url: '/ShopTransaction/add_delivery_address',
                 params: {
-                    user_id: this.$ls.get("user_info").id,
+                    user_id: this.$ls.get("user_info").user_id,
                     addr: this.address,
                     phone_number: this.phone,
                     name: this.userName,

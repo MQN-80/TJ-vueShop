@@ -1,9 +1,7 @@
 <template lang="html">
 
   <div class="pay">
-    <v-header>
-      <h1 slot="title">订单详情</h1>
-    </v-header>
+    <van-nav-bar title="订单详情"/>
 
     <div class="pay-address">
         <div>

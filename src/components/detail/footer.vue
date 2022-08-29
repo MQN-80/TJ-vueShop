@@ -119,7 +119,7 @@ export default {
               //arr: this.$store.state.detail.midList
               Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
               Ord_price: JSON.stringify(product[0].price),
-              UserID: this.$ls.get("user_info").userid
+              UserID: this.$ls.get("user_info").user_id
             }
           }).then(res => {
             console.log(res);
