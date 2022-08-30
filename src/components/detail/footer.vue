@@ -46,9 +46,22 @@ export default {
   },
     data () {
 				return {
-          icon_collect:collect
+          icon_collect:collect,
+          collect_list:this.$ls.get("favorites"),
+          new_collect:[]
 				  }
 		 }, 
+     created(){
+      var judge=check(this.productDatasView.id);
+      if(judge==1)
+      {
+        icon_collect=collect_filled;
+      }
+      else
+      {
+        icon_collect=collect;
+      }
+     },
   methods: {
     addIntoCar () {
       //  mint-ui的弹出式提示框
@@ -61,8 +74,6 @@ export default {
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
       }];
-
-
       MessageBox
         .confirm
         (
@@ -138,7 +149,36 @@ export default {
         id: this.productDatasView.id,
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
-      }];
+      }]
+      if(this.icon_collect==collect)
+      {
+        this.icon_collect=collect_filled;
+      }
+      else
+      {
+        this.icon_collect=collect;
+      }
+      ;
+    },
+    check(item){
+      for (let i=0; i<this.collect_list.length; i++){
+				if (this.collect_list[i].id == item){
+					return 1;
+				}
+			}
+      return 0;
+    },
+    del(item){
+      for (let i=0; i<this.collect_list.length; i++){
+				if (this.collect_list[i].id == item){
+					this.listVar.splice(i, 1)
+				}
+			}
+			console.log(this.listVar)
+    },
+    add(collect_item){
+      this.collect_list.push(collect_item);
+      this.$ls.set("favorites",this.collect_list);
     }
   }
 }
