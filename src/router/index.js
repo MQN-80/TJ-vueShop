@@ -208,19 +208,31 @@ export default new Router({
     },{
       path: '/User/Shop',
       name: '店铺页',
-      component: Shop
+      component: Shop,
+      meta: {
+        keepAlive: false
+    },
     },,{
       path: '/User/address',
       name: '地址页',
-      component: address
+      component: address,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/address/address-add',
       name: '地址添加页',
-      component: addaddress
+      component: addaddress,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/address/address-edit',
       name: '地址修改页',
-      component: editaddress
+      component: editaddress,
+      meta: {
+        keepAlive: false
+    },
     },
   ]
 })

@@ -50,6 +50,26 @@
         shop_table:this.$ls.get("subscribe")
       }
     },
+    beforeCreate(){
+      //缓存订阅店铺
+      if(this.$ls.get("subscribe")==null)
+      {
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collectShop',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('订阅店铺为');
+      console.log(response);
+      this.$ls.set("subscribe",response.data);
+      this.shop_table=this.$ls.get("subscribe");
+     }).catch(function(error) {
+      alert(error)
+     });
+      }
+    },
     methods: {
       handleEdit(index, row) {
         console.log(index, row);

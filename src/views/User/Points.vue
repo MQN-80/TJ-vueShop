@@ -8,7 +8,7 @@
   />
   <header class="header">
     <div class="header-info">您目前还有</div>
-    <div class="header-point">？</div>
+    <div class="header-point">{{user_point[0].Credits}}</div>
     <div class="header-info">积分</div>
   </header>
   <van-divider />
@@ -33,7 +33,8 @@
 export default {
     data() {
       return {
-        user_consumption:this.$ls.get(this.$route.params.id+"consumption"),
+        user_point:this.$ls.get("point"),
+        user_consumption:this.$ls.get("consumption"),
         User__consumption:[{
             number:-10,
             time:"2022:08:12"
@@ -46,6 +47,26 @@ export default {
             time:"2022:08:15"
         }]
         }
+    },
+    beforeCreate(){
+      if(this.$ls.get('consumption')==null)
+      {
+     //缓存积分数据
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_credit_record',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分交易为');
+      console.log(response);
+      this.$ls.set("consumption",response.data);
+      this.user_consumption=this.$ls.get("consumption")
+     }).catch(function(error) {
+      alert(error)
+     })
+      }
     },
     methods: {
       goback(){
