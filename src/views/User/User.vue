@@ -75,6 +75,7 @@
             <i class="icon-go"></i>
           </p>
         </router-link>
+        <van-button size="large" v-on:click="update_data" plain type="info">更新数据</van-button>
       </section>
     </div>
     <v-baseline></v-baseline>
