@@ -1,10 +1,13 @@
 <template>
   <div>
+    <van-nav-bar
+    title="用户店铺"
+    left-text="返回"
+    left-arrow
+    @click-left="goback"
+    />
     <div class="background">
-        <div class="shouyebiaoqian">
-            <a href="#">首页</a>
-        </div>
-        <br>
+        
         <van-row>
             <van-col span="8">
                 <div class="backbianju">
@@ -158,6 +161,7 @@ export default {
                     this.bg_color="#fef0f0";
                     this.ft_color="#f56c6c";
                 }
+                this.$router.go(-1);//返回上一页
             }
         }
         // 关注按钮需要的methods
@@ -167,13 +171,13 @@ export default {
 
 <style>
 .background{
-height:70px;
+height:40px;
 background: url(../../static/user_page.png) no-repeat center center;
 background-size:100% 100%;
 padding-top: 33.3%;
 }
 .backbianju{
-margin: 0 0 0 1rem;
+margin: .5rem 0 0 1rem;
 }
 .username{
     font-size: large;

@@ -1,7 +1,7 @@
 <template lang="html">
 
   <div class="wrap">
-    <v-gologin></v-gologin>
+    <v-gologin v-if="!islogin"></v-gologin>
     <ul class="something" v-if='carList'>
       <li v-for="(k,i) in carList">
           <div class="something-left" @click="toggle">
@@ -47,7 +47,6 @@ export default {
       this.$store.commit('RESET_CARLIST')
      }
   },
-
   methods: {
     cut (i) {
       // 点击垃圾桶，删除当前商品，这里用splice和filter都会bug,只能重置数组
@@ -72,6 +71,17 @@ export default {
       })
 
     }
+
+  },
+  beforeMount(){
+      if(localStorage.getItem('token'))
+      {
+        this.islogin=true;
+      }
+      else
+	  	{
+        this.islogin=false;
+      }
 
   }
 }

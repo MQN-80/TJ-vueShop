@@ -45,10 +45,10 @@ export default {
         },
         commit() {
             this.$net({
-                method: 'post',
-                url: '/ShopTransaction/add_delivery_address',
+                method: 'put',
+                url: '/ShopTransaction/edit_delivery_address',
                 params: {
-                    user_id: this.$ls.get("user_info").id,
+                    id: this.$route.query.addressid,
                     addr: this.address,
                     phone_number: this.phone,
                     name: this.userName,
@@ -65,15 +65,13 @@ export default {
         },
         godel()
         {
+            console.log(this.$route.query)
             this.$net({
-                method: 'post',
-                url: '/ShopTransaction/add_delivery_address',
+                method: 'delete',
+                url: '/ShopTransaction/delete_delivery_address',
                 params: {
-                    user_id: this.$ls.get("user_info").id,
-                    addr: this.address,
-                    phone_number: this.phone,
-                    name: this.userName,
-                    add_default: 0
+                    id: this.$route.query.addressid,
+                
                 }
             }).then((response) => {
                 console.log(response);

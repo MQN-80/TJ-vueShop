@@ -17,7 +17,7 @@
 				</li>
 				<li>• 发布时间:{{ $route.params.Article.create_time}}</li>
 			</ul>
-			<div v-html="$route.params.Article.article_context" id="content"></div>
+			<div style='white-space: pre-wrap' v-html="$route.params.Article.article_context" id="content"></div>
             <van-cell title="URL 跳转"  is-link url="../../components/forum/Comment.vue" />
 		</div>
 		<div class="replySec" v-if="!loading">
@@ -34,7 +34,7 @@
                 <section  class='thumbsClass'>
            	         <span>❤ </span>
                 </section>
-                <p v-html='post.comment_context'></p>
+                <p style='white-space: pre-wrap' v-html='post.comment_context'></p>
             </div>
     	</div>
 	</div>
@@ -111,7 +111,6 @@ import Comment from '../../components/forum/Comment.vue';
     .Article{
         height: 100%;
         width: 100%;
-        position: fixed;
     }
 	.ArticleSection {
 		-webkit-box-sizing: border-box;
@@ -131,6 +130,7 @@ import Comment from '../../components/forum/Comment.vue';
 		line-height: 1.6;
 		padding-bottom: 1rem;
 		border-top: 3px solid #F8FCFF;
+		font-size: 15px;
     }
 	.ArticleSection > h1 {
 		font-size: 0.1rem;
