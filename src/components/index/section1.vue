@@ -45,6 +45,7 @@ export default {
     }
   },
   beforeCreate(){
+  setTimeout(100);
   this.$net({
       method: 'get',
       url: '/MallPage/get4randomProduct',

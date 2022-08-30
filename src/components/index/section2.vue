@@ -47,6 +47,7 @@ export default {
     list:[],
   },
   beforeCreate(){
+  setTimeout(200);
   this.$net({
       method: 'get',
       url: '/MallPage/get4shopProduct',

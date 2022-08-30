@@ -23,10 +23,13 @@ import {
 
 export default {
   props:["message"],
-  data:{
-    id:'',
-    product:[],
-    flag:0,
+  data(){
+    return{
+      id:'',
+      product:[],
+      flag:0,
+    }
+    
   },
   methods: {
 
@@ -49,12 +52,13 @@ export default {
      }).then((response)=>{
       console.log(response)
       this.product=response.data;
+      console.log(this.product)
       this.flag=1;
      })
     }
 
   },
-  created(){
+  beforeMount(){
   //传参数
   this.flag=0;
   this.id=this.message;

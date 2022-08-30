@@ -1,6 +1,6 @@
 <template lang="html">
   <div class="detail">
-    <v-swiper/>
+    <v-swiper :message="id"/>
     <v-chose :message="id"/>
     <v-content/>
     <v-baseline/>
