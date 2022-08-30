@@ -50,7 +50,7 @@ export default {
   },
  
   beforeCreate() {
-    this.$api({
+     this.$api({
       method: 'post',
       url: '/index'
     }).then((response) => {

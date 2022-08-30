@@ -52,6 +52,7 @@ import { Lazyload } from 'mint-ui';
       }
     },
   beforeCreate(){
+  setTimeout(300);
   this.$net({
       method: 'get',
       url: '/MallPage/get4shopProduct',

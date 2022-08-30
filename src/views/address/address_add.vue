@@ -36,7 +36,7 @@ export default {
             this.$router.go(-1);//返回上一页
         },
         pushAddress() {
-            if (this.productName != '' && this.price != 0 && this.type != '' && this.desc != '') {
+            if (this.userName != '' && this.phone!= 0 && this.address != '') {
                 this.commit()
             }
             else {

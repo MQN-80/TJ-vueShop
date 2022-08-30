@@ -74,7 +74,7 @@ export default {
                     phone: add.Phone_number,
                     address: add.Addr,
                     add_state: add.Add_default,
-                    addressid: add.Add_default,
+                    addressid: add.Id,
                 }
             })
         },
