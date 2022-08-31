@@ -115,7 +115,24 @@
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
 				  }
 		 }, 
+     beforeCreate(){
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_User_Credits',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分为');
+      console.log(response);
+      this.$ls.set("point",response.data);
+     }).catch(function(error) {
+      alert(error)
+     });
+     },
     created(){
+      if(this.$ls.get("data")==null)
+      {
       this.avator_img="http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg";
       console.log(this.user_id);
       //缓存用户数据
@@ -132,55 +149,20 @@
      }).catch(function(error) {
       alert(error)
      });
-      //缓存收藏夹
-      this.$net({
-      method: 'get',
-      url: '/ShopTransaction/search_user_collect',
-      params:{
-        UserID:this.$ls.get("user_info").user_id,
-      }
-     }).then((response) => {
-      console.log('收藏夹为');
-      console.log(response);
-      this.$ls.set("favorites",response.data);
-     }).catch(function(error) {
-      alert(error)
-     });
-     //缓存积分数据
-     this.$net({
-      method: 'get',
-      url: '/ShopTransaction/get_User_Credits',
-      params:{
-        UserID:this.$ls.get("user_info").user_id,
-      }
-     }).then((response) => {
-      console.log('积分为');
-      console.log(response);
-      this.$ls.set("consumption",response.data);
-     }).catch(function(error) {
-      alert(error)
-     })
-     //缓存订阅店铺
-      this.$net({
-      method: 'get',
-      url: '/ShopTransaction/search_user_collectShop',
-      params:{
-        UserID:this.$ls.get("user_info").user_id,
-      }
-     }).then((response) => {
-      console.log('订阅店铺为');
-      console.log(response);
-      this.$ls.set("subscribe",response.data);
-     }).catch(function(error) {
-      alert(error)
-     })
       //缓存历史订单
       this.$ls.set("orders",[]);
+      }
   },
   methods:{
   delete_info(){
     Toast('已经退出登录！返回登录页');
     localStorage.removeItem('token');
+    this.$ls.remove('user_info');
+    this.$ls.remove('data');
+    this.$ls.remove('favorites');
+    this.$ls.remove('consumption');
+    this.$ls.remove('subscribe');
+    this.$ls.remove('orders');
     console.log("删除成功");
   },
   update_data(){

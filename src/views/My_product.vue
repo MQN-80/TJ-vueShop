@@ -87,8 +87,18 @@ export default {
                 }
             ]
         }
+    },
+    goback(){
+    if(this.liked){
+        this.bg_color="#f56c6c";
+        this.ft_color="#fef0f0";
     }
-
+    else{
+        this.bg_color="#fef0f0";
+        this.ft_color="#f56c6c";
+    }
+    this.$router.go(-1);//返回上一页
+}
 }
 </script>
 

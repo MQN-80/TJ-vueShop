@@ -8,19 +8,21 @@
   />
   <header class="header">
     <div class="header-info">您目前还有</div>
-    <div class="header-point">？</div>
+    <div class="header-point">{{user_point[0].Credits}}</div>
     <div class="header-info">积分</div>
   </header>
   <van-divider />
   <van-cell-group>
-  <div v-for="consumption in User__consumption" :key="consumption.time">
+  <div v-for="consumption in user_consumption" :key="consumption.Create_time">
     <van-cell title="URL 跳转" size="large" url="">
   <template #title>
-    <span>积分变更：{{consumption.number}}</span>
+    <span>积分变更：</span>
+    <span v-if="consumption.Status==0">-</span>
+    <span>{{consumption.Credits_change}}</span>
     <van-tag type="danger">标签</van-tag>
   </template>
  <template #label>
-   <span>时间：{{consumption.time}}</span>
+   <span>时间：{{consumption.Create_time}}</span>
  </template>
   </van-cell>
   <van-divider />
@@ -33,7 +35,8 @@
 export default {
     data() {
       return {
-        user_consumption:this.$ls.get(this.$route.params.id+"consumption"),
+        user_point:this.$ls.get("point"),
+        user_consumption:this.$ls.get("consumption"),
         User__consumption:[{
             number:-10,
             time:"2022:08:12"
@@ -46,6 +49,26 @@ export default {
             time:"2022:08:15"
         }]
         }
+    },
+    beforeCreate(){
+      if(this.$ls.get('consumption')==null)
+      {
+     //缓存积分数据
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_credit_record',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分交易为');
+      console.log(response);
+      this.$ls.set("consumption",response.data);
+      this.user_consumption=this.$ls.get("consumption")
+     }).catch(function(error) {
+      alert(error)
+     })
+      }
     },
     methods: {
       goback(){
