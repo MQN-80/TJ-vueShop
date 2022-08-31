@@ -31,7 +31,7 @@
             border
             />
         </van-cell-group>
-        <van-cell icon="fire-o" title="推荐商品"  is-link url="../../components/forum/Comment.vue" />
+        <van-cell icon="fire-o" :title="this.goods_title"  @click="goodsClick" />
         <div style="margin: 10px;">
           <van-button round block type="info" native-type="submit" @click="push_article">提交</van-button>
         </div>
@@ -47,6 +47,7 @@ export default {
         return{
             title:'',
             context:'',
+            goods_title:'选择推荐商品'
         }
     },
     setup() {
@@ -61,7 +62,9 @@ export default {
         console.log(this.$ls.get("user_info").user_id)
         if(this.title!=''&&this.context!='')
         {
-           this.commit_article();
+            this.commit_article();
+            setTimeout(500);
+            this.$router.push({name:'论坛页'})
         }
         else
             Toast("请完成内容输入再发布吧！")
