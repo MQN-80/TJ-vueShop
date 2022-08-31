@@ -53,6 +53,12 @@ export default {
       console.log(response)
       this.product=response.data;
       console.log(this.product)
+      //使用vuex传递数据
+      this.$store.commit('change_productid',this.id)
+      this.$store.commit('change_title',response.data.name)
+      this.$store.commit('change_price',response.data.price)
+      this.$store.commit('change_path',"http://106.12.131.109:8083/product/" +this.id+".jpg")
+      console.log(this.$store.state.category.product_id)
       this.flag=1;
      })
     }

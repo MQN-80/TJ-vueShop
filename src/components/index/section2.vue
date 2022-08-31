@@ -2,7 +2,7 @@
   <section class="section2">
     <div class="section2-list">
       <ul>
-        <li v-for="k in list" :key="k.id">
+        <li v-for="k in list2" :key="k.id">
          <router-link :to="{name:'详情页',params:{id:k.id}}">
             <img v-lazy="k.imgPath">
           </router-link>
@@ -36,24 +36,22 @@ export default {
       type: String,
       default: ''
     },
-    list: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    }
   },
-  data:{
-    list:[],
+  data(){
+  return{
+    list2:[],
+  }
   },
-  beforeCreate(){
+  beforeMount(){
   setTimeout(200);
   this.$net({
       method: 'get',
       url: '/MallPage/get4shopProduct',
   }).then(response=>{
     console.log(response);
-    this.list=response.data;
+    this.list2=response.data;
+  }).catch(error=>{
+    console.log(error);
   })
   },
 }

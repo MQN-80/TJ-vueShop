@@ -66,12 +66,10 @@ export default {
     addIntoCar () {
       //  mint-ui的弹出式提示框
       const product = [{
-        title: this.productDatasView.title,
-        price: this.productDatasView.price,
-        size: this.productDatasView.chose[this.sizeSelected].size,
-        col: this.productDatasView.chose[this.colSelected].col,
-        id: this.productDatasView.id,
-        imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
+        title: this.$store.state.category.title,
+        price: this.$store.state.category.price,
+        id: this.$store.state.category.product_id,
+        imgPath: this.$store.state.category.imgPath,
         choseBool: false
       }];
       MessageBox
@@ -79,8 +77,6 @@ export default {
         (
         `商品名称:${product[0].title}</br>` +
         `价格:${product[0].price}</br>` +
-        `规格:${product[0].size}</br>` +
-        `颜色:${product[0].col}</br>` +
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数
@@ -97,12 +93,10 @@ export default {
     addInto () {
       //  mint-ui的弹出式提示框
       const product = [{
-        title: this.productDatasView.title,
-        price: this.productDatasView.price,
-        size: this.productDatasView.chose[this.sizeSelected].size,
-        col: this.productDatasView.chose[this.colSelected].col,
-        id: this.productDatasView.id,
-        imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
+       title: this.$store.state.category.title,
+        price: this.$store.state.category.price,
+        id: this.$store.state.category.product_id,
+        imgPath: this.$store.state.category.imgPath,
         choseBool: false
       }];
       
@@ -113,8 +107,6 @@ export default {
         (
         `商品名称:${product[0].title}</br>` +
         `价格:${product[0].price}</br>` +
-        `规格:${product[0].size}</br>` +
-        `颜色:${product[0].col}</br>` +
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数
@@ -128,8 +120,8 @@ export default {
             url: '/ShopTransaction/add_deal_record',
             params: {
               //arr: this.$store.state.detail.midList
-              Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
-              Ord_price: JSON.stringify(product[0].price),
+              Product_id: this.$store.state.category.product_id,
+              Ord_price:  this.$store.state.category.price,
               UserID: this.$ls.get("user_info").user_id
             }
           }).then(res => {

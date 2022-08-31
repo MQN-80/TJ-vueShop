@@ -44,6 +44,7 @@ export default {
             }
         },
         commit() {
+            
             this.$net({
                 method: 'post',
                 url: '/ShopTransaction/add_delivery_address',
