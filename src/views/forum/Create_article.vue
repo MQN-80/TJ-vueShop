@@ -35,10 +35,10 @@
         <div style="margin: 10px;">
           <van-button round block type="info" native-type="submit" @click="push_article">提交</van-button>
         </div>
-
     </div>
   </div>
 </template>
+
 <script>
 import { Toast } from 'vant';
 
@@ -50,13 +50,13 @@ export default {
         }
     },
     setup() {
-        const onClickLeft = () => history.back();//有问题
+        const onClickLeft = () => history.back();
         return {
             onClickLeft,
             };
      },
      methods:{
-      push_article()
+     push_article()
      {
         console.log(this.$ls.get("user_info").user_id)
         if(this.title!=''&&this.context!='')
@@ -82,7 +82,6 @@ export default {
 			  	console.log(response);
                 Toast("上传成功,请等待管理员审核")
                 this.$router.push({name:'首页'})
-
 			  })
 			  .catch(function (error) {
 			    console.log(error);
