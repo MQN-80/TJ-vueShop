@@ -35,19 +35,29 @@ export default {
     data() {
       return {
         orders:[
-            {
-            product_name:'欧内的手',
-            price:123,
-            order_state:'已支付',
-            order_number:'1919810',
-            }
         ],
         user_orders:this.$ls.get(this.$route.params.id+"orders")
         }
     },
+  created() {
+    this.getdata();
+  },
     methods: {
       goback(){
           this.$router.go(-1);//返回上一页
+      },
+      getdata()
+      {
+        this.$net({
+            method: 'get',
+            url: '/ShopTransaction/get_deal_record',
+            params: {
+              UserID:  this.$ls.get("user_info").user_id
+            }
+          }).then(res => {
+            console.log(res);
+            this.orders=res.data;
+          })
       }
     }
 }
