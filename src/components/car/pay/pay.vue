@@ -100,7 +100,7 @@ export default {
               //修改订单信息
               this.$net({
                 method: 'put',
-                url: '/ShopTransaction/modify_deal_record',
+                url: '/ShopTransaction/goods_transaction_primer_plus',
                 params: {
                   Trade_id: this.orderidList[i]
                 }
@@ -110,20 +110,6 @@ export default {
               setTimeout(500);
 
 
-              //进行积分交换
-              // this.$net({
-              //   method: 'post',
-              //   url: '/ShopTransaction/add_deal_record',
-              //   params: {
-              //     //arr: this.$store.state.detail.midList
-              //     Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
-              //     Ord_price: JSON.stringify(product[0].price),
-              //     UserID: this.$ls.get("user_info").userid
-              //   }
-              // }).then(res => {
-              //   console.log(res);
-              //   this.$router.push({ name: '现付页' });
-              // })
             }
             this.$store.commit('SET_LOADING', true);
             this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
