@@ -7,12 +7,12 @@
             <!-- 历史记录需要在本地存储 -->
             <h4>历史记录</h4>
             <van-icon name="delete"
-            @click="deleteHis"/>
+            @click="deleteHistory"/>
         </div>
         <div>
             <van-tag plain type="default"
             v-for="(item,index) in historyList" 
-            :key="index" @click="goSearchDetail(item)">
+            :key="index">
               {{item}}
             </van-tag>
             <van-tag plain type="default">标签</van-tag>
@@ -28,13 +28,12 @@ import { onMounted } from 'vue';
 export default {
      data(){
         return{
-            search_val:'',
             history_list:[]
         }
      },
-    //父子通信
+     props:["HistoryList"],
     methods:{
-        deleteHis(){
+        deleteHistory(){
            
         }
     },

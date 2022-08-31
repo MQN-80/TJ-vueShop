@@ -36,7 +36,13 @@ export default {
 
   methods:{
     salesSelect(){
-
+         if(this.value1 == 0)
+         {
+            
+         }else if(this.value1 == 1)
+         {
+            
+         }
     },
     
       priceSort(){

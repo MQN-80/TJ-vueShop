@@ -16,7 +16,7 @@
         </form>
         <!-- 调用历史与热门组件 -->
         <History 
-        :search_val="searchval"
+        :history_list="HistoryList"
         v-if="blockshow==1" 
         />
 
@@ -58,22 +58,22 @@ export default {
   methods: {
     onSearch(val) {
 
-      // if (this.$refs.getValue.value !== "") {  //判断输入框的值
-      //   // 每次搜索的值push到新数组里
-      //   this.newArr.push(this.val);
+      if (this.val !== "") {  //判断输入框的值
+        // 每次搜索的值push到新数组里
+        this.newArr.push(this.val);
 		
-      //   this.newArr = this.unique(this.newArr);  //调用unique方法去重
+        this.newArr = this.unique(this.newArr);  //调用unique方法去重
         
-      //   this.list = [];
-      //   for (let i = this.newArr.length; i > 0; i--) {  //数组倒序  最新输入的排在最上面
-      //     this.list.push(this.newArr[i - 1]);
-      //   }
+        this.list = [];
+        for (let i = this.newArr.length; i > 0; i--) {  //数组倒序  最新输入的排在最上面
+          this.list.push(this.newArr[i - 1]);
+        }
         
-      //   if (this.list.length > 10) {  //最多保存10条
-      //     this.list = this.list.slice(0, 10);
-      //   }
-      //   localStorage.setItem("HistoryList", JSON.stringify(this.list));   //存localStorage
-      // }
+        if (this.list.length > 10) {  //最多保存10条
+          this.list = this.list.slice(0, 10);
+        }
+        localStorage.setItem("HistoryList", JSON.stringify(this.list));   //存localStorage
+      }
       // 发送搜索请求
       this.get_serachProduct(val);
 

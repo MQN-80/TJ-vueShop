@@ -1,6 +1,6 @@
 <template lang="html">
     <ul class="product-list">
-      <li v-for="k in product" :key="k.name">
+      <li v-for="k in product" :key="k.name" :v-show="!(k.discount==1) || showAll">
         <router-link :to="{name:'详情页',params: {id: k.id}}">
           <img :src="k.img" alt=""/>
           <div>{{k.name}}</div>
@@ -15,6 +15,7 @@
 export default {
 data(){
 return{
+  showAll:1,
   product:[],
 }
 },
