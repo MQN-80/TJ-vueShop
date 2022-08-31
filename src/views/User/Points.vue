@@ -13,14 +13,16 @@
   </header>
   <van-divider />
   <van-cell-group>
-  <div v-for="consumption in User__consumption" :key="consumption.time">
+  <div v-for="consumption in user_consumption" :key="consumption.Create_time">
     <van-cell title="URL 跳转" size="large" url="">
   <template #title>
-    <span>积分变更：{{consumption.number}}</span>
+    <span>积分变更：</span>
+    <span v-if="consumption.Status==0">-</span>
+    <span>{{consumption.Credits_change}}</span>
     <van-tag type="danger">标签</van-tag>
   </template>
  <template #label>
-   <span>时间：{{consumption.time}}</span>
+   <span>时间：{{consumption.Create_time}}</span>
  </template>
   </van-cell>
   <van-divider />
