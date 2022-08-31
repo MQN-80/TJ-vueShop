@@ -5,13 +5,13 @@
       <h1 slot="title">支付订单</h1>
     </v-header>
 
-    <div class="pay-address">
-      <div>
-        <p class="main-address-per">收货人:<span>王先生</span></p>
-        <p class="main-address-tel">15985698749</p>
+    <div class="pay-address" @click='goAddress'>
+        <div>
+          <p class="main-address-per">收货人:<span>{{this.user_name}}</span></p>
+          <p class="main-address-tel">{{this.phone}}</p>
+        </div>
+        <p>收货地址:<span>{{this.address}}</span></p>
       </div>
-      <p>收货地址:<span>上海市嘉定区曹安公路4800号</span></p>
-    </div>
 
     <div class="pay-product">
       <ul v-if="!confirm">
@@ -26,13 +26,7 @@
         </li>
       </ul>
 
-      <!-- 支付成功后的提示 -->
-      <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空</br>
-        购物车列表重新设置
-      </div>
-    </div>
+    </div> 
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
       <span>立即支付</span>
@@ -45,6 +39,7 @@
 <script>
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
+import eventBus from '@/views/address/eventBus.js'
 import {
   MessageBox
 } from 'mint-ui';
@@ -54,10 +49,20 @@ export default {
   },
   data () {
     return {
-      confirm: ''
+      confirm: '',
+      user_name: '',
+      phone: '',
+      address: '',
     }
   },
+  activated() {
+    eventBus.$on('selectAddress', (data) => {
 
+      this.user_name = data.user_name;
+      this.phone = data.phone;
+      this.address = data.address;
+    })
+  },
   computed: {
 
     //所有商品列表
@@ -68,7 +73,7 @@ export default {
 
     // 商品价格总和
     allpay () {
-      let allpay = 0, selectedList = this.carList
+      let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
         allpay += selectedList[i].price
       }
@@ -90,15 +95,49 @@ export default {
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
-            this.confirm = false;
+
+            for (let i = 0; i < this.$store.state.detail.selectedList; i++) {
+              //修改订单信息
+              this.$net({
+                method: 'put',
+                url: '/ShopTransaction/modify_deal_record',
+                params: {
+                  Trade_id: this.orderidList[i]
+                }
+              }).then(res => {
+                console.log(res);
+              })
+              setTimeout(500);
+
+
+              //进行积分交换
+              // this.$net({
+              //   method: 'post',
+              //   url: '/ShopTransaction/add_deal_record',
+              //   params: {
+              //     //arr: this.$store.state.detail.midList
+              //     Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
+              //     Ord_price: JSON.stringify(product[0].price),
+              //     UserID: this.$ls.get("user_info").userid
+              //   }
+              // }).then(res => {
+              //   console.log(res);
+              //   this.$router.push({ name: '现付页' });
+              // })
+            }
             this.$store.commit('SET_LOADING', true);
-            // this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-            // this.$store.dispatch('resetCount'); //重置购物车数量
+            this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
+            this.$store.dispatch('resetCount'); //重置购物车数量
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
-              this.confirm = true; //支付完成后切换视图
-
-              this.$router.push({ name: '车结页' });
+              this.$router.push({
+                name: '车结页',
+                query: {
+                  user_name: this.user_name,
+                  phone: this.phone,
+                  address: this.address,
+                }
+              }) 
             }, 300)
           }, function (err) {
             //点击取消执行这里的函数
@@ -106,6 +145,16 @@ export default {
       } else { //提交了订单,数据清空
         alert('请勿重复提交订单')
       }
+
+    },
+    goAddress()
+    {
+      this.$router.push({
+        name: '地址页',
+        query: {
+          type: 'select'
+        }
+      });
 
     }
   }
@@ -197,7 +246,7 @@ export default {
     background-color: #fff;
     i,
     span {
-      color: @cl;
+      color: rgb(246, 34, 34);
     }
   }
 
@@ -218,14 +267,14 @@ export default {
       margin: 0 auto;
       text-align: center;
       &:active {
-        background-color: @cl;
+        background-color: rgb(246, 34, 34);
       }
     }
   }
 
   .pay-confirm {
     padding: 20px 0;
-    background-color: @cl;
+    background-color: rgb(246, 34, 34);
     text-align: center;
     color: #fff;
     line-height: 30px;

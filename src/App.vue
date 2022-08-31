@@ -1,7 +1,11 @@
 <template>
   <div id="app">
-    <router-view></router-view>
     <v-loading v-show="fetchLoading"></v-loading>
+      <keep-alive>
+        <router-view v-if="$route.meta.keepAlive"></router-view>
+      </keep-alive>
+      <!-- 不缓存的页面，不缓存$route.meta.keepAlive为false的组件 -->
+      <router-view v-if="!$route.meta.keepAlive"></router-view>
   </div>
 </template>
 

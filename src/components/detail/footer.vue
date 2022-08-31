@@ -46,9 +46,22 @@ export default {
   },
     data () {
 				return {
-          icon_collect:collect
+          icon_collect:collect,
+          collect_list:this.$ls.get("favorites"),
+          new_collect:[]
 				  }
 		 }, 
+     created(){
+      var judge=check(this.productDatasView.id);
+      if(judge==1)
+      {
+        icon_collect=collect_filled;
+      }
+      else
+      {
+        icon_collect=collect;
+      }
+     },
   methods: {
     addIntoCar () {
       //  mint-ui的弹出式提示框
@@ -61,8 +74,6 @@ export default {
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
       }];
-
-
       MessageBox
         .confirm
         (
@@ -94,6 +105,7 @@ export default {
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
       }];
+      
 
 
       MessageBox
@@ -108,6 +120,7 @@ export default {
         .then(action => {      //点击成功执行这里的函数
 
           this.$store.dispatch('resetMidList');
+          this.$store.dispatch('resetOrderID');
           this.$store.dispatch('addMidList', product);
           //提交订单信息
           this.$net({
@@ -117,10 +130,11 @@ export default {
               //arr: this.$store.state.detail.midList
               Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
               Ord_price: JSON.stringify(product[0].price),
-              UserID: this.$ls.get("user_info").userid
+              UserID: this.$ls.get("user_info").user_id
             }
           }).then(res => {
             console.log(res);
+            this.$store.dispatch('transOrderID', res.data);
             this.$router.push({ name: '现付页' });
           })
         }, function (err) {
@@ -135,7 +149,36 @@ export default {
         id: this.productDatasView.id,
         imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
         choseBool: false
-      }];
+      }]
+      if(this.icon_collect==collect)
+      {
+        this.icon_collect=collect_filled;
+      }
+      else
+      {
+        this.icon_collect=collect;
+      }
+      ;
+    },
+    check(item){
+      for (let i=0; i<this.collect_list.length; i++){
+				if (this.collect_list[i].id == item){
+					return 1;
+				}
+			}
+      return 0;
+    },
+    del(item){
+      for (let i=0; i<this.collect_list.length; i++){
+				if (this.collect_list[i].id == item){
+					this.listVar.splice(i, 1)
+				}
+			}
+			console.log(this.listVar)
+    },
+    add(collect_item){
+      this.collect_list.push(collect_item);
+      this.$ls.set("favorites",this.collect_list);
     }
   }
 }
@@ -200,7 +243,7 @@ export default {
       position: absolute;
       top: 0.5vw;
       right: 5.5vw;
-      background-color: @cl;
+      background-color: rgb(238, 113, 80);
       border-radius: 50%;
       color: #fff;
       .fz(font-size,24);

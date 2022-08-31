@@ -51,7 +51,10 @@ export default {
   },
 
   mounted() {
-    this.productInfo=this.message;
+    console.log(this.message); //父组件传递过来的数据
+    console.log("dada");
+    this.product=this.message;
+    console.log(this.product);
   },
 };
 </script>

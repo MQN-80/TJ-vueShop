@@ -7,19 +7,29 @@
   @click-left="goback"
 />
 <van-cell-group>
-  <div v-for="product in productData" :key="product.name">
+  <div v-for="product in user_favorites" :key="product.Name">
     <van-card
   desc="描述信息"
   title="商品标题"
-  thumb="https://img01.yzcdn.cn/vant/ipad.jpeg">
+  thumb
+  origin-price>
+  <template #origin-price>
+    <span>原价：{{product.collectPrice}}</span>
+  </template>
+  <template #thumb>
+    <img class="icon_product" :src="'http://106.12.131.109:8083/product/'+product.id+'.jpg'"/>
+  </template>
+  <template #desc>
+    <span><br/>收藏时间：{{product.create_time}}</span>
+  </template>
    <template #title>
-    <span>{{product.name}}</span>
+    <span style="font-size:20px ">{{product.Name}}</span>
   </template>
   <template #price>
-    <span>{{product.price}}</span>
+    <span style="font-size:20px ">现价：{{product.nowPrice}}</span>
   </template>
   <template #footer>
-    <van-button plain type="info">查看商品主页</van-button>
+    <van-button size=small plain type="info">查看商品主页</van-button>
   </template>
   </van-card>
    <van-divider />
@@ -31,24 +41,7 @@
   export default {
     data() {
       return {
-        productData: [{
-          name: '书包',
-          price: '132',
-          address: ''
-        }, {
-          name: '耳机',
-          price: '400',
-          address: ''
-        }, {
-          name: '数据库系统概念教材',
-          price: '93',
-          address: ''
-        }, {
-          name: '鞋',
-          price: '300',
-          address: ''
-        }],
-        user_favorites:this.$ls.get(this.$route.params.id+"favorites")
+        user_favorites:this.$ls.get("favorites")
       }
     },
     methods: {
@@ -69,4 +62,8 @@
 </script>
 
 <style>
+.icon_product{
+  width: 90px;
+  height:110px;
+}
 </style>

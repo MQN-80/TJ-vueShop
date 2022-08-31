@@ -4,15 +4,13 @@
     <v-header>
       <h1 slot="title">支付订单</h1>
     </v-header>
-
-    <div class="pay-address">
-      <div>
-        <p class="main-address-per">收货人:<span>王先生</span></p>
-        <p class="main-address-tel">15985698749</p>
+      <div class="pay-address" @click='goAddress'>
+        <div>
+          <p class="main-address-per">收货人:<span>{{this.user_name}}</span></p>
+          <p class="main-address-tel">{{this.phone}}</p>
+        </div>
+        <p>收货地址:<span>{{this.address}}</span></p>
       </div>
-      <p>收货地址:<span>上海市嘉定区曹安公路4800号</span></p>
-    </div>
-
     <div class="pay-product">
       <ul v-if="!confirm">
         <li v-for="k in midList">
@@ -26,11 +24,6 @@
         </li>
       </ul>
 
-      <!-- 支付成功后的提示 -->
-      <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空
-      </div>
     </div>
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
@@ -44,6 +37,7 @@
 <script>
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
+import eventBus from '@/views/address/eventBus.js'
 import qs from 'qs'
 import {
   MessageBox
@@ -54,7 +48,10 @@ export default {
   },
   data () {
     return {
-      confirm: ''
+      confirm: '',
+      user_name: '',
+      phone: '',
+      address: '',
     }
   },
 
@@ -75,6 +72,14 @@ export default {
       return allpay
     }
   },
+  activated() {
+    eventBus.$on('selectAddress', (data) => {
+
+      this.user_name = data.user_name;
+      this.phone = data.phone;
+      this.address = data.address;
+    })
+  },
   mounted () {
     // 防止页面刷新后数据丢失
     if (this.$store.state.detail.midList == '') {
@@ -90,14 +95,45 @@ export default {
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
-          this.$router.push({ name: '完成页' });
-            this.confirm = false;
+          //修改订单信息
+          this.$net({
+            method: 'put',
+            url: '/ShopTransaction/modify_deal_record',
+            params: {
+              Trade_id:  this.orderid
+            }
+          }).then(res => {
+            console.log(res);
+          })
+
+
+          //进行积分交换
+          // this.$net({
+          //   method: 'post',
+          //   url: '/ShopTransaction/add_deal_record',
+          //   params: {
+          //     //arr: this.$store.state.detail.midList
+          //     Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
+          //     Ord_price: JSON.stringify(product[0].price),
+          //     UserID: this.$ls.get("user_info").userid
+          //   }
+          // }).then(res => {
+          //   console.log(res);
+          //   this.$router.push({ name: '现付页' });
+          // })
+            this.$router.push({ name: '完成页' });
             this.$store.commit('SET_LOADING', true);
             //this.$store.dispatch('cutMidList', this.midList);
             setTimeout(() => {
               this.$store.commit('SET_LOADING', false); //关闭loading
-              this.confirm = true; //支付完成后切换视图
-              this.$router.push({ name: '完成页' });
+              this.$router.push({
+                name: '完成页',
+                query: {
+                  user_name: this.user_name,
+                  phone: this.phone,
+                  address: this.address,
+                }
+              }) 
             }, 300)
           }, function (err) {
             //点击取消执行这里的函数
@@ -105,6 +141,16 @@ export default {
       } else { //提交了订单,数据清空
         alert('请勿重复提交订单')
       }
+
+    },
+    goAddress()
+    {
+      this.$router.push({
+        name: '地址页',
+        query: {
+          type: 'select'
+        }
+      });
 
     }
   }
@@ -196,7 +242,7 @@ export default {
     background-color: #fff;
     i,
     span {
-      color: @cl;
+      color: rgb(246, 34, 34);
     }
   }
 
@@ -217,14 +263,14 @@ export default {
       margin: 0 auto;
       text-align: center;
       &:active {
-        background-color: @cl;
+        background-color: rgb(246, 34, 34);
       }
     }
   }
 
   .pay-confirm {
     padding: 20px 0;
-    background-color: @cl;
+    background-color: rgb(246, 34, 34);
     text-align: center;
     color: #fff;
     line-height: 30px;

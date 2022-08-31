@@ -1,17 +1,15 @@
 <template lang="html">
 
   <div class="pay">
-    <v-header>
-      <h1 slot="title">订单详情</h1>
-    </v-header>
+    <van-nav-bar title="订单详情"/>
 
     <div class="pay-address">
-      <div>
-        <p class="main-address-per">收货人:<span>王先生</span></p>
-        <p class="main-address-tel">15985698749</p>
+        <div>
+          <p class="main-address-per">收货人:<span>{{this.$route.query.user_name}}</span></p>
+          <p class="main-address-tel">{{this.$route.query.phone}}</p>
+        </div>
+        <p>收货地址:<span>{{this.$route.query.address}}</span></p>
       </div>
-      <p>收货地址:<span>上海市嘉定区曹安公路4800号</span></p>
-    </div>
 
     <div class="pay-product">
         <li v-for="k in carList">
@@ -23,13 +21,6 @@
             </div>
           </a>
         </li>
-
-      <!-- 支付成功后的提示 -->
-      <!-- <div class="pay-confirm" v-else>
-        支付成功!!!</br>
-        当页面数据清空</br>
-        购物车列表重新设置
-      </div> -->
     </div>
     <h3 class="pay-allpay">共计 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
@@ -60,12 +51,12 @@ export default {
  //所有商品列表
     carList () {
 
-      return this.$store.state.detail.carList
+      return this.$store.state.detail.selectedList
     },
 
     // 商品价格总和
     allpay () {
-      let allpay = 0, selectedList = this.carList
+      let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
         allpay += selectedList[i].price
       }
@@ -79,10 +70,10 @@ export default {
     }
   },
   methods: {
-      payConfirm() {
-          this.$store.dispatch('resetCarList'); //重置购物车（用unSelectedList替换）
-          this.$store.dispatch('resetCount'); //重置购物车数量
-          this.$router.push({ name: '首页' });
+    payConfirm() {
+
+
+      this.$router.push({ name: '首页' });
     }
   }
 
@@ -172,7 +163,7 @@ export default {
     background-color: #fff;
     i,
     span {
-      color: @cl;
+      color: rgb(246, 34, 34);
     }
   }
 
@@ -193,14 +184,14 @@ export default {
       margin: 0 auto;
       text-align: center;
       &:active {
-        background-color: @cl;
+        background-color: rgb(246, 34, 34);
       }
     }
   }
 
   .pay-confirm {
     padding: 20px 0;
-    background-color: @cl;
+    background-color: rgb(246, 34, 34);
     text-align: center;
     color: #fff;
     line-height: 30px;
