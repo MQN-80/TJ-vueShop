@@ -15,27 +15,28 @@
           <!-- input表示输入框发生变化 -->
         </form>
         <!-- 调用历史与热门组件 -->
-        <HistoryHot v-if="blockshow==1" 
-        :HistoryData="HistoryData"
-        :HotData="HotData"/>
+        <History 
+        :search_val="searchval"
+        v-if="blockshow==1" 
+        />
 
         <!-- 调用搜索提示组件 -->
-        <SearchTips v-if="blockshow==2" 
-        :SearchTipsData = "SearchTipsData"/>
+        <SearchTips  
+        v-if="blockshow==2"/>
 
         <!-- 调用商品内容组件 -->
-        <SearchProducts :message="getProduct" v-if="blockshow==3"/>
+        <SearchProducts 
+        :message="getProduct"
+        v-if="blockshow==3"/>
       </div>
   </body>
 </template>
 
 <script>
-import HistoryHot from "@/components/search/HistoryHot"
+import History from "@/components/search/History"
 import SearchTips from "@/components/search/SearchTips"
 import SearchProducts from "@/components/search/SearchProducts"
 import { Toast } from 'vant';
-// 未来调用数据接口
-// import (GetSearchHistoryHot,GetSearchTips) from "@/vuex/search"
 
 export default {
   data() {
@@ -48,36 +49,34 @@ export default {
       //为3表示展示搜索内容
       blockshow:1,
       //历史记录的列表数据
-      HistoryData:[],
-      //热门搜索的列表数据
-      HotData:[],
-      //搜索实时提示的列表数据
-      SearchTipsData:[],
+      HistoryList:[],
       //获取的后端商品列表
       getProduct:[],
     };
   },
 
-  //数据请求
-  created(){
-    GetSearchHistoryHot().then(res=>{
-        if(res.data.errno==0){
-          console.log(res.data);
-          //调取历史记录
-          this.HistoryData=res.data.data.HistoryList.keyword;
-          //调取热门搜索
-          this.HotData=res.data.data.HotList.keyword;
-        }
-    })
-
-  },
-
   methods: {
     onSearch(val) {
+
+      // if (this.$refs.getValue.value !== "") {  //判断输入框的值
+      //   // 每次搜索的值push到新数组里
+      //   this.newArr.push(this.val);
+		
+      //   this.newArr = this.unique(this.newArr);  //调用unique方法去重
+        
+      //   this.list = [];
+      //   for (let i = this.newArr.length; i > 0; i--) {  //数组倒序  最新输入的排在最上面
+      //     this.list.push(this.newArr[i - 1]);
+      //   }
+        
+      //   if (this.list.length > 10) {  //最多保存10条
+      //     this.list = this.list.slice(0, 10);
+      //   }
+      //   localStorage.setItem("HistoryList", JSON.stringify(this.list));   //存localStorage
+      // }
       // 发送搜索请求
       this.get_serachProduct(val);
-      //this.blockshow=3;
-      Toast(val);
+
     },
     onCancel() {
       // 取消搜索请求
@@ -85,17 +84,10 @@ export default {
       Toast('取消');
     },
     oninput(val){
-      //发送请求，获取实时搜索的文本内容的数据列表
       this.blockshow=2;
-      console.log(val);
-      GetSearchTips({keyword:val}).then(res=>{
-        if(res.errno == 0){
-          console.log(res);
-          //数据请求待完善
-          SearchTipsData.SearchTipsData=res.data
-        }
-      })
+      // this.get_serachTips(val);
     },
+    
     //获取搜索的商品
     get_serachProduct(val){
     this.$net({
@@ -107,17 +99,19 @@ export default {
     }).then((response)=>{
     this.getProduct=response.data;
     this.blockshow=3;
-    console.log("sada")
     }).catch((err)=>{
       console.log(err);
     })
     }
   },
   components:{
-    HistoryHot,
+    History,
     SearchTips,
     SearchProducts
-}
+  },
+  mounted(){
+     
+  }
 };
 </script>
 

@@ -4,7 +4,8 @@
     :finished="finished"
     finished-text="没有更多了">
     <!-- @load="onLoad" -->
-    <van-cell v-for="item in list" :key="item" :title="item" />
+    <van-cell
+    />
     <!-- 上面的list以后替换成SearchTipsData -->
   </van-list>
 </template>
@@ -16,6 +17,7 @@ export default {
       list: [1,2,3,4,5,6],
       // loading: false,
       finished: true,
+      Tipslist:[]
     };
   },
   // methods: {
@@ -37,7 +39,10 @@ export default {
   //     }, 1000);
   //   },
   // },
-  props:["SearchTipsData"]
+  props:["Tips"],
+  mounted(){
+    this.Tipslist=this.Tips
+  }
 };
 </script>
 
