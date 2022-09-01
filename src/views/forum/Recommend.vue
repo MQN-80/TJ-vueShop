@@ -5,7 +5,7 @@
 			<van-loading size="24px" vertical>加载中...</van-loading>
 	    </div>
 		<div v-else-if="isEmpty">
-			<van-empty description="先登录吧！" />
+			<van-empty description="暂无文章！" />
 		</div>
 	    <div class="posts" v-else >
 			<ul>
@@ -61,7 +61,7 @@ export default {
 			  		this.posts = response.data;
 					console.log(this.posts);
 			  		this.loading = false;
-					this.isEmpty=flase;
+					this.isEmpty=false;
 			  	}
 			  })
 			  .catch(function (error) {
