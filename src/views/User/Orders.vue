@@ -6,7 +6,6 @@
   left-arrow
   @click-left="goback"
 />
-<div v-if="user_orders.length>0">
 <van-cell-group>
   <div v-for="order in orders" :key="order.productname">
     <van-card
@@ -19,33 +18,22 @@
     <van-tag plain type="danger">{{order.order_state}}</van-tag>
   </template>
   <template #price>
-    <span style="font-size:20px">成交金额：{{order.price}}元</span>
-  </template>
-  <template #footer>
-    <van-button plain type="info">查看订单详情</van-button>
+    <span style="font-size:20px">成交金额：{{order.Ord_price}}元</span>
   </template>
   </van-card>
    <van-divider />
 </div>
 </van-cell-group>
 </div>
-<div v-else>
-  <baseline></baseline>
-</div>
-</div>
 </template>
 
 <script>
-import Baseline from '@/common/user_baseline.vue'
-  export default {
-    components: {
-      'baseline': Baseline,
-    },
+export default {
     data() {
       return {
         orders:[
         ],
-        user_orders:this.$ls.get("orders")
+        user_orders:this.$ls.get(this.$route.params.id+"orders")
         }
     },
   created() {

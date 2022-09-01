@@ -61,7 +61,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.midList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }

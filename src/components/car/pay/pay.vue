@@ -57,7 +57,6 @@ export default {
   },
   activated() {
     eventBus.$on('selectAddress', (data) => {
-
       this.user_name = data.Name;
       this.phone = data.Phone_number;
       this.address = data.Addr;
@@ -96,16 +95,21 @@ export default {
           )
           .then(action => { //点击成功执行这里的函数
 
-            for (let i = 0; i < this.$store.state.detail.selectedList; i++) {
+            for (let i = 0; i < this.$store.state.detail.selectedList.length; i++) {
               //修改订单信息
               this.$net({
                 method: 'put',
                 url: '/ShopTransaction/goods_transaction_primer_plus',
                 params: {
-                  Trade_id: this.orderidList[i]
+                  Trade_id: this.$store.state.detail.orderidList[i]
                 }
               }).then(res => {
                 console.log(res);
+                if (res.data=='error') {
+                  alert('积分不足');
+                  setTimeout(2000);
+                  this.$router.push({ name: '用户页' })
+                }
               })
               setTimeout(500);
 
