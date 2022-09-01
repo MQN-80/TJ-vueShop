@@ -84,7 +84,9 @@ export default {
                 // 关注按钮需要的数据
                 username:'用户昵称',
                 introduction:'1、欢迎光临本店，本店新开张，诚信经营，只赚信誉不赚钱，谢谢。 2、本店商品均属正品，假一罚十信誉保证。 欢迎广大顾客前来放心选购，我们将竭诚为您服务! 3、本店专门营销什么什么商品，假一罚十信誉保证。 本店的服务宗旨是用心服务，以诚待人!',
-                goodslist:[]
+                goodslist:[],
+                shop_list:this.$ls.get("subscribe"),
+                new_shop:[]
             }
         },
         // 关注按钮需要的methods
@@ -175,6 +177,13 @@ export default {
             }
             }).then((response)=>{
                 Toast("关注成功")
+                this.new_shop={
+                    collect_time:response.data,
+                    img:this.avator_img,
+                    name:this.username,
+                    shop_id:this.shop_id,
+                }
+                this.add(this.new_shop)
             }).catch((err)=>{
                 Toast("关注失败,网络出错")
             })           
@@ -189,7 +198,7 @@ export default {
             }
             }).then((response)=>{
                 Toast("取关成功")
-                console.log(response)
+                this.del(this.shop_id)
             }).catch((err)=>{
                 Toast("取关失败,网络出错")
             })     
@@ -227,7 +236,20 @@ export default {
                 this.$store.commit('change_id',mid)
                 this.$router.go(-1);//返回上一页
             },
-
+            del(item){
+                for (let i=0; i<this.shop_list.length; i++){
+				if (this.shop_list[i].shop_id == item){
+					this.shop_list.splice(i, 1)
+				}
+                this.$ls.set("subscribe",this.shop_list);
+			}
+			console.log(this.shop_list)
+            },
+            add(shop_item){
+                this.shop_list.push(shop_item);
+                this.$ls.set("subscribe",this.shop_list);
+                console.log(this.shop_list)
+            }
         }
         // 关注按钮需要的methods
 

@@ -6,6 +6,7 @@
   left-arrow
   @click-left="goback"
 />
+<div v-if="user_favorites.length>0">
 <van-cell-group>
   <div v-for="product in user_favorites" :key="product.Name">
     <van-card
@@ -38,9 +39,17 @@
 </div>
 </van-cell-group>
 </div>
+<div v-else>
+  <baseline></baseline>
+</div>
+</div>
 </template>
 <script>
+import Baseline from '@/common/user_baseline.vue'
   export default {
+    components: {
+      'baseline': Baseline,
+    },
     data() {
       return {
         user_favorites:this.$ls.get("favorites")
