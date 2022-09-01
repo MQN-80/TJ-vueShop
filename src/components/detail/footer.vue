@@ -153,7 +153,6 @@ export default {
             method: 'post',
             url: '/ShopTransaction/add_deal_record',
             params: {
-              //arr: this.$store.state.detail.midList
               Product_id: this.$store.state.category.product_id,
               Ord_price:  this.$store.state.category.price,
               UserID: this.$ls.get("user_info").user_id

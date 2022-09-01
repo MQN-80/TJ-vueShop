@@ -46,19 +46,6 @@ export default {
       return all
     }
   },
-  created() {
-    this.$net({
-      method: 'get',
-      url: '/ShopTransaction/get_trolley',
-      params: {
-        user_id: this.$ls.get("user_info").user_id
-      }
-    }).then(res => {
-      console.info(res.data);
-      this.$store.state.detail.carList = res.data;
-    })
-
-  },
 
   methods: {
     //点击跳转到支付页
@@ -69,21 +56,22 @@ export default {
         // 保存+缓存选择的商品 ,在支付页能用到
         this.$store.dispatch('setSelectedList');
         this.$store.dispatch('resetOrderList');
+        console.log(this.$store.getters.selectedList)
         for (let i = 0; i < this.$store.getters.selectedList.length; i++) {
           this.$net({
             method: 'post',
             url: '/ShopTransaction/add_deal_record',
             params: {
               //arr: this.$store.state.detail.midList
-              Product_id: 'E6936BA8E6F37DCCE05011AC02002E4E',
-              Ord_price: JSON.stringify(this.$store.getters.selectedList[i].price),
+              Product_id: this.$store.getters.selectedList[i].id,
+              Ord_price: this.$store.getters.selectedList[i].price,
               UserID: this.$ls.get("user_info").user_id
             }
           }).then(res => {
             console.log(res);
             this.$store.dispatch('addOrderList', res.data);
           })
-          setTimeout(500);
+          setTimeout(1000);
         }
 
         this.$router.push({ name: '支付页' });

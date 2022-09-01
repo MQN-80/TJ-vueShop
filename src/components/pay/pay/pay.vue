@@ -67,7 +67,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.midList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }
@@ -96,14 +96,21 @@ export default {
           )
           .then(action => { //点击成功执行这里的函数
           //修改订单信息
+          console.log(this.$store.state.detail.orderid);
           this.$net({
             method: 'put',
             url: '/ShopTransaction/goods_transaction_primer_plus',
             params: {
-              Trade_id:  this.orderid
+              Trade_id:  this.$store.state.detail.orderid
             }
           }).then(res => {
             console.log(res);
+            if (res.data=='error' ) {
+              alert('积分不足');
+              setTimeout(2000);
+              this.$router.push({name: '用户页'}) 
+            }
+
           })
 
             this.$router.push({ name: '完成页' });
