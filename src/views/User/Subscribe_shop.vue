@@ -6,6 +6,7 @@
   left-arrow
   @click-left="goback"
 />
+<div v-if="shop_table.length>0">
 <van-cell-group>
   <div v-for="shop in shop_table" :key="shop.name">
  <van-cell icon title="URL 跳转" size="large" is-link url="">
@@ -26,29 +27,20 @@
 </div>
 </van-cell-group>
 </div>
+<div v-else>
+  <baseline></baseline>
+</div>
+</div>
 </template>
 
 <script>
+import Baseline from '@/common/user_baseline.vue'
   export default {
+    components: {
+      'baseline': Baseline,
+    },
     data() {
       return {
-        tableData: [{
-          name: '万代',
-          date: '2016-05-02',
-          address: ''
-        }, {
-          name: '寿屋',
-          date: '2016-05-04',
-          address: ''
-        }, {
-          name: '御模道',
-          date: '2016-05-01',
-          address: ''
-        }, {
-          name: 'GSC',
-          date: '2016-05-03',
-          address: ''
-        }],
         shop_table:this.$ls.get("subscribe")
       }
     },
@@ -71,6 +63,7 @@
       alert(error)
      });
       }
+      console.log(this.$ls.get("subscribe"));
     },
     methods: {
       handleEdit(index, row) {

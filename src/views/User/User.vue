@@ -54,13 +54,6 @@
             <i class="icon-go"></i>
           </p>
         </router-link>
-        <router-link class="my-vip-top ho" :to="{ name: '我的商品页'}">
-          <img :src="icon_my_p" />
-          <p>
-            <span>我的商品</span>
-            <i class="icon-go"></i>
-          </p>
-        </router-link>
         <router-link class="my-vip-top ho" :to="{ name: '店铺页',params:{shop_id:id}}">
           <img :src="icon_my_p" />
           <p>
@@ -226,7 +219,20 @@
       alert(error)
      })
       //缓存历史订单
-      this.$ls.set("orders",[]);
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_credit_record',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分交易为');
+      console.log(response);
+      this.$ls.set("consumption",response.data);
+      this.user_consumption=this.$ls.get("consumption")
+     }).catch(function(error) {
+      alert(error)
+     })
   }
   }
   }
@@ -238,7 +244,7 @@
 
   .car {
     width: 100%;
-    padding-bottom: 60vw;
+    padding-bottom: 20vw;
     background-color: #F8FCFF;
     .header {
       width: 100%;

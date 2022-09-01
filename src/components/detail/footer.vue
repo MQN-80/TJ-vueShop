@@ -193,7 +193,16 @@ export default {
         price:this.$store.state.category.price
       }
       }).then((response)=>{
-        console.log(response)
+        console.log(response);
+        this.new_collect={
+          Name:this.$store.state.category.title,
+          collectPrice:this.$store.state.category.price,
+          create_time:response.data,
+          id:this.$store.state.category.product_id,
+          nowPrice:this.$store.state.category.price,
+        }
+        console.log(this.new_collect);
+        this.add(this.new_collect);
       }).catch((err)=>{
         Toast("网络有错误,稍候再试")
       })
@@ -208,7 +217,8 @@ export default {
         user_id:this.$ls.get("user_info").user_id,
       }
       }).then((response)=>{
-        console.log(response)
+        console.log(response);
+        this.del(this.$store.state.category.product_id);
       }).catch((err)=>{
         Toast("网络有错误,请稍候再试")
       })
@@ -216,10 +226,11 @@ export default {
     del(item){
       for (let i=0; i<this.collect_list.length; i++){
 				if (this.collect_list[i].id == item){
-					this.listVar.splice(i, 1)
+					this.collect_list.splice(i, 1)
 				}
+      this.$ls.set("favorites",this.collect_list);
 			}
-			console.log(this.listVar)
+			console.log(this.collect_list)
     },
     add(collect_item){
       this.collect_list.push(collect_item);

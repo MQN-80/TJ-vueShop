@@ -5,7 +5,7 @@
            <img :src="k.imgSrc">
         </mt-swipe-item>
       </mt-swipe>
-      <div class="back" @click="$router.go(-1)">
+      <div class="back" @click="go_back">
         <span class="icon-go"></span>
       </div>
     </div>
@@ -23,9 +23,26 @@ export default {
     }
   },
   created(){
-  this.swiper[0].imgSrc="http://106.12.131.109:8083/product/" +this.message+".jpg";
-  console.log("dada")
-  console.log(this.swiper[0].imgSrc);
+  if(this.message!=undefined)
+  {
+    this.swiper[0].imgSrc="http://106.12.131.109:8083/product/" +this.message+".jpg";
+    this.$store.commit('change_pic',this.swiper[0].imgSrc)
+  }
+  //缓存图像地址
+  else
+  this.swiper[0].imgSrc=this.$store.state.category.product_pic;
+  
+  },
+  methods:{
+    go_back(){
+    //清除缓存,防止影响下次
+    var mid=[];
+    var mid1=''
+    this.$store.commit('change_product',mid)
+    this.$store.commit('change_pic',mid1)
+    this.$store.commit('change_shopuser',mid)
+    this.$router.go(-1);
+    }
   }
 }
 </script>

@@ -69,6 +69,7 @@ export default {
       // 取消搜索请求
       this.blockshow=1;
       Toast('取消');
+      
     },
     //获取搜索的商品
     get_serachProduct(val){
