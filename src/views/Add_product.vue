@@ -54,7 +54,8 @@ methods:{
     pushProduct(){
     if(this.productName!=''&&this.price!=0&&this.type!=''&&this.desc!='')
     {
-     this.commit()
+        this.commit()
+        this.$router.push({ name: '用户页' });
     }
     else
     {
@@ -76,7 +77,6 @@ methods:{
         console.log(response);
         this.uploadPic(response.data);  //上传图片
         Toast("上传成功,等待后台管理员审核");
-        this.$router.push({ name: '用户页' });
      }).catch((err)=>{
         console.log(err);
         Toast("网络报错,请稍后");
