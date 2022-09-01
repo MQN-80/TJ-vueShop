@@ -40,6 +40,7 @@ export default {
       }
      }).then((response)=>{
       console.log(response)
+      this.$store.commit('change_shopuser',response.data[0])
       this.avator="http://106.12.131.109:8083/avator/"+response.data[0].id+".jpg";
       this.user_id=response.data[0].id;
       this.user_name=response.data[0].User_name
@@ -55,9 +56,17 @@ export default {
     }
   },
   created(){
-  this.product_id=this.message;
-  console.log(this.product_id)
+  if(this.message!=undefined)
+  {
+    this.product_id=this.message;
   this.get_user(this.product_id)
+  }
+  else{
+  var mid=this.$store.state.category.shopuser_detail
+  this.avator="http://106.12.131.109:8083/avator/"+mid.id+".jpg";
+  this.user_id=mid.id;
+  this.user_name=mid.User_name
+  }
   }
 }
 </script>
