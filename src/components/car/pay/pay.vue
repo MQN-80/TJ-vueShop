@@ -58,9 +58,9 @@ export default {
   activated() {
     eventBus.$on('selectAddress', (data) => {
 
-      this.user_name = data.user_name;
-      this.phone = data.phone;
-      this.address = data.address;
+      this.user_name = data.Name;
+      this.phone = data.Phone_number;
+      this.address = data.Addr;
     })
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }

@@ -66,7 +66,7 @@ export default {
         },
         goedit(add) {
 
-            console.info(add);
+            
             this.$router.push({
                 name: '地址修改页',
                 query: {
