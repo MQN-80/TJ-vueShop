@@ -8,6 +8,8 @@ const state = {
   title:'',   //商品名称
   imgPath:'',   // 商品路径
   k1:'',
+  product_detail:[],   //商品页缓存
+  shop_detail:[],      //店铺页缓存
 
 }
 
@@ -30,6 +32,12 @@ const mutations = {
   change_k1(state,res) {
     state.k1 = res
   },
+  change_product(state,res){
+    state.product_detail=res
+  },
+  change_shop(state,res){
+    state.shop_detail=res;
+  }
 }
 
 
