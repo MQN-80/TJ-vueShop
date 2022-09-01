@@ -4,7 +4,7 @@
   </div>
   <div class="MyArticle" v-else>
     <div class="ShowArticle">
-      <img :src="icon_redo" v-on:click="getMyArticle" />
+      <img class="imgO" :src="icon_redo" v-on:click="getMyArticle" />
       <div v-if="isEmpty">
           <van-empty description="暂无发表" />
       </div>
@@ -90,7 +90,7 @@
     height: 100%;
     width: 100%;
   }
-  .MyArticle img {
+  .MyArticle .imgO {
 		width: 30px;
         height: 30px;
 		}
