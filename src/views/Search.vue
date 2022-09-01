@@ -10,7 +10,6 @@
           show-action
           placeholder="请输入商品名称"
           @search="onSearch"
-          @input="oninput"
           @cancel="onCancel"/>
           <!-- input表示输入框发生变化 -->
         </form>
@@ -20,20 +19,15 @@
         v-if="blockshow==1" 
         />
 
-        <!-- 调用搜索提示组件 -->
-        <SearchTips  
-        v-if="blockshow==2"/>
-
         <!-- 调用商品内容组件 -->
         <SearchProducts 
-        v-if="blockshow==3"/>
+        v-if="blockshow==2"/>
       </div>
   </body>
 </template>
 
 <script>
 import History from "@/components/search/History"
-import SearchTips from "@/components/search/SearchTips"
 import SearchProducts from "@/components/search/SearchProducts"
 import { Toast } from 'vant';
 
@@ -42,10 +36,8 @@ export default {
     return {
       //搜索的文字，由用户输入
       searchval:"",
-      //值可以为1，2，3
       //为1表示历史记录和热门搜索
-      //为2表示展示搜索提示的列表
-      //为3表示展示搜索内容
+      //为2表示展示搜索内容
       blockshow:1,
       //历史记录的列表数据
       HistoryList:[],
@@ -78,11 +70,6 @@ export default {
       this.blockshow=1;
       Toast('取消');
     },
-    oninput(val){
-      this.blockshow=2;
-      // this.get_serachTips(val);
-    },
-    
     //获取搜索的商品
     get_serachProduct(val){
     this.$net({
@@ -93,7 +80,7 @@ export default {
       }
     }).then((response)=>{
     this.$store.commit('changemessage',response.data) 
-    this.blockshow=3;
+    this.blockshow=2;
     }).catch((err)=>{
       console.log(err);
     })
@@ -101,7 +88,6 @@ export default {
   },
   components:{
     History,
-    SearchTips,
     SearchProducts
   },
   mounted(){
