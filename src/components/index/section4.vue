@@ -36,7 +36,6 @@ export default {
   }
   },
   beforeMount(){
-  setTimeout(600);
   this.$net({
       method: 'get',
       url: '/MallPage/get4recentProduct',

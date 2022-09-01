@@ -48,21 +48,29 @@ export default {
 				return {
           icon_collect:collect,
           collect_list:this.$ls.get("favorites"),
-          new_collect:[]
+          new_collect:[],
+          collect_flag:'',
 				  }
 		 }, 
      created(){
-      var judge=check(this.productDatasView.id);
-      if(judge==1)
-      {
-        icon_collect=collect_filled;
-      }
-      else
-      {
-        icon_collect=collect;
-      }
+      this.is_collect();
      },
   methods: {
+    //检查是否收藏该商品
+    is_collect(){
+    this.$net({
+      method: 'get',
+      url: '/ShopTransaction/is_collect',
+      params:{
+        id:this.id,
+        user_id:this.$ls.get("user_info").user_id,
+      }
+     }).then((response)=>{
+      console.log(response);
+      //页面渲染后先赋初值
+      this.collect_flag=response.data
+     })
+    },
     addIntoCar () {
       //  mint-ui的弹出式提示框
       const product = [{
