@@ -28,7 +28,6 @@ export default {
   beforeCreate(){
     this.id=this.$route.params.id;
     console.log(this.id)
-    //this.$store.dispatch('setDatas');
   }
 }
 </script>

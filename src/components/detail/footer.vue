@@ -48,21 +48,42 @@ export default {
 				return {
           icon_collect:collect,
           collect_list:this.$ls.get("favorites"),
-          new_collect:[]
+          new_collect:[],
+          collect_flag:'',
 				  }
 		 }, 
      created(){
-      var judge=this.check(this.productDatasView.id);
-      if(judge==1)
+      this.is_collect();
+      //var judge=check(this.productDatasView.id);
+     },
+  methods: {
+    //判断是否是收藏商品
+    is_collect(){
+    var mid=1;
+    this.$net({
+      method: 'get',
+      url: '/ShopTransaction/is_collect',
+      params:{
+        id:this.$store.state.category.product_id,
+        user_id:this.$ls.get("user_info").user_id
+      }
+     }).then((response)=>{
+      console.log(response)
+      this.change(response.data);
+     })
+     
+    },
+    //转变关注商品
+    change(judge){
+     if(judge==1)
       {
-        icon_collect=collect_filled;
+        this.icon_collect=collect_filled;
       }
       else
       {
-        icon_collect=collect;
+        this.icon_collect=collect;
       }
-     },
-  methods: {
+    },
     addIntoCar () {
       //  mint-ui的弹出式提示框
       const product = [{
@@ -137,28 +158,66 @@ export default {
       if(this.icon_collect==collect)
       {
         this.icon_collect=collect_filled;
+        this.push_collect()
+        Toast("收藏成功")
       }
       else
       {
         this.icon_collect=collect;
+        this.delete_collect()
+        Toast("取关成功")
       }
-      ;
+      
     },
-    check(item){
-      for (let i=0; i<this.collect_list.length; i++){
-				if (this.collect_list[i].id == item){
-					return 1;
-				}
-			}
-      return 0;
+    //添加商品收藏
+    push_collect(){
+    this.$net({
+      method: 'post',
+      url: '/ShopTransaction/add_collect',
+      params:{
+        user_id:this.$ls.get("user_info").user_id,
+        product_id:this.$store.state.category.product_id,
+        price:this.$store.state.category.price
+      }
+      }).then((response)=>{
+        console.log(response);
+        this.new_collect={
+          Name:this.$store.state.category.title,
+          collectPrice:this.$store.state.category.price,
+          create_time:response.data,
+          id:this.$store.state.category.product_id,
+          nowPrice:this.$store.state.category.price,
+        }
+        console.log(this.new_collect);
+        this.add(this.new_collect);
+      }).catch((err)=>{
+        Toast("网络有错误,稍候再试")
+      })
+     },
+    //删除商品收藏
+    delete_collect(){
+     this.$net({
+      method: 'delete',
+      url: '/ShopCenter/delete_collect',
+      params:{
+        product_id:this.$store.state.category.product_id,
+        user_id:this.$ls.get("user_info").user_id,
+      }
+      }).then((response)=>{
+        console.log(response);
+        this.del(this.$store.state.category.product_id);
+      }).catch((err)=>{
+        Toast("网络有错误,请稍候再试")
+      })
     },
     del(item){
       for (let i=0; i<this.collect_list.length; i++){
 				if (this.collect_list[i].id == item){
-					this.listVar.splice(i, 1)
+					this.collect_list.splice(i, 1)
 				}
+      this.$ls.set("favorites",this.collect_list);
 			}
-			console.log(this.listVar)
+			console.log(this.collect_list)
     },
     add(collect_item){
       this.collect_list.push(collect_item);

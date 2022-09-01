@@ -6,6 +6,7 @@
   left-arrow
   @click-left="goback"
 />
+<div v-if="user_orders.length>0">
 <van-cell-group>
   <div v-for="order in orders" :key="order.productname">
     <van-card
@@ -28,15 +29,23 @@
 </div>
 </van-cell-group>
 </div>
+<div v-else>
+  <baseline></baseline>
+</div>
+</div>
 </template>
 
 <script>
-export default {
+import Baseline from '@/common/user_baseline.vue'
+  export default {
+    components: {
+      'baseline': Baseline,
+    },
     data() {
       return {
         orders:[
         ],
-        user_orders:this.$ls.get(this.$route.params.id+"orders")
+        user_orders:this.$ls.get("orders")
         }
     },
   created() {

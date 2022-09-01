@@ -6,6 +6,7 @@
   left-arrow
   @click-left="goback"
 />
+<div v-if="user_favorites.length>0">
 <van-cell-group>
   <div v-for="product in user_favorites" :key="product.Name">
     <van-card
@@ -29,18 +30,26 @@
     <span style="font-size:20px ">现价：{{product.nowPrice}}</span>
   </template>
   <template #footer>
-    <router-link :to="{name:'详情页',params:{id:'product.id'}}">
-      <van-button size=small plain type="info">查看商品主页</van-button>
-        </router-link>
+    <router-link :to="{name:'详情页',params:{id:product.id}}">
+    <van-button size=small plain type="info">查看商品主页</van-button>
+    </router-link>
   </template>
   </van-card>
    <van-divider />
 </div>
 </van-cell-group>
 </div>
+<div v-else>
+  <baseline></baseline>
+</div>
+</div>
 </template>
 <script>
+import Baseline from '@/common/user_baseline.vue'
   export default {
+    components: {
+      'baseline': Baseline,
+    },
     data() {
       return {
         user_favorites:this.$ls.get("favorites")
