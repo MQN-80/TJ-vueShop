@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-heard></v-heard>
+        <v-heard :active="this.tab"></v-heard>
         <v-footer></v-footer>
     </div>
 </template>
@@ -13,5 +13,15 @@
       'v-heard': Heard,
       'v-footer': Footer
     },
+    data(){
+      return {
+        tab:0,
+      }
+    },
+    beforeMount(){
+      if(this.$route.params.tab)
+      {this.tab=this.$route.params.tab;}
+      console.log(this.tab)
+     }
     }
 </script>
