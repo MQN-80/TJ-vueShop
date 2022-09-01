@@ -53,6 +53,8 @@ export default {
       console.log(response)
       this.product=response.data;
       console.log(this.product)
+      //vuex缓存商品页,防止返回没东西
+      this.$store.commit('change_product',this.product)
       //使用vuex传递数据
       this.$store.commit('change_productid',this.id)
       this.$store.commit('change_title',response.data.name)
@@ -70,6 +72,9 @@ export default {
   this.id=this.message;
   console.log(this.id);
   this.getDeatil();
+  console.log("dadas")
+  this.product=this.$store.state.category.product;
+  console.log("das")
   }
 }
 </script>
