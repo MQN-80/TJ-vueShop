@@ -29,7 +29,9 @@
     <span style="font-size:20px ">现价：{{product.nowPrice}}</span>
   </template>
   <template #footer>
-    <van-button size=small plain type="info">查看商品主页</van-button>
+    <router-link :to="{name:'详情页',params:{id:'product.id'}}">
+      <van-button size=small plain type="info">查看商品主页</van-button>
+        </router-link>
   </template>
   </van-card>
    <van-divider />

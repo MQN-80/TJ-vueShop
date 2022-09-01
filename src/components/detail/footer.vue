@@ -52,7 +52,7 @@ export default {
 				  }
 		 }, 
      created(){
-      var judge=check(this.productDatasView.id);
+      var judge=this.check(this.productDatasView.id);
       if(judge==1)
       {
         icon_collect=collect_filled;
@@ -133,15 +133,7 @@ export default {
         });
     },
     addIntoCollect(){
-      const product = [{
-        title: this.productDatasView.title,
-        price: this.productDatasView.price,
-        size: this.productDatasView.chose[this.sizeSelected].size,
-        col: this.productDatasView.chose[this.colSelected].col,
-        id: this.productDatasView.id,
-        imgPath: this.$store.state.detail.productDatas.swiper[0].imgSrc,
-        choseBool: false
-      }]
+
       if(this.icon_collect==collect)
       {
         this.icon_collect=collect_filled;
