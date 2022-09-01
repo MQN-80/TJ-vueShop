@@ -156,10 +156,10 @@ export default {
     del(item){
       for (let i=0; i<this.collect_list.length; i++){
 				if (this.collect_list[i].id == item){
-					this.listVar.splice(i, 1)
+					this.collect_list.splice(i, 1)
 				}
 			}
-			console.log(this.listVar)
+			console.log(this.collect_list)
     },
     add(collect_item){
       this.collect_list.push(collect_item);

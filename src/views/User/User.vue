@@ -238,7 +238,7 @@
 
   .car {
     width: 100%;
-    padding-bottom: 60vw;
+    padding-bottom: 20vw;
     background-color: #F8FCFF;
     .header {
       width: 100%;

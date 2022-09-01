@@ -36,7 +36,7 @@ export default {
       return {
         orders:[
         ],
-        user_orders:this.$ls.get(this.$route.params.id+"orders")
+        user_orders:this.$ls.get("orders")
         }
     },
   created() {
