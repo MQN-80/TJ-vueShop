@@ -23,7 +23,7 @@
 					</div>
           </div>
       <template #right>
-        <van-button square text="删除" type="danger" class="delete-button" @click="deleteArticle" />
+        <van-button square text="删除" type="danger" class="delete-button" @click="deleteArticle(post.article_id)" />
       </template>
       </van-swipe-cell>
       </div>
@@ -47,10 +47,10 @@
     methods: {
       getMyArticle(){
 			this.$net({
-                url: '/userForum/get_article',
-                method: 'get',
+                url: '/userForum/get_userArticle',
+                method: 'post',
                 params: {
-                    //sum: 0
+                    user_id:this.$ls.get("user_info").user_id,
                 }
               })
 			  .then( (response) => {
@@ -65,9 +65,23 @@
 				alert(error)
 			  });
       },
-      deleteArticle(){
+      deleteArticle(id){
         	this.$net({
+                url: '/userForum/delete_article',
+                method: 'post',
+                params: {
+                    article_id: id,
+                }
           })
+          .then( (response) => {
+					  console.log(response);
+            this.$router.go(0);
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+				alert(error)
+			  });
+
       }
     },
     beforeMount(){
