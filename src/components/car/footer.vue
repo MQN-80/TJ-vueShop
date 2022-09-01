@@ -37,7 +37,7 @@ export default {
 
         for (let i = 0; i < this.$store.getters.selectedList.length; i++) {
 
-          all += this.$store.getters.selectedList[i].price;
+          all += parseInt(this.$store.getters.selectedList[i].price);
 
         }
 
@@ -45,6 +45,19 @@ export default {
       // 没有勾选 即为0
       return all
     }
+  },
+  created() {
+    this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_trolley',
+      params: {
+        user_id: this.$ls.get("user_info").user_id
+      }
+    }).then(res => {
+      console.info(res.data);
+      this.$store.state.detail.carList = res.data;
+    })
+
   },
 
   methods: {

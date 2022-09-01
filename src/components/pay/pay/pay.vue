@@ -74,10 +74,10 @@ export default {
   },
   activated() {
     eventBus.$on('selectAddress', (data) => {
-
-      this.user_name = data.user_name;
-      this.phone = data.phone;
-      this.address = data.address;
+      console.info(data);
+      this.user_name = data.Name;
+      this.phone = data.Phone_number;
+      this.address = data.Addr;
     })
   },
   mounted () {

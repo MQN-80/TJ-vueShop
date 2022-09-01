@@ -82,6 +82,19 @@ export default {
         .then(action => {      //点击成功执行这里的函数
           this.$store.dispatch('setLocalCount', true);
           this.$store.dispatch('addCarList', product);
+          this.$net({
+            method: 'post',
+            url: '/ShopTransaction/add_trolley',
+            params: {
+              //arr: this.$store.state.detail.midList 
+              User_id: this.$ls.get("user_info").user_id,
+              Product_id: product[0].id,
+              Product_num:  1,
+             
+            }
+          }).then(res => {
+            console.log(res);
+          })
 
           Toast({
             message: '添加成功',
