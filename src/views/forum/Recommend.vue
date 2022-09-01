@@ -4,6 +4,9 @@
 	    <div class="loading" v-if="loading">
 			<van-loading size="24px" vertical>加载中...</van-loading>
 	    </div>
+		<div v-else-if="isEmpty">
+			<van-empty description="暂无文章！" />
+		</div>
 	    <div class="posts" v-else >
 			<ul>
 				<section v-for="post in posts" :key="post">	
@@ -33,9 +36,10 @@ export default {
 	  name: 'PostList',
 	  data () {
 	    return {
-	      posts:{},
+	      posts:{},//存取读取的文章
 	      loading:false,
-		  icon_redo:redo
+		  icon_redo:redo,
+		  isEmpty:true,
 	    }
 	},
       filters: {
@@ -57,6 +61,7 @@ export default {
 			  		this.posts = response.data;
 					console.log(this.posts);
 			  		this.loading = false;
+					this.isEmpty=false;
 			  	}
 			  })
 			  .catch(function (error) {
@@ -67,6 +72,7 @@ export default {
 	  },
 	    beforeMount() {
 	    	this.loading = true;
+			this.isEmpty=true;
 	    	this.getData();
 	    }
 	}

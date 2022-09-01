@@ -23,10 +23,9 @@
           id="content"
         ></div>
         <van-cell
-			is-link
 			icon="fire-o"
           :title="'推荐商品：'+product_name"
-          :to="{ name: '详情页', parmas: { id: this.Article.prouduct_id } }"
+        is-link  :to="{ name: '详情页', params: { id: this.Article.product_id } }"
         />
       </div>
       <div class="replySec" v-if="!loading">
@@ -63,7 +62,7 @@ export default {
       loading: false,
       icon_redo: redo,
       Article: this.$route.params.Article,
-	  product_name:""
+	    product_name:""
     };
   },
   methods: {
@@ -72,7 +71,7 @@ export default {
         url: "/userForum/get_comment",
         method: "get",
         params: {
-          article_id: this.$route.params.Article.article_id,
+          article_id: this.Article.article_id,
         },
       })
         .then((response) => {
@@ -91,7 +90,7 @@ export default {
         method: "get",
         url: "/ShopCenter/getProduct",
         params: {
-          id: this.Article.prouduct_id,
+          id: this.Article.product_id,
         },
       })
         .then((response) => {
@@ -119,8 +118,8 @@ export default {
     if (this.Article || this.$store.getters.existArticle) {
       if (this.Article) {
         this.$store.commit("setArticle", this.Article);
-        /* 					console.log(this.$store.getters.RetuenArticle+"!!!!!!!!!!!!!!!!")
-         */
+        //console.log(this.Article.product_id)
+         
       } else {
         this.Article = this.$store.getters.RetuenArticle;//返回缓存数据
       }
@@ -128,7 +127,7 @@ export default {
       this.loading = false;
       this.getcommentData();
       /*此处获取商品细节信息，方便跳转商品页面*/
-	  this.getProduct();
+	    this.getProduct();
     } else {
     /* 			console.log(this.$store.getters.RetuenArticle)
      */
