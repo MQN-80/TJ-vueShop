@@ -56,8 +56,33 @@ const mutations = {
     },
 }
 
+const getters ={
+    existArticle(){
+        if(state.Article.article_context!=""){
+            return true;
+        }
+        else{
+            return false;
+        }
+    },
+    existCreateArticle(){
+        if(state.createARticle.context!=""||state.createARticle.title!=""||state.createARticle.goods_id!=""){
+            return true;
+        }
+        else{
+            return false;
+        }
+    },
+    RetuenArticle(){
+        return state.Article;
+    },
+    RetuenCreateArticle(){
+        return state.createARticle;
+    }
+}
 
 export default {
     state,
-    mutations
+    mutations,
+    getters
 }
