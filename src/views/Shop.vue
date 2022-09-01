@@ -89,8 +89,17 @@ export default {
         },
         // 关注按钮需要的methods
         created(){
-        this.shop_id=this.$route.params.shop_id;
-        this.get_shopinfo(this.shop_id);
+        if(this.$route.params.shop_id!=undefined)
+        {
+            this.$store.commit('change_shopid',this.$route.params.shop_id)
+            this.shop_id=this.$route.params.shop_id;
+            this.get_shopinfo(this.shop_id);
+        }
+        else
+        {
+            this.shop_id=this.$store.state.category.shop_id
+            this.get_shopinfo(this.shop_id);
+        }
         //this.get_productList(this.shop_id)
         },
         methods:{
@@ -214,6 +223,8 @@ export default {
                     this.bg_color="#fef0f0";
                     this.ft_color="#f56c6c";
                 }
+                var mid=''
+                this.$store.commit('change_id',mid)
                 this.$router.go(-1);//返回上一页
             },
 
