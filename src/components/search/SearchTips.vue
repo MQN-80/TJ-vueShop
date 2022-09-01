@@ -1,9 +1,7 @@
 <template>
   <van-list
-    v-model="loading"
     :finished="finished"
     finished-text="没有更多了">
-    <!-- @load="onLoad" -->
     <van-cell
     />
     <!-- 上面的list以后替换成SearchTipsData -->
@@ -39,10 +37,6 @@ export default {
   //     }, 1000);
   //   },
   // },
-  props:["Tips"],
-  mounted(){
-    this.Tipslist=this.Tips
-  }
 };
 </script>
 

@@ -1,6 +1,6 @@
 <template lang="html">
     <ul class="product-list">
-      <li v-for="k in product" :key="k.name" :v-show="!(k.discount==1) || showAll">
+      <li v-for="k in this.$store.state.login.message" :key="k.name">
         <router-link :to="{name:'详情页',params: {id: k.id}}">
           <img :src="k.img" alt=""/>
           <div>{{k.name}}</div>
@@ -11,18 +11,23 @@
 </template>
 
 <script>
-
+// import store from '@/vuex/store.js'   //vuex
 export default {
-data(){
-return{
-  showAll:1,
-  product:[],
-}
-},
-props:["productInfo"],
-mounted() {
-    this.product=this.productInfo;
+  data(){
+    return{
+    }
   },
+  // watch:{
+  //   'this.$store.state.login.showAll'(newval,oldval)
+  //   {
+  //     if(newval)
+  //       {this.show=newval
+  //       console.log(this.show)}
+  //   }
+  // },
+  // created(){
+  //   let that = this
+  // }
 }
 
 </script>

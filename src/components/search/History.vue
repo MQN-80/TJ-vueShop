@@ -11,7 +11,7 @@
         </div>
         <div>
             <van-tag plain type="default"
-            v-for="(item,index) in historyList" 
+            v-for="(item,index) in history_list" 
             :key="index">
               {{item}}
             </van-tag>

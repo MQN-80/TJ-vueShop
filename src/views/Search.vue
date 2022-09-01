@@ -26,7 +26,6 @@
 
         <!-- 调用商品内容组件 -->
         <SearchProducts 
-        :message="getProduct"
         v-if="blockshow==3"/>
       </div>
   </body>
@@ -50,30 +49,26 @@ export default {
       blockshow:1,
       //历史记录的列表数据
       HistoryList:[],
-      //获取的后端商品列表
-      getProduct:[],
     };
   },
 
   methods: {
     onSearch(val) {
 
-      if (this.val !== "") {  //判断输入框的值
-        // 每次搜索的值push到新数组里
-        this.newArr.push(this.val);
-		
-        this.newArr = this.unique(this.newArr);  //调用unique方法去重
+      // if (this.val !== "") {  //判断输入框的值
+      //   // 每次搜索的值push到新数组里
+      //   this.newArr.push(this.val);
+      //   this.newArr = this.unique(this.newArr);  //调用unique方法去重
+      //   var list=[];
+      //   for (let i = this.newArr.length; i > 0; i--) {  //数组倒序  最新输入的排在最上面
+      //     list.push(this.newArr[i - 1]);
+      //   }
         
-        this.list = [];
-        for (let i = this.newArr.length; i > 0; i--) {  //数组倒序  最新输入的排在最上面
-          this.list.push(this.newArr[i - 1]);
-        }
-        
-        if (this.list.length > 10) {  //最多保存10条
-          this.list = this.list.slice(0, 10);
-        }
-        localStorage.setItem("HistoryList", JSON.stringify(this.list));   //存localStorage
-      }
+      //   if (list.length > 10) {  //最多保存10条
+      //     list = list.slice(0, 10);
+      //   }
+      //   localStorage.setItem("HistoryList", JSON.stringify(list));   //存localStorage
+      // }
       // 发送搜索请求
       this.get_serachProduct(val);
 
@@ -97,7 +92,7 @@ export default {
        product_name:val
       }
     }).then((response)=>{
-    this.getProduct=response.data;
+    this.$store.commit('changemessage',response.data) 
     this.blockshow=3;
     }).catch((err)=>{
       console.log(err);
