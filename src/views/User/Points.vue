@@ -12,6 +12,7 @@
     <div class="header-info">积分</div>
   </header>
   <van-divider />
+  <div v-if="user_consumption.length>0">
   <van-cell-group>
   <div v-for="consumption in user_consumption" :key="consumption.Create_time">
     <van-cell title="URL 跳转" size="large" url="">
@@ -28,26 +29,23 @@
   <van-divider />
   </div>
   </van-cell-group>
+  </div>
+  <div v-else>
+    <baseline></baseline>
+  </div>
 </div>
 </template>
 
 <script>
-export default {
+import Baseline from '@/common/user_baseline.vue'
+  export default {
+    components: {
+      'baseline': Baseline,
+    },
     data() {
       return {
         user_point:this.$ls.get("point"),
         user_consumption:this.$ls.get("consumption"),
-        User__consumption:[{
-            number:-10,
-            time:"2022:08:12"
-        },
-        {
-            number:20,
-            time:"2022:08:13"
-        },{
-            number:100,
-            time:"2022:08:15"
-        }]
         }
     },
     beforeCreate(){

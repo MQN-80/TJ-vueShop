@@ -226,7 +226,20 @@
       alert(error)
      })
       //缓存历史订单
-      this.$ls.set("orders",[]);
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/get_credit_record',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('积分交易为');
+      console.log(response);
+      this.$ls.set("consumption",response.data);
+      this.user_consumption=this.$ls.get("consumption")
+     }).catch(function(error) {
+      alert(error)
+     })
   }
   }
   }
