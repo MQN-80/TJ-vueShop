@@ -74,7 +74,7 @@ export default {
                         title:this.title,
                         context:this.context,
                         user_id:this.$ls.get("user_info").user_id,
-                        product_id:goods_id,  //之后改一下获取方式
+                        product_id:this.goods_id,  
                     }
                 })
                 .then((response) => {
@@ -92,7 +92,7 @@ export default {
             this.$store.commit('setCreatecontext',this.context);
             this.$store.commit('setCreategoods',this.goods_id);
 
-            this.$router.push({name: '详情页', parmas: {id:'E7230190226FFA5AE05011AC02007324'}})
+            this.$router.push({name: '推荐商品搜索页'})
         },
         getProduct() {
             this.$net({
@@ -127,7 +127,7 @@ export default {
             this.title=CreateA.title;
             this.context=CreateA.context;
             this.goods_id=CreateA.goods_id;
-/*                     console.log(this.$store.getters.RetuenCreateArticle)
+/*                     console.log(this.goods_id)
  */            if(this.goods_id!=""){
                 this.getProduct();
             }
