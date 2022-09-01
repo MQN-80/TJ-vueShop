@@ -27,7 +27,6 @@ export default {
     return{
       id:'',
       product:[],
-      flag:0,
     }
     
   },
@@ -67,14 +66,16 @@ export default {
 
   },
   beforeMount(){
-  //传参数
-  this.flag=0;
+  //传参数,没有传参的话就使用缓存
+  if(this.message!=undefined)
+  {
   this.id=this.message;
   console.log(this.id);
   this.getDeatil();
-  console.log("dadas")
-  this.product=this.$store.state.category.product;
-  console.log("das")
+  }
+  else{
+    this.product=this.$store.state.category.product_detail;
+  }
   }
 }
 </script>
