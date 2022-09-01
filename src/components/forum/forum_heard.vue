@@ -19,5 +19,6 @@
       'recommend': Recommend,
       'myarticle':Myarticle
     },
+    props:["active"]
     }
 </script>

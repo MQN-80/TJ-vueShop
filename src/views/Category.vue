@@ -23,6 +23,7 @@
                   <van-card v-for="(goods,index2) in item.data" :key="coffee"
                   :title="goods.title"
                   :thumb="goods.thumb"
+                  @click="goSearch(goods.title)"
                   centered="true">
                   </van-card>
               </div>
@@ -37,6 +38,7 @@
 
 <script>
 import { ref, reactive, toRefs, onMounted } from "vue";
+import { Toast } from 'vant';
 
 export default {
   name: "menu",
@@ -166,6 +168,10 @@ export default {
   methods:{
       onClickLeft(){
           this.$router.push({name:'首页'})
+      },
+      goSearch(name)
+      {
+        Toast(name)
       }
   }
 };
