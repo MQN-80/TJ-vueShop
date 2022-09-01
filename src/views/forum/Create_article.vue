@@ -92,7 +92,7 @@ export default {
             this.$store.commit('setCreatecontext',this.context);
             this.$store.commit('setCreategoods',this.goods_id);
 
-            this.$router.push({name: '详情页', parmas: {id:6}})
+            this.$router.push({name: '详情页', parmas: {id:'E7230190226FFA5AE05011AC02007324'}})
         },
         getProduct() {
             this.$net({
