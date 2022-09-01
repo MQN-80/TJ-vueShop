@@ -5,7 +5,6 @@ Vue.use(Router);
 //按需加载,当渲染其他页面时才加载其组件,并缓存,减少首屏加载时间
 const Index = resolve => require(['@/views/Index.vue'], resolve)
 const Category = resolve => require(['@/views/Category.vue'], resolve)
-const CategoryMain = resolve => require(['@/components/category/main.vue'], resolve)
 const Car = resolve => require(['@/views/Car.vue'],resolve)
 const User = resolve => require(['@/views/User/User.vue'], resolve)
 const Detail = resolve => require(['@/views/Detail.vue'], resolve)
@@ -42,12 +41,7 @@ export default new Router({
     }, {
       path: '/category',
       name: '分类页',
-      redirect: '/category/all',
       component: Category,
-      children: [{
-        path: '/category/:tab',
-        component:CategoryMain
-      }],
       meta: {
         keepAlive: false
     },
@@ -208,19 +202,31 @@ export default new Router({
     },{
       path: '/User/Shop',
       name: '店铺页',
-      component: Shop
+      component: Shop,
+      meta: {
+        keepAlive: false
+    },
     },,{
       path: '/User/address',
       name: '地址页',
-      component: address
+      component: address,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/address/address-add',
       name: '地址添加页',
-      component: addaddress
+      component: addaddress,
+      meta: {
+        keepAlive: false
+    },
     },{
       path: '/User/address/address-edit',
       name: '地址修改页',
-      component: editaddress
+      component: editaddress,
+      meta: {
+        keepAlive: false
+    },
     },
   ]
 })

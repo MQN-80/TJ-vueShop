@@ -5,7 +5,7 @@
       <i class="icon-right"></i>
     </h1>
     <ul class="section1-list">
-      <li v-for="k in list" :key="k.id">
+      <li v-for="k in list1" :key="k.id">
         <router-link :to="{name:'详情页',params:{id:k.id}}">
           <img  v-lazy="k.imgPath" alt="">
         </router-link>
@@ -29,28 +29,27 @@ export default {
       type: String,
       default: ''
     },
-    list: {
-      type: Array,
-      default: function () {
-        return []
-      }
-    }
+   
   },
-  data:{
-  list:[],
+  data(){
+  return{
+  list1:[],
+  }
   },
   methods:{
     getProduct(){
 
     }
   },
-  beforeCreate(){
+  beforeMount(){
   this.$net({
       method: 'get',
       url: '/MallPage/get4randomProduct',
   }).then(response=>{
     console.log(response);
-    this.list=response.data;
+    this.list1=response.data;
+  }).catch(error=>{
+    console.log(error);
   })
   },
 }

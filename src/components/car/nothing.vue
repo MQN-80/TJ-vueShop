@@ -1,9 +1,9 @@
 <template lang="html">
 
   <div class="nothing">
-    <v-gologin/>
+    <v-gologin v-if="!islogin"/>
 
-    <div class="nothing-img">
+    <div class="nothing-img" v-else>
       <img src="../../assets/car/images/cart.svg" alt="">
     </div>
     <router-link class="nothing-toshop" :to="{name:'分类页'}">
@@ -20,7 +20,19 @@ import Gologin from '@/components/car/gologin.vue'
 export default {
   components: {
     'v-gologin': Gologin
+  },
+    beforeMount(){
+      if(localStorage.getItem('token'))
+      {
+        this.islogin=true;
+      }
+      else
+	  	{
+        this.islogin=false;
+      }
+
   }
+
 }
 </script>
 

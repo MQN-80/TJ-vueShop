@@ -14,10 +14,18 @@
 
 <script>
 export default {
-  computed: {
-    swiper () {
-      return this.$store.state.detail.productDatas.swiper
+  props:["message"],
+  data(){
+    return{
+      swiper:[{
+        imgSrc:'',
+      }],
     }
+  },
+  created(){
+  this.swiper[0].imgSrc="http://106.12.131.109:8083/product/" +this.message+".jpg";
+  console.log("dada")
+  console.log(this.swiper[0].imgSrc);
   }
 }
 </script>

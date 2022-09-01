@@ -15,7 +15,7 @@ const state = {
   midList:'',
   orderid:'', 
   orderidList:'',
-  
+
 }
 
 //更改 store 中的状态的唯一方法:提交 mutation

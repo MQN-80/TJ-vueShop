@@ -51,14 +51,9 @@ import { Lazyload } from 'mint-ui';
         }]
       }
     },
-  beforeCreate(){
-  this.$net({
-      method: 'get',
-      url: '/MallPage/get4shopProduct',
-  }).then(response=>{
-    console.log(response);
-    this.list=response.data;
-  })
+  beforeMount(){
+  setTimeout(400);
+ 
   },
     mounted() {
       this.$api({

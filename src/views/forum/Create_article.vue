@@ -31,14 +31,14 @@
             border
             />
         </van-cell-group>
-        <van-cell icon="fire-o" title="推荐商品"  is-link url="../../components/forum/Comment.vue" />
+        <van-cell icon="fire-o" :title="this.goods_title"  @click="goodsClick" />
         <div style="margin: 10px;">
           <van-button round block type="info" native-type="submit" @click="push_article">提交</van-button>
         </div>
-
     </div>
   </div>
 </template>
+
 <script>
 import { Toast } from 'vant';
 
@@ -47,21 +47,24 @@ export default {
         return{
             title:'',
             context:'',
+            goods_title:'选择推荐商品'
         }
     },
     setup() {
-        const onClickLeft = () => history.back();//有问题
+        const onClickLeft = () => history.back();
         return {
             onClickLeft,
             };
      },
      methods:{
-      push_article()
+     push_article()
      {
         console.log(this.$ls.get("user_info").user_id)
         if(this.title!=''&&this.context!='')
         {
-           this.commit_article();
+            this.commit_article();
+            setTimeout(500);
+            this.$router.push({name:'论坛页'})
         }
         else
             Toast("请完成内容输入再发布吧！")
@@ -82,7 +85,6 @@ export default {
 			  	console.log(response);
                 Toast("上传成功,请等待管理员审核")
                 this.$router.push({name:'首页'})
-
 			  })
 			  .catch(function (error) {
 			    console.log(error);

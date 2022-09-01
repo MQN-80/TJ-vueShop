@@ -44,6 +44,26 @@
         user_favorites:this.$ls.get("favorites")
       }
     },
+    beforeCreate(){
+      if(this.$ls.get('favorites')==null)
+      {
+      //缓存收藏夹
+      this.$net({
+      method: 'get',
+      url: '/ShopTransaction/search_user_collect',
+      params:{
+        UserID:this.$ls.get("user_info").user_id,
+      }
+     }).then((response) => {
+      console.log('收藏夹为');
+      console.log(response);
+      this.$ls.set("favorites",response.data);
+      this.user_favorites=this.$ls.get("favorites")
+     }).catch(function(error) {
+      alert(error)
+     });
+      }
+    },
     methods: {
       handleEdit(index, row) {
         console.log(index, row);

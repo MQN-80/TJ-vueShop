@@ -1,38 +1,15 @@
 <template lang="html">
-  <section class="chose" v-if="view">
+  <section class="chose">
     <div class="chose-view">
       <h1 class="chose-view-title">
-        {{view.title}} ~~
-        <span>(已选 {{colText}} - {{sizeText}})</span>
+        {{product.name}}
+        <span><br>类型 {{product.type_id}}</span>
       </h1>
-      <span>{{view.price}}元</span>
-      <p class="chose-view-intro">{{view.intro}}</p>
+      <span>{{product.price}}元</span>
+      <p class="chose-view-intro">{{product.des}}</p>
     </div>
   <!-- 添加空函数 解决Safari浏览器 :active无效 -->
-    <div class="chose-mychosed" ontouchstart="">
-      <div class="colChose">
-        <span
-           v-for="(k,i) in view.chose"
-           :class="{active:colSelected==i}"
-           @click="colChose(i)"
-         >{{k.col}}</span>
-      </div>
-      <div class="sizeChose" >
-        <span
-          v-for="(k,i) in view.chose"
-          :class="{active:sizeSelected==i}"
-          @click="sizeChose(i)"
-        >
-          {{k.size}}
-        </span>
-      </div>
-    </div>
-
-
-
   </section>
-
-
 </template>
 
 <script>
@@ -45,22 +22,15 @@ import {
 
 
 export default {
-
-  computed: mapState({
-
-    view: state => state.detail.productDatas.view,
-    colSelected: state => state.detail.colSelected,
-    sizeSelected: state => state.detail.sizeSelected,
-    // 返回当前选择颜色的值(innerText)
-    colText() {
-      return this.view.chose[this.colSelected].col
-    },
-    // 返回当前选择规格的值(innerText)
-    sizeText() {
-      return this.view.chose[this.sizeSelected].size
+  props:["message"],
+  data(){
+    return{
+      id:'',
+      product:[],
+      flag:0,
     }
-
-  }),
+    
+  },
   methods: {
 
     //点击后把i赋值给colSelected,再通过判断决定是否添加选中样式 (active)
@@ -69,8 +39,37 @@ export default {
     },
     sizeChose(i) {
       this.$store.commit('CHANGE_SIZE_SELECTED', i);
+    },
+    //获取页面具体商品值
+    getDeatil(){
+     console.log(this.id);
+     this.$net({
+      method: 'get',
+      url: '/ShopCenter/getProduct',
+      params:{
+        id:this.id,
+      }
+     }).then((response)=>{
+      console.log(response)
+      this.product=response.data;
+      console.log(this.product)
+      //使用vuex传递数据
+      this.$store.commit('change_productid',this.id)
+      this.$store.commit('change_title',response.data.name)
+      this.$store.commit('change_price',response.data.price)
+      this.$store.commit('change_path',"http://106.12.131.109:8083/product/" +this.id+".jpg")
+      console.log(this.$store.state.category.product_id)
+      this.flag=1;
+     })
     }
 
+  },
+  beforeMount(){
+  //传参数
+  this.flag=0;
+  this.id=this.message;
+  console.log(this.id);
+  this.getDeatil();
   }
 }
 </script>
