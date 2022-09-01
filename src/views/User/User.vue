@@ -61,11 +61,11 @@
             <i class="icon-go"></i>
           </p>
         </router-link>
-        <router-link class="my-vip-top ho" :to="{ name: '店铺页'}">
+        <router-link class="my-vip-top ho" :to="{ name: '店铺页',params:{shop_id:id}}">
           <img :src="icon_my_p" />
           <p>
             <span>店铺按钮</span>
-            <i class="icon-go"></i>
+             <i class="icon-go"></i>
           </p>
         </router-link>
         <router-link class="my-vip-top ho" :to="{ name: '地址页'}">
@@ -105,6 +105,7 @@
 				return {
           user_id:this.$ls.get("user_info").user_id,
           user_name:this.$ls.get("user_info").user_name,
+          id:this.$ls.get("user_info").id,
 				 	icon_money:pay,
           icon_shop:shop,
           icon_order:my_order,

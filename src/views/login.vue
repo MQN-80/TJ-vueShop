@@ -42,6 +42,7 @@
 import Header from '@/common/_header.vue'
 import net from '@/http/net.js'       //http请求
 import { Toast } from 'mint-ui'
+import store from '@/vuex/store.js'
 export default {
   components:{
     'v-header':Header

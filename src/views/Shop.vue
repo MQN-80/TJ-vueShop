@@ -15,7 +15,7 @@
                     round
                     width="4.5rem"
                     height="4.5rem"
-                    src="https://img01.yzcdn.cn/vant/cat.jpeg"
+                    :src="avator_img"
                     /><br>
                     <div class="username">
                         {{username}}
@@ -51,15 +51,15 @@
                 <van-grid-item v-for="(n,inx) in goodslist" :key=inx>
                 <div class="goodsdiv" >
                     <!-- 商品跳转链接 -->
-                    <a href="#">
-                        <van-image
+                     <router-link :to="{name:'详情页',params:{id:n.id}}">
+                     <van-image
                         width="100"
                         height="100"
-                        src="http://106.12.131.109:8083/avator/E6D28E0A082DACF5E05011AC02007F3A.jpg"
+                        :src="n.img"
                         />
-                    </a>
+                      </router-link>
                 </div>
-                <div align="center" class="goodsname">{{n.txt}}</div>
+                <div align="center" class="goodsname">{{n.name}}</div>
                 <div align="center" class="price">${{n.price}}</div>
                 </van-grid-item>
             </van-grid>
@@ -69,6 +69,7 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
     name: "Shop.vue",
         data () {
@@ -78,74 +79,126 @@ export default {
                 content:'+关注',
                 bg_color:"#fef0f0",
                 ft_color:"#f56c6c",
+                avator_img:'',
+                shop_id:'', //这里是string的id
                 // 关注按钮需要的数据
                 username:'用户昵称',
                 introduction:'1、欢迎光临本店，本店新开张，诚信经营，只赚信誉不赚钱，谢谢。 2、本店商品均属正品，假一罚十信誉保证。 欢迎广大顾客前来放心选购，我们将竭诚为您服务! 3、本店专门营销什么什么商品，假一罚十信誉保证。 本店的服务宗旨是用心服务，以诚待人!',
-                goodslist:[
-                {
-                    // 图片url，目的请求图片链接，到时候可自行更改，商品图片暂时用死图
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                },
-                {
-                    imgurl:require('../assets/user/shop.png'),
-                    txt:'商品名称',
-                    price:'100',
-                }
-            ]
+                goodslist:[]
             }
         },
         // 关注按钮需要的methods
+        created(){
+        this.shop_id=this.$route.params.shop_id;
+        this.get_shopinfo(this.shop_id);
+        //this.get_productList(this.shop_id)
+        },
         methods:{
+            get_shopinfo(shop_id){
+            this.$net({
+            method: 'get',
+            url: '/ShopCenter/get_shop_info',
+            params:{
+               shopUserId:this.shop_id,
+            }
+            }).then((response)=>{
+                console.log(response);
+                this.username=response.data[0].userName;
+                this.introduction=response.data[0].userDetail;
+                this.avator_img='http://106.12.131.109:8083/avator/'+this.shop_id+'.jpg';
+                this.get_productList(this.shop_id)   //不太合理,不过先这么写
+            })
+            },
+            get_productList(shop_id)
+            {
+               this.$net({
+                method: 'get',
+                url: '/ShopCenter/get_shop_product',
+                params:{
+                shopUserId:shop_id
+            }
+            }).then((response)=>{
+                console.log(response)
+                response.data.forEach(element => {
+                    console.log(element)
+                    var mid={
+                    img:'',
+                    price:'',
+                    id:'',
+                    name:'',
+                    };
+                    mid.img='http://106.12.131.109:8083/product/'+element.id+'.jpg';
+                    mid.price=element.price;
+                    mid.id=element.id;
+                    mid.name=element.name;
+                    this.goodslist.push(mid)
+                });
+                this.is_follow()
+            })
+            },
+            //查看是否关注店铺
+            is_follow(){
+             this.$net({
+                method: 'get',
+                url: '/ShopCenter/is_follow',
+                params:{
+                userid:this.$ls.get("user_info").user_id,
+                shopid:this.shop_id
+            }
+            }).then((response)=>{
+                console.log(response);
+                this.liked=response.data;
+                if(this.liked){
+                    this.content="已关注";
+                    this.bg_color="#f56c6c";
+                    this.ft_color="#fef0f0";
+                }
+            })
+            },
+            //关注店铺
+            follow_shop(){
+            this.$net({
+                method: 'post',
+                url: '/ShopCenter/follow_shop',
+                params:{
+                userId:this.$ls.get("user_info").user_id,
+                shopUserId:this.shop_id
+            }
+            }).then((response)=>{
+                Toast("关注成功")
+            }).catch((err)=>{
+                Toast("关注失败,网络出错")
+            })           
+            },
+            cancel_shop(){
+             this.$net({
+                method: 'delete',
+                url: '/ShopCenter/cancel_follow_shop',
+                params:{
+                userId:this.$ls.get("user_info").user_id,
+                shopUserId:this.shop_id
+            }
+            }).then((response)=>{
+                Toast("取关成功")
+                console.log(response)
+            }).catch((err)=>{
+                Toast("取关失败,网络出错")
+            })     
+            },
             favor (e) {
                 this.liked=!this.liked;
                 if(this.liked){
                     this.content="已关注";
                     this.bg_color="#f56c6c";
                     this.ft_color="#fef0f0";
+                    this.follow_shop()
                 }
 
                 else{
                     this.content="+关注"
                     this.bg_color="#fef0f0";
                     this.ft_color="#f56c6c";
-
+                    this.cancel_shop()
                 }
             },
             change(){
@@ -162,7 +215,8 @@ export default {
                     this.ft_color="#f56c6c";
                 }
                 this.$router.go(-1);//返回上一页
-            }
+            },
+
         }
         // 关注按钮需要的methods
 

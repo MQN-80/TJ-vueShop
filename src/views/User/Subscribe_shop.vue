@@ -14,7 +14,9 @@
     <van-tag type="danger">标签</van-tag>
   </template>
     <template #icon>
+      <router-link :to="{name:'店铺页',params:{shop_id:shop.shop_id}}">
       <img class="icon_shop" :src="shop.img"/>
+      </router-link>
   </template>
  <template #label>
    <span>添加时间：{{shop.collect_time}}</span>

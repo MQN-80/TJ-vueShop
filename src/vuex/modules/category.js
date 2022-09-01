@@ -7,6 +7,7 @@ const state = {
   product_id:'',  // 商品id
   title:'',   //商品名称
   imgPath:'',   // 商品路径
+  k1:'',
 
 }
 
@@ -25,6 +26,9 @@ const mutations = {
   },
   change_path(state,res) {
     state.imgPath = res
+  },
+  change_k1(state,res) {
+    state.k1 = res
   },
 }
 

@@ -2,7 +2,7 @@
   <div class="detail">
     <v-swiper :message="id"/>
     <v-chose :message="id"/>
-    <v-content/>
+    <v-content :message="id"/>
     <v-baseline/>
     <v-footer/>>
   </div>
