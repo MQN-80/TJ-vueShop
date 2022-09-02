@@ -2,7 +2,7 @@
   <div v-if="!islogin">
       <van-empty description="先登录吧！" />
   </div>
-  <div class="MyArticle" v-else>
+  <form class="MyArticle" v-else>
     <div class="ShowArticle">
       <img class="imgO" :src="icon_redo" v-on:click="getMyArticle" />
       <div v-if="isEmpty">
@@ -29,7 +29,7 @@
       </div>
     </div>
     <FloatBall :text="'发布'" ></FloatBall>
-  </div>
+  </form>
 </template>
 <script>
     import redo from'@/assets/forum/redo.png'
@@ -75,7 +75,6 @@
           })
           .then( (response) => {
 					  console.log(response);
-            this.$router.go(0);
 			  })
 			  .catch(function (error) {
 			    console.log(error);

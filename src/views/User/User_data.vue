@@ -41,6 +41,7 @@
 </div>
 </template>
 <script>
+import { Toast } from 'vant';
 export default {
     data() {
       return {
@@ -67,8 +68,11 @@ export default {
       }
      }).then((response) => {
       console.log(response);
+      Toast("上传成功！")
+      this.$router.push({name:'用户页'})
      }).catch(function(error) {
       alert(error)
+      Toast("上传失败QAQ!")
      });
       this.$ls.set("data",{
       user_name:this.user_name,
