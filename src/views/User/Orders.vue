@@ -55,8 +55,13 @@ export default {
       goback(){
           this.$router.go(-1);//返回上一页
       },
+      getimg(order)
+      {
+        return 'http://106.12.131.109:8083/product/' + order.Product_id + '.jpg'
+      },
       getdata()
       {
+        console.log(this.$ls.get("user_info").user_id);
         this.$net({
             method: 'get',
             url: '/ShopTransaction/get_deal_record',
@@ -71,7 +76,7 @@ export default {
       gopay(order)
       {
         const s_product = [{
-          title: order.Ord_price,
+          title: order.Product_name,
           price: order.Ord_price,
           id: order.Product_id,
           imgPath: 'http://106.12.131.109:8083/product/' + order.Product_id + '.jpg',
