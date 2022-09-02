@@ -38,6 +38,7 @@
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
 import eventBus from '@/views/address/eventBus.js'
+import { Toast } from 'vant';
 import qs from 'qs'
 import {
   MessageBox
@@ -95,38 +96,44 @@ export default {
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
-          //修改订单信息
-          console.log(this.$store.state.detail.orderid);
-          this.$net({
-            method: 'put',
-            url: '/ShopTransaction/goods_transaction_primer_plus',
-            params: {
-              Trade_id:  this.$store.state.detail.orderid
+            if (!this.address)
+            {
+              Toast("请选择地址");
             }
-          }).then(res => {
-            console.log(res);
-            if (res.data=='error' ) {
-              alert('积分不足');
-              setTimeout(2000);
-              this.$router.push({name: '用户页'}) 
-            }
-
-          })
-
-            this.$router.push({ name: '完成页' });
-            this.$store.commit('SET_LOADING', true);
-            //this.$store.dispatch('cutMidList', this.midList);
-            setTimeout(() => {
-              this.$store.commit('SET_LOADING', false); //关闭loading
-              this.$router.push({
-                name: '完成页',
-                query: {
-                  user_name: this.user_name,
-                  phone: this.phone,
-                  address: this.address,
+            else {
+              console.log(this.$store.state.detail.orderid);
+              this.$net({
+                method: 'put',
+                url: '/ShopTransaction/goods_transaction_primer_plus',
+                params: {
+                  Trade_id: this.$store.state.detail.orderid
                 }
-              }) 
-            }, 300)
+              }).then(res => {
+                console.log(res);
+                if (res.data == '积分不足') {
+                  Toast('积分不足');
+                  this.$router.push({ name: '用户页' })
+                }
+
+              })
+
+              this.$router.push({ name: '完成页' });
+              this.$store.commit('SET_LOADING', true);
+              //this.$store.dispatch('cutMidList', this.midList);
+              setTimeout(() => {
+                this.$store.commit('SET_LOADING', false); //关闭loading
+                this.$router.push({
+                  name: '完成页',
+                  query: {
+                    user_name: this.user_name,
+                    phone: this.phone,
+                    address: this.address,
+                  }
+                })
+              }, 300)
+            }
+          //修改订单信息
+          
           }, function (err) {
             //点击取消执行这里的函数
           });
