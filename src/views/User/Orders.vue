@@ -44,13 +44,7 @@ export default {
       return {
         orders:[
         ],
-        s_product : [{
-          title: '',
-          price: '',
-          id: '',
-          imgPath: '',
-          choseBool: false
-        }],
+       
         
         }
     },
@@ -76,11 +70,11 @@ export default {
       },
       gopay(order)
       {
-      const s_product = [{
+        const s_product = [{
           title: order.Ord_price,
           price: order.Ord_price,
           id: order.Product_id,
-          imgPath: 'http://106.12.131.109:8083/product/'+order.Product_id+'.jpg',
+          imgPath: 'http://106.12.131.109:8083/product/' + order.Product_id + '.jpg',
           choseBool: false
         }];
         console.log(s_product);
