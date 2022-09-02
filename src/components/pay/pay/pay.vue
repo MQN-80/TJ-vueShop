@@ -27,7 +27,7 @@
     </div>
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
-      <span>立即支付</span>
+      <span>创建订单</span>
     </footer>
 
 

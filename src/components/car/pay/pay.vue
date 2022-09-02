@@ -29,7 +29,7 @@
     </div> 
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
-      <span>立即支付</span>
+      <span>创建订单</span>
     </footer>
 
 
@@ -43,6 +43,7 @@ import eventBus from '@/views/address/eventBus.js'
 import {
   MessageBox
 } from 'mint-ui';
+import { Toast } from 'vant';
 export default {
   components: {
     'v-header': Header
@@ -105,8 +106,8 @@ export default {
                 }
               }).then(res => {
                 console.log(res);
-                if (res.data=='error') {
-                  alert('积分不足');
+                if (res.data=="积分不足") {
+                  Toast("积分不足")
                   setTimeout(2000);
                   this.$router.push({ name: '用户页' })
                 }
