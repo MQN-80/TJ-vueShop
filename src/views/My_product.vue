@@ -21,7 +21,7 @@
             <div align="center" class="goodsname">{{ n.name }}</div>
             <div align="center" class="price">${{ n.price }}</div>
             <div align="center">
-              <van-button plain type="danger" size="small">
+              <van-button plain type="danger" size="small" @click="delete_product(n.id)">
                 <a href="#" class="delete">删除发布</a>
               </van-button>
             </div>
@@ -33,39 +33,19 @@
 </template>
 
 <script>
+import { Toast } from 'vant';
 export default {
   name: "My_product",
   data() {
     return {
       goodslist: [],
+      shop_id:'',
     };
   },
   methods: {
     goback() {//////////////不太一样！！！！！！！！！！！！！！！！！！！！！！！！
-      if (this.liked) {
-        this.bg_color = "#f56c6c";
-        this.ft_color = "#fef0f0";
-      } else {
-        this.bg_color = "#fef0f0";
-        this.ft_color = "#f56c6c";
-      }
+      
       this.$router.go(-1); //返回上一页
-    },
-    get_shopinfo(shop_id) {
-      this.$net({
-        method: "get",
-        url: "/ShopCenter/get_shop_info",
-        params: {
-          shopUserId: this.shop_id,
-        },
-      }).then((response) => {
-        console.log(response);
-        this.username = response.data[0].userName;
-        this.introduction = response.data[0].userDetail;
-        this.avator_img =
-          "http://106.12.131.109:8083/avator/" + this.shop_id + ".jpg";
-        this.get_productList(this.shop_id); //不太合理,不过先这么写
-      });
     },
     get_productList(shop_id) {
       this.$net({
@@ -92,18 +72,26 @@ export default {
         });
       });
     },
+    delete_product(id){
+    this.$net({
+        method: "delete",
+        url: "/ShopCenter/delete_product",
+        params: {
+          productId:id,
+          shopUserId:this.shop_id,
+        },
+      }).then((response)=>{
+      Toast("删除成功")
+      this.$router.go(0)
+      }).catch((err)=>{
+        Toast("网格错误")
+      })
+    },
   },
   created() {
-    if (this.$route.params.shop_id != undefined) {
-      this.$store.commit("change_shopid", this.$route.params.shop_id);
-      this.shop_id = this.$route.params.shop_id;
-      this.get_shopinfo(this.shop_id);
-    } else {
-      this.shop_id = this.$store.state.category.shop_id;
-      this.get_shopinfo(this.shop_id);
-    }
-    //this.get_productList(this.shop_id)
-  },
+      this.shop_id=this.$ls.get("user_info").id
+      this.get_productList(this.$ls.get("user_info").id);
+  }
 };
 </script>
 
