@@ -142,7 +142,6 @@ export default {
 解决的话把scoped属性去掉就行了*/
 @import url("../../assets/markdown-github.css");
 .Article {
-  height: 100%;
   width: 100%;
 }
 .ArticleSection {
