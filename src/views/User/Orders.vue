@@ -9,7 +9,7 @@
 <van-cell-group>
   <div v-for="order in orders" :key="order.productname">
     <van-card
-  thumb="https://img01.yzcdn.cn/vant/ipad.jpeg" @click='gopay(order)'>
+  :thumb="order.img" @click='gopay(order)'>
    <template #title>
     <span style="font-size:10px">{{order.id}}</span>
     <br/><br/>
@@ -71,6 +71,10 @@ export default {
           }).then(res => {
             console.log(res);
             this.orders=res.data;
+            this.orders.forEach(element => {
+              element.img='http://106.12.131.109:8083/product/' + element.Product_id + '.jpg'
+            });
+            cosnole.log(this.orders)
           })
       },
       gopay(order)

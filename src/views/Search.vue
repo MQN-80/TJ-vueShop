@@ -74,10 +74,8 @@ export default {
       // 发送搜索请求
       if (this.type == 1) {
         this.get_serachProductbyName(val);
-        console.log("1111111111111111111111111111111111111")
       } else if (this.type == 2) {
         this.get_serachProductbyType(val);
-        console.log("2222222222222222222222222222222222222")
      }
     },
     onCancel() {
@@ -87,6 +85,7 @@ export default {
     },
     //获取搜索的商品
     get_serachProductbyName(val) {
+       this.$store.commit('change_history', val);
       this.$net({
         method: "get",
         url: "/ShopTransaction/search_productInfo",

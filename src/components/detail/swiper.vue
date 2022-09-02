@@ -41,6 +41,10 @@ export default {
     this.$store.commit('change_product',mid)
     this.$store.commit('change_pic',mid1)
     this.$store.commit('change_shopuser',mid)
+    this.$store.commit('changeproduct_id',mid1)
+    this.$store.commit('change_title',mid1)
+    this.$store.commit('change_price',mid1)
+    this.$store.commit('change_path',mid1)
     this.$router.go(-1);
     }
   }

@@ -6,7 +6,7 @@
     <v-service/>
     <v-section1 :list="datas.section1.list" :banner='datas.section1.banner'/>
     <v-section2 :list="datas.section2.list" :banner='datas.section2.banner'/>
-    <v-section3/>
+   
     <v-section4 :list="datas.section4.list" :banner='datas.section4.banner'/>
     <v-baseline/>
     <v-footer/>

@@ -13,12 +13,23 @@ const state = {
   shopuser_detail:[],   //跳转缓存
   product_pic:'',      //商品图像缓存
   shop_id:'',   //店铺id缓存
+  history:[],   //展示历史记录
 
 }
 
 const mutations = {
   [types.CHANGE_TABINDEX] (state,res) {
     state.tabIndex = res
+  },
+  change_history(state,res){
+   if(res!='')
+   if(state.history.length>6)
+   return;
+   else
+   state.history.push(res)
+   else{
+    state.history=[]
+   }
   },
   change_shopid(state,res){
   state.shop_id=res
