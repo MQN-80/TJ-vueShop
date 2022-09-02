@@ -53,7 +53,8 @@ export default {
 				  }
 		 }, 
      created(){
-      this.is_collect();
+      if(localStorage.getItem('token'))
+      {this.is_collect();}
       //var judge=check(this.productDatasView.id);
      },
   methods: {
@@ -101,7 +102,8 @@ export default {
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数
-          this.$store.dispatch('setLocalCount', true);
+        if(localStorage.getItem('token'))
+         { this.$store.dispatch('setLocalCount', true);
           this.$store.dispatch('addCarList', product);
           this.$net({
             method: 'post',
@@ -121,6 +123,7 @@ export default {
             message: '添加成功',
             duration: 1000
           });
+         }
         }, function (err) {
         });
     },
@@ -167,8 +170,8 @@ export default {
         });
     },
     addIntoCollect(){
-
-      if(this.icon_collect==collect)
+      if(localStorage.getItem('token'))
+      {if(this.icon_collect==collect)
       {
         this.icon_collect=collect_filled;
         this.push_collect()
@@ -180,7 +183,7 @@ export default {
         this.delete_collect()
         Toast("取关成功")
       }
-      
+      }
     },
     //添加商品收藏
     push_collect(){
