@@ -7,7 +7,7 @@
       @click-left="goback"
     />
     <br />
-    <div>
+    <div class="add">
       <span class="tishi">商品名称：</span>
       <input type="text" v-model="productName" />
       <br />
@@ -20,15 +20,17 @@
       <br /><br />
       <span class="tishi"> 描述：</span>
       <br /><br />
-      <textarea
-        name=""
-        id=""
-        cols="35"
-        rows="9"
-        class="nonesize"
-        placeholder="请输入商品描述"
-        v-model="desc"
-      ></textarea>
+      <van-field
+            v-model="desc"
+            class="nonesize"
+            rows="10"
+            autosize
+            type="textarea"
+            maxlength="400"
+            placeholder="请输入商品描述"
+            show-word-limit
+            border
+      ></van-field>
       <br /><br />
       <span class="tishi"> 上传图片：</span>
       <van-uploader :after-read="afterRead" v-model="fileList" :max-count="1" />
@@ -122,7 +124,7 @@ export default {
 
 <style>
 /* 表单外边距 */
-form {
+.add {
   margin: 27px;
 }
 /* 输入框 */
@@ -184,8 +186,12 @@ a {
   margin: 0 auto;
 }
 .nonesize {
-  resize: none;
-  font-size: large;
+    resize: none;
+    font-size: large;
+  		color: #000;
+   		padding: 10px;
+    	border-radius: 30px ;
+   		box-shadow: 0 0 0 2px #e1f0fd;
 }
 /* 首行 */
 .head {
