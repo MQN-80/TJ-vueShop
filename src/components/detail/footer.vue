@@ -148,6 +148,7 @@ export default {
           this.$store.dispatch('resetMidList');
           this.$store.dispatch('resetOrderID');
           this.$store.dispatch('addMidList', product);
+          console.log(product);
           //提交订单信息
           this.$net({
             method: 'post',

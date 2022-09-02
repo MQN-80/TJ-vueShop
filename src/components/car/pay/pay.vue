@@ -40,6 +40,7 @@
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
 import eventBus from '@/views/address/eventBus.js'
+import { Toast } from 'vant';
 import {
   MessageBox
 } from 'mint-ui';
@@ -95,7 +96,12 @@ export default {
           )
           .then(action => { //点击成功执行这里的函数
 
-            for (let i = 0; i < this.$store.state.detail.selectedList.length; i++) {
+            if (!this.address)
+            {
+              Toast("请选择地址");
+            }
+            else{
+              for (let i = 0; i < this.$store.state.detail.selectedList.length; i++) {
               //修改订单信息
               this.$net({
                 method: 'put',
@@ -105,9 +111,8 @@ export default {
                 }
               }).then(res => {
                 console.log(res);
-                if (res.data=='error') {
-                  alert('积分不足');
-                  setTimeout(2000);
+                if (res.data=='积分不足') {
+                  Toast('积分不足');
                   this.$router.push({ name: '用户页' })
                 }
               })
@@ -129,6 +134,8 @@ export default {
                 }
               }) 
             }, 300)
+            }
+           
           }, function (err) {
             //点击取消执行这里的函数
           });

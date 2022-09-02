@@ -3,19 +3,13 @@
         <van-nav-bar title="添加地址" left-text="返回" left-arrow @click-left="goback" />
         <br>
         <form action="">
-            <span class="tishi">收货人：</span>
-            <input type="text" v-model="userName">
-            <br>
-            <br>
-            <span class="tishi">手机号码：</span>
-            <input type="text" v-model="phone">
-            <br><br>
-            <span class="tishi"> 地址：</span>
-            <br><br>
-            <textarea name="" id="" cols="35" rows="9" class="nonesize" placeholder="请输入详细地址" v-model="address"></textarea>
-            <br><br>
+            <van-cell-group>
+                <van-field v-model="userName" required label="收货人" placeholder="请输入收货人" />
+                <van-field v-model="phone" required label="手机号" placeholder="请输入手机号" />
+                <van-field v-model="address" rows="3" autosize required label="地址" type="textarea" placeholder="请输入地址" />
+            </van-cell-group>
             <center>
-                <van-button plain type="primary" @click="pushAddress">完成</van-button>
+                <button class="btn back p-cu-p" @click="pushAddress" type="button">完成</button>
             </center>
         </form>
     </div>
@@ -23,6 +17,7 @@
 
 <script>
 import { Toast } from 'vant';
+import { Field } from 'vant';
 export default {
     data() {
         return {
@@ -36,7 +31,11 @@ export default {
             this.$router.go(-1);//返回上一页
         },
         pushAddress() {
-            if (this.userName != '' && this.phone!= 0 && this.address != '') {
+            if (!this.checkPhone(this.phone))
+            {
+                Toast("请填写正确的手机号码");
+            }
+            else if (this.userName != '' && this.phone!= 0 && this.address != '') {
                 this.commit()
             }
             else {
@@ -57,13 +56,22 @@ export default {
                 }
             }).then((response) => {
                 console.log(response);
+                this.$router.go(-1);
                 Toast("上传成功");
-                this.$router.push({ name: '用户页' });
+                
             }).catch((err) => {
                 console.log(err);
                 Toast("网络报错,请稍后");
             })
         },
+        checkPhone(value) {
+            var phone = value;
+            if (!/^1(3|4|5|6|7|8|9)\d{9}$/.test(phone)) {
+                return false;
+            } else {
+                return true;
+            }
+        }
     }
 }
 </script>
