@@ -49,14 +49,13 @@ import Baseline from '@/common/user_baseline.vue'
         }
     },
     beforeCreate(){
-      if(this.$ls.get('consumption')==null)
-      {
+      
      //缓存积分数据
       this.$net({
       method: 'get',
       url: '/ShopTransaction/get_credit_record',
       params:{
-        UserID:this.$ls.get("user_info").user_id,
+        userID:this.$ls.get("user_info").id,
       }
      }).then((response) => {
       console.log('积分交易为');
@@ -66,7 +65,7 @@ import Baseline from '@/common/user_baseline.vue'
      }).catch(function(error) {
       alert(error)
      })
-      }
+      console.log(this.$ls.get("user_info").id)
     },
     methods: {
       goback(){

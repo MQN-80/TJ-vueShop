@@ -30,7 +30,7 @@ const address = resolve => require(['@/views/address/address.vue'], resolve)
 const addaddress = resolve => require(['@/views/address/address_add.vue'], resolve)
 const editaddress = resolve => require(['@/views/address/address_edit.vue'], resolve)
 const CArticleSearch = resolve => require(['@/views/SearchForForum.vue'], resolve)
-
+const My_product = resolve => require(['@/views/My_product.vue'], resolve)
 
 export default new Router({
   routes: [{
@@ -229,6 +229,13 @@ export default new Router({
       meta: {
         keepAlive: false
     },
-    }
-  ]
+  },{
+    path: '/User/My_product',
+    name: '我的商品页',
+    component: My_product,
+    meta: {
+      keepAlive: false
+  },
+  },  
+]
 })
