@@ -26,6 +26,7 @@
 				</section>
 			</ul>
 	    </div>
+		<section class="Empty"></section>
 	</div>
 </template>
 
@@ -84,7 +85,6 @@ export default {
 		margin-top: 0.5rem;
 		margin-left: 0.5rem;
 		margin-right: 0.5rem;
-		height: 100%;
 	}
 	.PostList img {
 		width: 30px;
@@ -113,5 +113,8 @@ export default {
 		float: right;
    		font-size: 0.5rem;
    	    margin-top: 0.3rem;
+	}
+	.Empty{
+		height: 60px;
 	}
 </style>

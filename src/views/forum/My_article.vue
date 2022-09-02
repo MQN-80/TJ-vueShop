@@ -1,4 +1,5 @@
 <template>
+  <div>
   <div v-if="!islogin">
       <van-empty description="先登录吧！" />
   </div>
@@ -28,8 +29,10 @@
       </van-swipe-cell>
       </div>
     </div>
-    <FloatBall :text="'发布'" ></FloatBall>
   </form>
+  <FloatBall :text="'发布'" ></FloatBall>
+  <section class="Empty"></section>
+  </div>
 </template>
 <script>
     import redo from'@/assets/forum/redo.png'
@@ -100,7 +103,6 @@
 
 <style>
   .MyArticle{
-    height: 100%;
     width: 100%;
   }
   .MyArticle .imgO {
@@ -130,4 +132,8 @@
     height: 100%;
     border-radius: 30px;
   }
+  	.Empty{
+		height: 60px;
+	}
+
 </style>
