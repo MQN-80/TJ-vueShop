@@ -38,6 +38,7 @@ export default {
         pushAddress() {
             if (this.userName != '' && this.phone!= 0 && this.address != '') {
                 this.commit()
+                this.$router.push({ name: '用户页' });
             }
             else {
                 Toast("请填写完整后再提交");
@@ -58,7 +59,6 @@ export default {
             }).then((response) => {
                 console.log(response);
                 Toast("上传成功");
-                this.$router.push({ name: '用户页' });
             }).catch((err) => {
                 console.log(err);
                 Toast("网络报错,请稍后");
