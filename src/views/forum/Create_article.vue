@@ -55,7 +55,7 @@ export default {
         push_article()
         {
             console.log(this.$ls.get("user_info").user_id)
-            if(this.title!=''&&this.context!='')
+            if(this.title!=''&&this.context!=''&&this.goods_id!='')
             {
                 this.commit_article();
                 setTimeout(500);
