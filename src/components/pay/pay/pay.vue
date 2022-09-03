@@ -102,6 +102,8 @@ export default {
             }
             else {
               console.log(this.$store.state.detail.orderid);
+              
+
               this.$net({
                 method: 'put',
                 url: '/ShopTransaction/goods_transaction_primer_plus',

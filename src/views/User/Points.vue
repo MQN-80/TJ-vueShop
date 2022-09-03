@@ -48,14 +48,14 @@ import Baseline from '@/common/user_baseline.vue'
         user_consumption:this.$ls.get("consumption"),
         }
     },
-    beforeCreate(){
+    beforeCreate() {
       
      //缓存积分数据
-      this.$net({
+     this.$net({
       method: 'get',
       url: '/ShopTransaction/get_credit_record',
       params:{
-        userID:this.$ls.get("user_info").id,
+        UserID:this.$ls.get("user_info").user_id,
       }
      }).then((response) => {
       console.log('积分交易为');
