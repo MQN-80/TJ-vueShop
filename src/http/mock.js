@@ -33,21 +33,6 @@ var index = Mock.mock('http://api.com/index', {
   },
 
 
-  'section3':{
-      'list|4':[{
-        'title':'@last',
-        'start':Random.time('HH:mm'),
-        // 在end数组里随机取一个
-        'imgPath':Random.image('320x200', '#f5f2a5', '#333', 'png', ''),
-        'id':'@id',
-        'price|99-1000':100,
-        'end|1':['2017/09/23 02:00:00','2017/09/23 11:00:00','2017/09/23 14:00:00','2017/09/23 13:00:00'],
-      }],
-
-      'banner':Random.image('400x100', '#30f673', '#FFF', 'png', 's3-banner'),
-
-  },
-
 
   'section4':{
     'list|4':[{
