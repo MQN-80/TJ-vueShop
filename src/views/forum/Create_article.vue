@@ -14,7 +14,7 @@
             rows="1"
             autosize
             type="textarea"
-            maxlength="20"
+            maxlength="10"
             placeholder="写标题，吸引更多人看见哦！"
             show-word-limit
             border
@@ -25,7 +25,7 @@
             rows="10"
             autosize
             type="textarea"
-            maxlength="1000"
+            maxlength="500"
             placeholder="说点好玩的！"
             show-word-limit
             border
