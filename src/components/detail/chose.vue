@@ -27,7 +27,6 @@ export default {
     return{
       id:'',
       product:[],
-      flag:0,
     }
     
   },
@@ -53,6 +52,8 @@ export default {
       console.log(response)
       this.product=response.data;
       console.log(this.product)
+      //vuex缓存商品页,防止返回没东西
+      this.$store.commit('change_product',this.product)
       //使用vuex传递数据
       this.$store.commit('change_productid',this.id)
       this.$store.commit('change_title',response.data.name)
@@ -65,11 +66,16 @@ export default {
 
   },
   beforeMount(){
-  //传参数
-  this.flag=0;
+  //传参数,没有传参的话就使用缓存
+  if(this.message!=undefined)
+  {
   this.id=this.message;
   console.log(this.id);
   this.getDeatil();
+  }
+  else{
+    this.product=this.$store.state.category.product_detail;
+  }
   }
 }
 </script>

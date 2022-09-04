@@ -1,47 +1,38 @@
 # 技术栈
 
-vue2.0 + vue-router + vuex + axios + mock.js(模拟数据) + ES6 + less
+vue2.0 + vue-router + vuex + axios
 
 ## 简介
 
-vuex + webStorage 实现了购物车功能,axios拦截,配合路由钩子函数实现权限控制、登录、登出功能
+项目已部署,地址为:http://106.12.131.109:8081/#/  
+目前支持手机访问,电脑端访问需要开发者工具内更换为移动端
 
-## 预览
+## 页面预览
 
-![](./static/car.gif)   ![](./static/login.gif)
+![](./static/1.png)   ![](./static/2.png)
+![](./static/3.png)   ![](./static/4.png)
 
 
 ## 经验
 
-1. 事先一定要先想好整个页面组成，怎样去分组件开发，这样在开发阶段会事半功倍
+1. 事先一定要先想好整个页面组成，将一些常用的页面组件化开发,避免代码复用的情况发生
 
-2. 本质上vuex只是一个全局变量,所以刷新路由,state数据会清空,可配合webStorage实现响应式
+2. 用vuex可以减少组件间频繁传参,提高效率,但是要注意清除时间
 
-3. 所有webStorage存储应该通过dispatch操作
+3. 用axios时记得在catch内和then内都给出相应的弹出提示,提升用户体验
 
-4. 只做数据渲染,不做数据修改,不需要用vuex
-
-5. 简单的父子通信不需要用vuex
-
-## 待完成
-
-1. 购物车内编辑(增减商品)
-
-2. 搜索功能
+4. 记得经常pull和pr,减少冲突
 
 
-## Build Setup
+## 项目运行方式
 
 ``` bash
-# install dependencies
+# 安装相关依赖
 npm install
 
-# serve with hot reload at localhost:1322
+# 本地运行,端口为8081
 npm run dev
 
-# build for production with minification
-
-npm run build
 ```
 
 

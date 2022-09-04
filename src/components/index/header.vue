@@ -1,6 +1,6 @@
 <template lang="html">
 
-  <mt-header title="电商联盟">
+  <mt-header title="大学生二手交易商城">
 
   <router-link :to="{name:'搜索页'}" slot="right">
     <mt-button icon="search"></mt-button>

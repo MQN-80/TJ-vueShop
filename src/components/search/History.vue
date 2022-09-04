@@ -11,7 +11,7 @@
         </div>
         <div>
             <van-tag plain type="default"
-            v-for="(item,index) in history_list" 
+            v-for="(item,index) in this.$store.state.category.history" 
             :key="index">
               {{item}}
             </van-tag>
@@ -34,7 +34,7 @@ export default {
      props:["HistoryList"],
     methods:{
         deleteHistory(){
-           
+        this.$store.commit('change_history','');
         }
     },
     mounted() {

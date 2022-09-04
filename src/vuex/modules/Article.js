@@ -8,6 +8,7 @@ const state = {
         create_time: "",
         product_id: "",
         user_name: "",
+        article_id:""
     },
     createARticle: {
         title: "",
@@ -23,6 +24,7 @@ const mutations = {
         state.Article.create_time = res.create_time;
         state.Article.product_id = res.product_id;
         state.Article.user_name = res.user_name;
+        state.Article.article_id = res.article_id;
     },
 
     delArticle(state, res) {

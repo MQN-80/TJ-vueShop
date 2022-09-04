@@ -1,8 +1,9 @@
 <template>
+  <div>
   <div v-if="!islogin">
       <van-empty description="先登录吧！" />
   </div>
-  <div class="MyArticle" v-else>
+  <form class="MyArticle" v-else>
     <div class="ShowArticle">
       <img class="imgO" :src="icon_redo" v-on:click="getMyArticle" />
       <div v-if="isEmpty">
@@ -23,12 +24,14 @@
 					</div>
           </div>
       <template #right>
-        <van-button square text="删除" type="danger" class="delete-button" @click="deleteArticle" />
+        <van-button square text="删除" type="danger" class="delete-button" @click="deleteArticle(post.article_id)" />
       </template>
       </van-swipe-cell>
       </div>
     </div>
-    <FloatBall :text="'发布'" ></FloatBall>
+  </form>
+  <FloatBall :text="'发布'" ></FloatBall>
+  <section class="Empty"></section>
   </div>
 </template>
 <script>
@@ -47,10 +50,10 @@
     methods: {
       getMyArticle(){
 			this.$net({
-                url: '/userForum/get_article',
-                method: 'get',
+                url: '/userForum/get_userArticle',
+                method: 'post',
                 params: {
-                    //sum: 0
+                    user_id:this.$ls.get("user_info").user_id,
                 }
               })
 			  .then( (response) => {
@@ -65,9 +68,22 @@
 				alert(error)
 			  });
       },
-      deleteArticle(){
+      deleteArticle(id){
         	this.$net({
+                url: '/userForum/delete_article',
+                method: 'post',
+                params: {
+                    article_id: id,
+                }
           })
+          .then( (response) => {
+					  console.log(response);
+			  })
+			  .catch(function (error) {
+			    console.log(error);
+				alert(error)
+			  });
+
       }
     },
     beforeMount(){
@@ -87,7 +103,6 @@
 
 <style>
   .MyArticle{
-    height: 100%;
     width: 100%;
   }
   .MyArticle .imgO {
@@ -117,4 +132,8 @@
     height: 100%;
     border-radius: 30px;
   }
+  	.Empty{
+		height: 60px;
+	}
+
 </style>

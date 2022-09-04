@@ -48,6 +48,7 @@ export default {
   }).then(response=>{
     console.log(response);
     this.list1=response.data;
+    
   }).catch(error=>{
     console.log(error);
   })

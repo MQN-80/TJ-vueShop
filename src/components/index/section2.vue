@@ -20,10 +20,7 @@
     </div>
     <router-link class="section2-banner" :to="{name:'详情页'}">
     </router-link>
-     <h1 class="section2-title">
-      活动商品推荐
-      <i class="icon-right"></i>
-    </h1>
+     
   </section>
 </template>
 

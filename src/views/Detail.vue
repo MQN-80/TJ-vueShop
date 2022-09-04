@@ -26,8 +26,12 @@ export default {
   id:'',
   },
   beforeCreate(){
+    if(this.$route.params.id!=undefined)
+    {
     this.id=this.$route.params.id;
+    this.$store.commit('change_productid',this.id)
     console.log(this.id)
+    }
   }
 }
 </script>

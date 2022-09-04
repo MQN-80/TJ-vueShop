@@ -40,6 +40,7 @@
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
 import eventBus from '@/views/address/eventBus.js'
+import { Toast } from 'vant';
 import {
   MessageBox
 } from 'mint-ui';
@@ -57,10 +58,9 @@ export default {
   },
   activated() {
     eventBus.$on('selectAddress', (data) => {
-
-      this.user_name = data.user_name;
-      this.phone = data.phone;
-      this.address = data.address;
+      this.user_name = data.Name;
+      this.phone = data.Phone_number;
+      this.address = data.Addr;
     })
   },
   computed: {
@@ -75,7 +75,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }
@@ -96,16 +96,25 @@ export default {
           )
           .then(action => { //点击成功执行这里的函数
 
-            for (let i = 0; i < this.$store.state.detail.selectedList; i++) {
+            if (!this.address)
+            {
+              Toast("请选择地址");
+            }
+            else{
+              for (let i = 0; i < this.$store.state.detail.selectedList.length; i++) {
               //修改订单信息
               this.$net({
                 method: 'put',
                 url: '/ShopTransaction/goods_transaction_primer_plus',
                 params: {
-                  Trade_id: this.orderidList[i]
+                  Trade_id: this.$store.state.detail.orderidList[i]
                 }
               }).then(res => {
                 console.log(res);
+                if (res.data=='积分不足') {
+                  Toast('积分不足');
+                  this.$router.push({ name: '用户页' })
+                }
               })
               setTimeout(500);
 
@@ -125,6 +134,8 @@ export default {
                 }
               }) 
             }, 300)
+            }
+           
           }, function (err) {
             //点击取消执行这里的函数
           });

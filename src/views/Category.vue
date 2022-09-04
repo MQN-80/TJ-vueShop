@@ -171,7 +171,8 @@ export default {
       },
       goSearch(name)
       {
-        Toast(name)
+        Toast(name);
+        this.$router.push({name:'搜索页',params:{type:2,val:name}})
       }
   }
 };

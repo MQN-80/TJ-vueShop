@@ -58,7 +58,7 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.$store.state.detail.selectedList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }

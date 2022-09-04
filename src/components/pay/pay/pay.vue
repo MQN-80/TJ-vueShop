@@ -27,7 +27,7 @@
     </div>
     <h3 class="pay-allpay">总需要支付 : <i>￥</i><span>{{allpay}}</span></h3>
     <footer class="pay-footer" ontouchstrat="" @click="payConfirm">
-      <span>立即支付</span>
+      <span>支付订单</span>
     </footer>
 
 
@@ -38,6 +38,7 @@
 import Util from '../../../util/common'
 import Header from '@/common/_header.vue'
 import eventBus from '@/views/address/eventBus.js'
+import { Toast } from 'vant';
 import qs from 'qs'
 import {
   MessageBox
@@ -67,17 +68,17 @@ export default {
     allpay () {
       let allpay = 0, selectedList = this.midList
       for (let i = 0; i < selectedList.length; i++) {
-        allpay += selectedList[i].price
+        allpay += parseInt(selectedList[i].price)
       }
       return allpay
     }
   },
   activated() {
     eventBus.$on('selectAddress', (data) => {
-
-      this.user_name = data.user_name;
-      this.phone = data.phone;
-      this.address = data.address;
+      console.info(data);
+      this.user_name = data.Name;
+      this.phone = data.Phone_number;
+      this.address = data.Addr;
     })
   },
   mounted () {
@@ -95,31 +96,46 @@ export default {
             `确定支付${this.allpay}元`
           )
           .then(action => { //点击成功执行这里的函数
-          //修改订单信息
-          this.$net({
-            method: 'put',
-            url: '/ShopTransaction/goods_transaction_primer_plus',
-            params: {
-              Trade_id:  this.orderid
+            if (!this.address)
+            {
+              Toast("请选择地址");
             }
-          }).then(res => {
-            console.log(res);
-          })
+            else {
+              console.log(this.$store.state.detail.orderid);
+              
 
-            this.$router.push({ name: '完成页' });
-            this.$store.commit('SET_LOADING', true);
-            //this.$store.dispatch('cutMidList', this.midList);
-            setTimeout(() => {
-              this.$store.commit('SET_LOADING', false); //关闭loading
-              this.$router.push({
-                name: '完成页',
-                query: {
-                  user_name: this.user_name,
-                  phone: this.phone,
-                  address: this.address,
+              this.$net({
+                method: 'put',
+                url: '/ShopTransaction/goods_transaction_primer_plus',
+                params: {
+                  Trade_id: this.$store.state.detail.orderid
                 }
-              }) 
-            }, 300)
+              }).then(res => {
+                console.log(res);
+                if (res.data == '积分不足') {
+                  Toast('积分不足');
+                  this.$router.push({ name: '用户页' })
+                }
+
+              })
+
+              this.$router.push({ name: '完成页' });
+              this.$store.commit('SET_LOADING', true);
+              //this.$store.dispatch('cutMidList', this.midList);
+              setTimeout(() => {
+                this.$store.commit('SET_LOADING', false); //关闭loading
+                this.$router.push({
+                  name: '完成页',
+                  query: {
+                    user_name: this.user_name,
+                    phone: this.phone,
+                    address: this.address,
+                  }
+                })
+              }, 300)
+            }
+          //修改订单信息
+          
           }, function (err) {
             //点击取消执行这里的函数
           });

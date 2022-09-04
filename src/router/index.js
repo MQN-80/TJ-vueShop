@@ -22,7 +22,6 @@ const Authority = resolve => require(['@/views/User/Authority.vue'], resolve)
 const Points = resolve => require(['@/views/User/Points.vue'], resolve)
 const Register = resolve => require(['@/views/Register.vue'], resolve)
 const Add_product = resolve => require(['@/views/Add_product.vue'], resolve)
-const My_product = resolve => require(['@/views/My_product.vue'], resolve)
 const Forum = resolve => require(['@/views/forum/Forum.vue'], resolve)
 const CArticle = resolve => require(['@/views/forum/Create_article.vue'], resolve)
 const Article =resolve => require(['@/views/forum/Article.vue'], resolve)
@@ -30,6 +29,9 @@ const Shop = resolve => require(['@/views/Shop.vue'], resolve)
 const address = resolve => require(['@/views/address/address.vue'], resolve)
 const addaddress = resolve => require(['@/views/address/address_add.vue'], resolve)
 const editaddress = resolve => require(['@/views/address/address_edit.vue'], resolve)
+const CArticleSearch = resolve => require(['@/views/SearchForForum.vue'], resolve)
+const My_product = resolve => require(['@/views/My_product.vue'], resolve)
+
 export default new Router({
   routes: [{
       path: '/',
@@ -186,13 +188,6 @@ export default new Router({
         keepAlive: false
     },
     },{
-      path: '/User/My_product',
-      name: '我的商品页',
-      component: My_product,
-      meta: {
-        keepAlive: false
-    },
-    },{
       path:'/forum/Article',
       name: '文章页',
       component:Article,
@@ -227,6 +222,20 @@ export default new Router({
       meta: {
         keepAlive: false
     },
+    },{
+      path:'/forum/search',
+      name:'推荐商品搜索页',
+      component: CArticleSearch,
+      meta: {
+        keepAlive: false
     },
-  ]
+  },{
+    path: '/User/My_product',
+    name: '我的商品页',
+    component: My_product,
+    meta: {
+      keepAlive: false
+  },
+  },  
+]
 })

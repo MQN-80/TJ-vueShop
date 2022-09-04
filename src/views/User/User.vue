@@ -65,7 +65,7 @@
         <router-link class="my-vip-top ho" :to="{ name: '店铺页',params:{shop_id:id}}">
           <img :src="icon_my_p" />
           <p>
-            <span>店铺按钮</span>
+            <span>我的店铺</span>
              <i class="icon-go"></i>
           </p>
         </router-link>

@@ -53,7 +53,8 @@ export default {
 				  }
 		 }, 
      created(){
-      this.is_collect();
+      if(localStorage.getItem('token'))
+      {this.is_collect();}
       //var judge=check(this.productDatasView.id);
      },
   methods: {
@@ -101,13 +102,28 @@ export default {
         `商品ID:${product[0].id}</br>`
         )
         .then(action => {      //点击成功执行这里的函数
-          this.$store.dispatch('setLocalCount', true);
+        if(localStorage.getItem('token'))
+         { this.$store.dispatch('setLocalCount', true);
           this.$store.dispatch('addCarList', product);
+          this.$net({
+            method: 'post',
+            url: '/ShopTransaction/add_trolley',
+            params: {
+              //arr: this.$store.state.detail.midList 
+              User_id: this.$ls.get("user_info").user_id,
+              Product_id: product[0].id,
+              Product_num:  1,
+             
+            }
+          }).then(res => {
+            console.log(res);
+          })
 
           Toast({
             message: '添加成功',
             duration: 1000
           });
+         }
         }, function (err) {
         });
     },
@@ -135,12 +151,12 @@ export default {
           this.$store.dispatch('resetMidList');
           this.$store.dispatch('resetOrderID');
           this.$store.dispatch('addMidList', product);
+          console.log(product);
           //提交订单信息
           this.$net({
             method: 'post',
             url: '/ShopTransaction/add_deal_record',
             params: {
-              //arr: this.$store.state.detail.midList
               Product_id: this.$store.state.category.product_id,
               Ord_price:  this.$store.state.category.price,
               UserID: this.$ls.get("user_info").user_id
@@ -154,8 +170,8 @@ export default {
         });
     },
     addIntoCollect(){
-
-      if(this.icon_collect==collect)
+      if(localStorage.getItem('token'))
+      {if(this.icon_collect==collect)
       {
         this.icon_collect=collect_filled;
         this.push_collect()
@@ -167,7 +183,7 @@ export default {
         this.delete_collect()
         Toast("取关成功")
       }
-      
+      }
     },
     //添加商品收藏
     push_collect(){
