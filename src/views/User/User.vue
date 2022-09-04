@@ -48,6 +48,13 @@
             <i class="icon-go"></i>
           </p>
         </router-link>
+        <router-link class="my-vip-top ho" :to="{ name: '充值页',query:{id:user_id}}">
+          <img :src="icon_money" />
+          <p>
+            <span>充值积分</span>
+            <i class="icon-go"></i>
+          </p>
+        </router-link>
         <router-link class="my-vip-top ho" :to="{ name: '商品发布页'}">
           <img :src="icon_add" />
           <p>
@@ -95,6 +102,7 @@
   import my_points from'@/assets/user/my_points.png'
   import Baseline from '@/common/_baseline.vue'
   import Footer from '@/common/_footer.vue'
+  import money from '@/assets/user/money.png'
   import { Toast } from 'mint-ui'
   export default {
     components: {
@@ -113,6 +121,7 @@
           icon_add:my_add,
           icon_points:my_points,
           icon_my_p:my_p,
+          icon_money:money,
           avator_img:"http://106.12.131.109:8083/avator/"+this.$ls.get("user_info").id+".jpg",
 				  }
 		 }, 
