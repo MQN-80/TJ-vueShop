@@ -1,6 +1,7 @@
 <template lang="html">
 
   <div class="car">
+    <van-button hairline size="large" v-on:click="update_data" plain type="info">更新数据</van-button>
     <header class="header">
       <van-image round width="4rem" height="4rem" :src="avator_img" />
       <span>欢迎你！{{user_name}}</span>
@@ -75,7 +76,6 @@
             <i class="icon-go"></i>
           </p>
         </router-link>
-        <van-button size="large" v-on:click="update_data" plain type="info">更新数据</van-button>
       </section>
     </div>
     <v-baseline></v-baseline>
