@@ -8,6 +8,7 @@
 />
 <van-cell-group>
   <div v-for="order in orders" :key="order.productname">
+    <van-swipe-cell>
     <van-card
   :thumb="order.img" @click='gopay(order)'>
    <template #title>
@@ -18,16 +19,20 @@
     <van-tag plain type="danger">{{order.Start_time}}</van-tag>
     <div v-if="order.Status=='0'">
       <van-tag type="warning">未支付</van-tag>
+     
     </div>
     <div v-if="order.Status=='1'">
       <van-tag type="success">已支付</van-tag>
     </div>
   </template>
-  
   <template #price>
     <span style="font-size:20px">成交金额：{{order.Ord_price}}元</span>
   </template>
   </van-card>
+  <template #right  v-if="order.Status=='0'">
+    <van-button square text="删除" type="danger" class="delete-button" @click="delete1(order.id)" />
+  </template>
+  </van-swipe-cell>
    <van-divider />
 </div>
 </van-cell-group>
@@ -35,7 +40,7 @@
 </template>
 
 <script>
-import { Tag } from "vant";
+import { Tag, Toast } from "vant";
 export default {
   components: {
     vanTag: Tag,
@@ -52,6 +57,21 @@ export default {
     this.getdata();
   },
     methods: {
+      delete1(id){
+      console.log("dasd")
+      this.$net({
+      method: 'delete',
+      url: '/ShopCenter/delete_order',
+      params: {
+        id:id,
+      }
+      }).then((response)=>{
+        Toast("删除成功")
+      }).catch((err)=>{
+        Toast("网络错误")
+      })
+      this.$router.go(0)
+      },
       goback(){
           this.$router.go(-1);//返回上一页
       },
@@ -74,7 +94,6 @@ export default {
             this.orders.forEach(element => {
               element.img='http://106.12.131.109:8083/product/' + element.Product_id + '.jpg'
             });
-            cosnole.log(this.orders)
           })
       },
       gopay(order)
@@ -103,3 +122,8 @@ export default {
     }
 }
 </script>
+<style>
+.delete-button{
+    height: 100%;
+  }
+</style>
